@@ -1,5 +1,6 @@
 import User from '$lib/server/db/models/user.js';
 import { generateTokens } from '$lib/server/util/authUtil.js';
+import { log } from '$lib/server/util/loggerUtil.js';
 import bcrypt from "bcrypt";
 
 /** @type {import('./$types').RequestHandler} */
@@ -7,7 +8,7 @@ export const POST = async ({ request, cookies }) => {
     const body = await request.json();
 
     // FIND USER
-    const instance = await User.findOne({where: {username: body.username.toLowerCase()}});
+    const instance = await User.findOne({where: {username: body.username}});
 
     // IF USER DNE || PASSWORD AUTHENTICATION
     if(!instance || !await bcrypt.compare(body.password, instance.password)) {
@@ -28,6 +29,7 @@ export const POST = async ({ request, cookies }) => {
         sameSite: 'strict',
         secure: true,
     })
+    log("auth", `logging in user: ${instance.username}`);
 
     return new Response(JSON.stringify({
         username: instance.username,

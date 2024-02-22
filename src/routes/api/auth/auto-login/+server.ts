@@ -1,5 +1,6 @@
 import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from '$env/static/private';
 import User from '$lib/server/db/models/user.js';
+import { log } from '$lib/server/util/loggerUtil.js';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -24,6 +25,7 @@ export const POST = async ({ cookies }) => {
         if(!instance || !await bcrypt.compare(refresh, instance.refresh_token)) return new Response(JSON.stringify("Bad Refresh"), {status: 400});
 
         // SIGN NEW ACCESS_TOKEN
+        log("auth", `auto-login user: ${instance.username}`)
         const access_token = jwt.sign({username: username}, ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
         return new Response(JSON.stringify({username: username, access_token: access_token}), {status: 200});
     });

@@ -1,5 +1,6 @@
 import { REFRESH_TOKEN_SECRET } from '$env/static/private';
 import User from '$lib/server/db/models/user.js';
+import { log } from '$lib/server/util/loggerUtil.js';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -27,13 +28,14 @@ export const POST = async ({ request, cookies }) => {
     if(!(result as unknown as Response).ok) return new Response(JSON.stringify("Unsuccessful Logout"), {status: 400});
 
     // CLEAR REFRESH TOKEN
-    await User.update({refresh_token: ""}, {where: {username: body.username.toLowerCase()}});
+    await User.update({refresh_token: ""}, {where: {username: body.username}});
     cookies.delete("session", {
         path: '/',
         httpOnly: true,
         sameSite: 'strict',
         secure: true,
     });
+    log("auth", `logging out user: ${body.username}`);
 
     return new Response(JSON.stringify("Successfully Logged Out"), {status: 200});
 }
