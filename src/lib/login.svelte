@@ -18,7 +18,10 @@
         disable = true;
         const res = await authContext.login({username, password});
         setTimeout(() => {
-            disable = false;
+            if(res == 401) {
+                password = "";
+                disable = false;
+            } 
         }, 1000);
     }
 </script>
