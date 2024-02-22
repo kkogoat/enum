@@ -1,6 +1,11 @@
 <script lang="ts">
     import Login from "$lib/login.svelte";
     import { authContext } from "$lib/authContext";
+	import { onMount } from "svelte";
+
+    onMount(() => {
+        authContext.autoLogin();
+    })
 </script>
 
 <style>

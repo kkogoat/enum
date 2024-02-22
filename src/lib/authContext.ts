@@ -17,7 +17,14 @@ function createAuthContext(user: string) {
     }
 
     async function autoLogin() {
-
+        const result = await fetch('/api/auth/auto-login', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "same-origin"
+        })
+        const decoded = await result.json();
+        set(decoded.access_token);
+        username = decoded.username;
     }
 
     async function logout() {
