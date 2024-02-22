@@ -1,8 +1,10 @@
 <script lang="ts">
+    let usernameRef: HTMLElement;
     let passwordRef: HTMLElement;
     let loginButtonRef: HTMLElement;
     let username: string;
     let password: string;
+    let disable: boolean;
 
     // PASSWORD VISIBILITY
     const handlePasswordVisibility = (event: Event) => {
@@ -12,11 +14,12 @@
 
     // LOGIN SUBMIT
     import { authContext } from "./authContext";
-    const handleLoginSubmit = () => {
-        loginButtonRef.setAttribute('disabled', "true");
-        authContext.login({username, password});
-        username = "";
-        password = "";
+    const handleLoginSubmit = async () => {
+        disable = true;
+        const res = await authContext.login({username, password});
+        setTimeout(() => {
+            disable = false;
+        }, 1000);
     }
 </script>
 
@@ -43,6 +46,11 @@
         transition: .1s ease-out;
     }
 
+    .login-input:disabled {
+        background-color: #101216;
+        color: #818181;
+    }
+
     .login-input::placeholder {
         color: #949494;
     }
@@ -62,6 +70,7 @@
         font-size: 15px;
         border: none;
         border-radius: 8px;
+        transition: .1s ease-out;
     }
 
     .login-button:disabled {
@@ -94,7 +103,9 @@
         pattern="^[a-zA-Z0-9]+$"
         placeholder="Enter your username"
         required
+        bind:this={usernameRef}
         bind:value={username}
+        disabled={disable}
     >
 
     <!-- PASSWORD -->
@@ -108,6 +119,7 @@
         required
         bind:this={passwordRef}
         bind:value={password}
+        disabled={disable}
     >
 
     <!-- PASSWORD VISIBILITY -->
@@ -119,7 +131,7 @@
     <!-- SUBMIT -->
     <button 
         class="login-button"
-        disabled={Boolean(!username && !password)}
+        disabled={disable || !Boolean(username && password)}
         bind:this={loginButtonRef}
     > Login </button>
 </form>

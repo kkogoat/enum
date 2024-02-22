@@ -14,6 +14,7 @@ function createAuthContext(user: string) {
         const decoded = await result.json();
         set(decoded.access_token);
         username = decoded.username;
+        return result.status;
     }
 
     async function autoLogin() {
