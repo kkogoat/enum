@@ -165,7 +165,12 @@
         class="login-button"
         disabled={disable || !Boolean(username && password)}
         bind:this={loginButtonRef}
-    > ログイン </button>
+    > {#if disable}
+        ...
+      {:else}
+        ログイン
+      {/if}
+    </button>
 </form>
 
 <!-- PASSWORD VISIBILITY -->
