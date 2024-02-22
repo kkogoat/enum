@@ -12,10 +12,8 @@ function createAuthContext(user: string) {
             body: JSON.stringify(account)
         })
         const decoded = await result.json();
-        console.log(decoded);
-
-        set(account.username);
-        username = username;
+        set(decoded.access_token);
+        username = decoded.username;
     }
 
     async function autoLogin() {
