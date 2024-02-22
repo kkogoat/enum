@@ -1,0 +1,21 @@
+interface UserAttributes {
+    id: string;
+    username: string;
+    password: string;
+    refresh_token: string;
+    created_at: Date;
+    updated_at: Date;
+}
+
+interface MediaAttributes {
+    id: string;
+    title: string;
+    link: string;
+    current_episode: number;
+    total_episodes: number;
+    rating: number;
+    description: string;
+    created_at: Date;
+    updated_at: Date;
+    username: string;
+}
