@@ -28,7 +28,17 @@ function createAuthContext(user: string) {
     }
 
     async function logout() {
-        set("");
+        const result = await fetch('/api/auth/logout', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "same-origin",
+            body: JSON.stringify({username: username})
+        })
+
+        if (result.ok) {
+            set("");
+            username = "";
+        }
     }
 
     return { subscribe, login, logout, autoLogin}

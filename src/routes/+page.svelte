@@ -26,6 +26,7 @@
 <div id="app-container">
     {#if $authContext}
         {$authContext}
+        <button on:click={authContext.logout}>Logout</button>
     {:else}
         <Login />
     {/if}
