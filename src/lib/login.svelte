@@ -170,7 +170,7 @@
 
 <!-- PASSWORD VISIBILITY -->
 <button disabled={disable || !Boolean(password)} class="login-checkbox" on:click={handlePasswordVisibility}>
-    <img src={visible ? '/visOn.svg' : '/visOff.svg'} width="20" alt="visibility-off">
+    <img loading=eager src={visible ? '/visOn.svg' : '/visOff.svg'} width="20" alt="visibility-off">
 </button>
 
 {#if showError}
