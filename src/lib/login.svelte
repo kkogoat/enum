@@ -38,7 +38,7 @@
 
 <style>
     .login {
-        background-color: #262b35;
+        background-color: var(--foreground-color);
         width: 280px;
         height: 190px;
         padding: 30px 25px 20px 25px;
@@ -49,10 +49,10 @@
     }
 
     .login-input {
-        background-color: #171a20;
+        background-color: var(--background-color);
         border: none;
         border-radius: 8px;
-        color: white;
+        color: var(--text-color);
         padding-left: 10px;
         height: 35px;
         outline: 1px solid transparent;
@@ -60,25 +60,25 @@
     }
 
     .login-input:disabled {
-        background-color: #101216;
-        color: #818181;
+        background-color: var(--background-color-disabled);
+        color: var(--background-color-disabled-text);
     }
 
     .login-input::placeholder {
-        color: #949494;
+        color: var(--background-color-placeholder-text);
     }
 
     .login-input:focus {
-        box-shadow: 0 0 15px #2b93cf;
+        box-shadow: 0 0 15px var(--accent-color);
         transition: .2s ease-in-out;
-        outline: 1px solid #2b93cf;
+        outline: 1px solid var(--accent-color);
     }
 
     .login-button {
         margin-top: auto;
         height: 40px;
-        background-color: #2b93cf;
-        color: #ffffff;
+        background-color: var(--accent-color);
+        color: var(--text-color);
         font-weight: bold;
         font-size: 15px;
         border: none;
@@ -87,13 +87,15 @@
     }
 
     .login-button:disabled {
-        background-color: #1e6892;
-        color: #7a7a7a;
+        background-color: var(--accent-color-disabled);
+        color: var(--accent-color-disabled-text);
     }
-
     .login-button:enabled:hover {
-        background-color: #33b3fd;
+        background-color: var(--accent-color-hover);
         cursor: pointer;
+    }
+    .login-button:enabled:active {
+        background-color: var(--accent-color-active);
     }
 
     .login-checkbox {
@@ -123,8 +125,8 @@
         height: 45px;
         text-align: center;
         vertical-align: middle;
-        color: #d11313;
-        background-color: #262b35;
+        color: var(--text-color-error);
+        background-color: var(--foreground-color);
         border-radius: 8px;
         font-size: 13px;
     }
