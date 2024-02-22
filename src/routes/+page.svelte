@@ -3,8 +3,10 @@
     import { authContext } from "$lib/authContext";
 	import { onMount } from "svelte";
 
-    onMount(() => {
-        authContext.autoLogin();
+    let loading: boolean = true;
+    onMount(async () => {
+        await authContext.autoLogin();
+        loading = false;
     })
 </script>
 
@@ -24,10 +26,14 @@
 </style>
 
 <div id="app-container">
-    {#if $authContext}
-        {$authContext}
-        <button on:click={authContext.logout}>Logout</button>
+    {#if !loading}
+        {#if $authContext}
+            {$authContext}
+            <button on:click={authContext.logout}>Logout</button>
+        {:else}
+            <Login />
+        {/if}
     {:else}
-        <Login />
+        <span></span>
     {/if}
 </div>
