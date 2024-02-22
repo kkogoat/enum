@@ -7,6 +7,7 @@
     let username: string;
     let password: string;
     let disable: boolean;
+    let showError: boolean;
 
     onMount(() => {
         usernameRef.focus();
@@ -22,11 +23,13 @@
     import { authContext } from "./authContext";
     const handleLoginSubmit = async () => {
         disable = true;
+        showError = false;
         const res = await authContext.login({username, password});
         setTimeout(() => {
             if(res == 401) {
                 password = "";
                 disable = false;
+                showError = true;
             } 
         }, 1000);
     }
@@ -93,11 +96,30 @@
     }
 
     .login-checkbox {
+        position: relative;
+        top: -47px;
+        left: 367px;
         color: #171a20;
         accent-color: #171a20;
+        cursor: pointer;
     }
     .login-checkbox::after {
         accent-color: #171a20;
+    }
+
+    .login-error {
+        position: absolute;
+        transform: translate(0px, 150px);
+        width: 200px;
+        margin-top: 30px;
+        padding-top: 5px;
+        height: 45px;
+        text-align: center;
+        vertical-align: middle;
+        color: #d11313;
+        background-color: #262b35;
+        border-radius: 8px;
+        font-size: 13px;
     }
 </style>
 
@@ -110,7 +132,7 @@
         minlength="4"
         maxlength="15"
         pattern="^[a-zA-Z0-9]+$"
-        placeholder="Enter your username"
+        placeholder="ユーザー名"
         required
         bind:this={usernameRef}
         bind:value={username}
@@ -124,7 +146,7 @@
         class="login-input"
         minlength="8"
         maxlength="30"
-        placeholder="Enter your password"
+        placeholder="パスワード"
         required
         bind:this={passwordRef}
         bind:value={password}
@@ -134,7 +156,6 @@
     <!-- PASSWORD VISIBILITY -->
     <label>
         <input class="login-checkbox" type="checkbox" name="password visibility" on:click={handlePasswordVisibility}>
-        <span style="color: white">Show Password?</span>
     </label>
 
     <!-- SUBMIT -->
@@ -142,5 +163,14 @@
         class="login-button"
         disabled={disable || !Boolean(username && password)}
         bind:this={loginButtonRef}
-    > Login </button>
+    > ログイン </button>
 </form>
+
+{#if showError}
+    <div class="login-error">
+        <div>ログインに失敗しました</div>
+        <div>ユーザーが見つかりません</div>
+    </div>
+{:else}
+    <span></span>
+{/if}
