@@ -8,6 +8,7 @@
     let password: string;
     let disable: boolean;
     let showError: boolean;
+    let visible: boolean;
 
     onMount(() => {
         usernameRef.focus();
@@ -15,8 +16,8 @@
 
     // PASSWORD VISIBILITY
     const handlePasswordVisibility = (event: Event) => {
-        let checked: boolean = (event.target as HTMLInputElement).checked;
-        passwordRef.setAttribute('type', checked ? 'text' : 'password');
+        visible = !visible;
+        passwordRef.setAttribute('type', visible ? 'text' : 'password');
     }
 
     // LOGIN SUBMIT
@@ -38,8 +39,8 @@
 <style>
     .login {
         background-color: #262b35;
-        width: 400px;
-        height: 200px;
+        width: 280px;
+        height: 190px;
         padding: 30px 25px 20px 25px;
         border-radius: 8px;
         display: flex;
@@ -97,21 +98,27 @@
 
     .login-checkbox {
         position: relative;
-        top: -47px;
-        left: 367px;
-        color: #171a20;
-        accent-color: #171a20;
+        top: -150px;
+        left: 118px;
+        background: none;
+        border: none;
+        filter: invert(53%) sepia(48%) saturate(2480%) hue-rotate(182deg) brightness(110%) contrast(98%);
+        transition: .1s ease-out;
+    }
+
+    .login-checkbox:enabled:hover {
         cursor: pointer;
     }
-    .login-checkbox::after {
-        accent-color: #171a20;
+
+    .login-checkbox:disabled {
+        filter: invert(23%) sepia(10%) saturate(5113%) hue-rotate(165deg) brightness(90%) contrast(89%);
     }
 
     .login-error {
         position: absolute;
         transform: translate(0px, 150px);
         width: 200px;
-        margin-top: 30px;
+        margin-top: 10px;
         padding-top: 5px;
         height: 45px;
         text-align: center;
@@ -153,11 +160,6 @@
         disabled={disable}
     >
 
-    <!-- PASSWORD VISIBILITY -->
-    <label>
-        <input class="login-checkbox" type="checkbox" name="password visibility" on:click={handlePasswordVisibility}>
-    </label>
-
     <!-- SUBMIT -->
     <button 
         class="login-button"
@@ -165,6 +167,11 @@
         bind:this={loginButtonRef}
     > ログイン </button>
 </form>
+
+<!-- PASSWORD VISIBILITY -->
+<button disabled={disable || !Boolean(password)} class="login-checkbox" on:click={handlePasswordVisibility}>
+    <img src={visible ? '/visOn.svg' : '/visOff.svg'} width="20" alt="visibility-off">
+</button>
 
 {#if showError}
     <div class="login-error">
