@@ -1,10 +1,16 @@
 <script lang="ts">
+	import { onMount } from "svelte";
+
     let usernameRef: HTMLElement;
     let passwordRef: HTMLElement;
     let loginButtonRef: HTMLElement;
     let username: string;
     let password: string;
     let disable: boolean;
+
+    onMount(() => {
+        usernameRef.focus();
+    });
 
     // PASSWORD VISIBILITY
     const handlePasswordVisibility = (event: Event) => {
