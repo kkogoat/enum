@@ -14,14 +14,11 @@
     #app-container {
         width: 100vw;
         height: 100vh;
-        margin: 0px;
-        padding: 0px;
-        background:#171a20;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        flex-direction: column;
     }
 </style>
 
