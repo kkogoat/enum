@@ -20,14 +20,14 @@
 
 @keyframes dropdown {
     0% {
-        margin-bottom: 100vh;
+        margin-top: -50vh;
         opacity: 0;
     }
     30% {
-        margin-bottom: 50vh;
+        margin-top: 0vh;
     }
     100% {
-        margin-bottom: 45vh;
+        margin-top: 10vh;
         opacity: 1;
     }
 }
@@ -40,3 +40,64 @@ body {
     font-weight: bold;
     font-style: normal;
 }
+
+/* INPUT BOXES */
+input {
+    background-color: var(--background-color);
+    outline: 1px solid transparent;
+    color: var(--text-color);
+    border-radius: 8px;
+    border: none;
+    padding-left: 10px;
+    margin: 0px;
+    transition: .1s ease-out;
+}
+
+input:focus {
+    box-shadow: 0 0 15px var(--accent-color);
+    outline: 1px solid var(--accent-color);
+    transition: .2s ease-in-out;
+}
+
+input:disabled {
+    background-color: var(--background-color-disabled);
+    color: var(--background-color-disabled-text);
+}
+
+input::placeholder {
+    color: var(--background-color-placeholder-text);
+}
+
+/* BUTTONS */
+button {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    transition: .2s ease-out;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+}
+
+button:disabled {
+    background-color: var(--accent-color-disabled);
+    color: var(--accent-color-disabled-text);
+}
+
+button:enabled:hover {
+    background-color: var(--accent-color-hover);
+    cursor: pointer;
+}
+
+button:enabled:active {
+    background-color: var(--accent-color-active);
+}
+
+
+select {
+    background-color: var(--background-color);
+}
+
+textarea {
+    background-color: var(--background-color);
+}
+

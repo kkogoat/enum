@@ -49,53 +49,13 @@
     }
 
     .login-input {
-        background-color: var(--background-color);
-        border: none;
-        border-radius: 8px;
-        color: var(--text-color);
-        padding-left: 10px;
         height: 35px;
-        outline: 1px solid transparent;
-        transition: .1s ease-out;
-    }
-
-    .login-input:disabled {
-        background-color: var(--background-color-disabled);
-        color: var(--background-color-disabled-text);
-    }
-
-    .login-input::placeholder {
-        color: var(--background-color-placeholder-text);
-    }
-
-    .login-input:focus {
-        box-shadow: 0 0 15px var(--accent-color);
-        transition: .2s ease-in-out;
-        outline: 1px solid var(--accent-color);
     }
 
     .login-button {
         margin-top: auto;
         height: 40px;
-        background-color: var(--accent-color);
-        color: var(--text-color);
-        font-weight: bold;
         font-size: 15px;
-        border: none;
-        border-radius: 8px;
-        transition: .1s ease-out;
-    }
-
-    .login-button:disabled {
-        background-color: var(--accent-color-disabled);
-        color: var(--accent-color-disabled-text);
-    }
-    .login-button:enabled:hover {
-        background-color: var(--accent-color-hover);
-        cursor: pointer;
-    }
-    .login-button:enabled:active {
-        background-color: var(--accent-color-active);
     }
 
     .login-checkbox {
@@ -103,13 +63,12 @@
         top: -150px;
         left: 118px;
         background: none;
-        border: none;
         filter: invert(53%) sepia(48%) saturate(2480%) hue-rotate(182deg) brightness(110%) contrast(98%);
-        transition: .1s ease-out;
     }
 
     .login-checkbox:enabled:hover {
         cursor: pointer;
+        background: none;
     }
 
     .login-checkbox:disabled {
