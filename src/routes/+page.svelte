@@ -9,6 +9,16 @@
         await authContext.autoLogin();
         loading = false;
     })
+
+    // LOAD LIST IF LOGGED IN
+    let list: any[] = [];
+    import { getMediaList } from "$lib/util/mediaFetchUtil";
+	import { browser } from "$app/environment";
+    $: if(browser && $authContext) getList();
+    async function getList() {
+        const response = await getMediaList();
+        list = response;
+    }
 </script>
 
 <style>
@@ -29,6 +39,9 @@
             {$authContext}
             <button on:click={authContext.logout}>Logout</button>
             <AddModal />
+            {#each list as item}
+                {item["title"]}
+            {/each}
         {:else}
             <Login />
         {/if}
