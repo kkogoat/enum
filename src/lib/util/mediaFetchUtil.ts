@@ -13,3 +13,14 @@ export const addMedia = (data: object) => {
         console.log(error);
     });
 }
+
+export const getMediaList = async () => {
+    const result = await fetch('/api/media/get-list',{
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${get(authContext)}`
+        }
+    })
+    const list = await result.json();
+    return list;
+}
