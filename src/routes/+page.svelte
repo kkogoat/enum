@@ -1,9 +1,11 @@
 <script lang="ts">
+	import MediaItem from "$lib/mediaItem.svelte";
     import Login from "$lib/login.svelte";
-    import { authContext } from "$lib/authContext";
-	import { onMount } from "svelte";
 	import AddModal from "$lib/addModal.svelte";
 
+    // ON MOUNT
+    import { authContext } from "$lib/authContext";
+	import { onMount } from "svelte";
     let loading: boolean = true;
     onMount(async () => {
         await authContext.autoLogin();
@@ -11,7 +13,7 @@
     })
 
     // LOAD LIST IF LOGGED IN
-    let list: any[] = [];
+    let list: any = [];
     import { getMediaList } from "$lib/util/mediaFetchUtil";
 	import { browser } from "$app/environment";
     $: if(browser && $authContext) getList();
@@ -40,7 +42,7 @@
             <button on:click={authContext.logout}>Logout</button>
             <AddModal />
             {#each list as item}
-                {item["title"]}
+                <MediaItem item={item}/>
             {/each}
         {:else}
             <Login />
