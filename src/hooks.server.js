@@ -1,1 +1,0 @@
-import sequelize from "$lib/server/db/db";
