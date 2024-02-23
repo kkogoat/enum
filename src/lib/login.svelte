@@ -60,7 +60,7 @@
 
     .login-checkbox {
         position: relative;
-        top: -150px;
+        top: -153px;
         left: 118px;
         background: none;
         filter: invert(53%) sepia(48%) saturate(2480%) hue-rotate(182deg) brightness(110%) contrast(98%);

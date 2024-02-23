@@ -2,6 +2,7 @@
     import Login from "$lib/login.svelte";
     import { authContext } from "$lib/authContext";
 	import { onMount } from "svelte";
+	import AddModal from "$lib/addModal.svelte";
 
     let loading: boolean = true;
     onMount(async () => {
@@ -27,6 +28,7 @@
         {#if $authContext}
             {$authContext}
             <button on:click={authContext.logout}>Logout</button>
+            <AddModal />
         {:else}
             <Login />
         {/if}
