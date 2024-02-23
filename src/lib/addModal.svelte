@@ -8,17 +8,21 @@
     // FORM MEMBER
     let title: string;
     let link: string;
-    let current: number;
-    let total: number;
+    let current_episode: number;
+    let total_episodes: number;
     let rating: number;
     let status: string;
     let type: string;
     let description: string;
 
+    // FETCH UTIL
+    import { addMedia }  from '$lib/util/mediaFetchUtil';
+
     // HANDLE SUBMIT
-    function handleMediaSubmit() {
+    async function handleMediaSubmit() {
         disable = true;
-        console.log(title, link, current, total, rating, status, type, description);
+        // NO STATUS OR TYPE
+        await addMedia({title, link, current_episode, total_episodes, rating, description});
         setTimeout(() => {
             formRef.reset();
             dialogRef.close();
@@ -114,12 +118,12 @@
                 <div style="display: flex; justify-content: space-between; flex-wrap: wrap; row-gap: 10px">
                     <label class="label-shorter" for="current-episode">
                         現在 #:
-                        <input type="number" name="current-episode" min="1" bind:value={current} disabled={disable}/>
+                        <input type="number" name="current-episode" min="1" bind:value={current_episode} disabled={disable}/>
                     </label>
     
                     <label class="label-shorter" for="total-episode">
                         全 #:
-                        <input type="number" name="total-episode" min="1" bind:value={total} disabled={disable}/>
+                        <input type="number" name="total-episode" min="1" bind:value={total_episodes} disabled={disable}/>
                     </label>
     
                     <label class="label-shorter" for="rating">
