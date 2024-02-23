@@ -42,7 +42,7 @@ body {
 }
 
 /* INPUT BOXES */
-input {
+input, select, textarea {
     background-color: var(--background-color);
     outline: 1px solid transparent;
     color: var(--text-color);
@@ -53,19 +53,34 @@ input {
     transition: .1s ease-out;
 }
 
-input:focus {
+input:focus, select:focus, textarea:focus {
     box-shadow: 0 0 15px var(--accent-color);
     outline: 1px solid var(--accent-color);
     transition: .2s ease-in-out;
 }
 
-input:disabled {
+input:disabled, select:disabled, textarea:disabled {
     background-color: var(--background-color-disabled);
     color: var(--background-color-disabled-text);
 }
 
-input::placeholder {
+input::placeholder, select::placeholder, textarea::placeholder {
     color: var(--background-color-placeholder-text);
+}
+
+textarea {
+    padding-top: 10px;
+}
+
+input[type="number"] {
+    -webkit-appearance: textfield;
+       -moz-appearance: textfield;
+            appearance: textfield;
+}
+
+/* LABELS */
+label {
+    color: var(--text-color);
 }
 
 /* BUTTONS */
@@ -92,12 +107,19 @@ button:enabled:active {
     background-color: var(--accent-color-active);
 }
 
-
-select {
-    background-color: var(--background-color);
+/* DIALOG */
+dialog {
+    background-color: var(--foreground-color);
+    border: none;
+    border-radius: 8px;
+    outline: 1px solid var(--accent-color-disabled);
 }
 
-textarea {
-    background-color: var(--background-color);
+dialog[open] {
+    animation: dropdown .2s ease-in forwards;
 }
 
+dialog::backdrop {
+    background-color: var(--background-color-disabled);
+    opacity: .65;
+}
