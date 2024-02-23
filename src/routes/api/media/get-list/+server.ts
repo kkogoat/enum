@@ -8,7 +8,8 @@ export const GET = async({ locals }) => {
         order:[['title', 'ASC']],
         where: {
             username: locals.username
-        }
+        },
+        attributes: { exclude: ['username', 'updated_at']}
     });
     return new Response(JSON.stringify(list), {status: 200});
 }
