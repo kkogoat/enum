@@ -1,21 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 
 :root {
-    --background-color: #171a20;
+    --background-color: #FBF9F1;
     --background-color-placeholder-text: #949494;
-    --background-color-disabled: #101216;
+    --background-color-disabled: #cfcec7;
     --background-color-disabled-text: #818181;
 
-    --foreground-color: #262b35;
+    --foreground-color: #AAD7D9;
 
-    --text-color: #ffffff;
-    --text-color-error: #d11313;
+    --text-color: #000000;
+    --text-color-error: #f01717;
 
-    --accent-color: #2b93cf;
-    --accent-color-hover: #33b3fd;
-    --accent-color-active: #237fb4;
-    --accent-color-disabled: #1e6892;
-    --accent-color-disabled-text: #7a7a7a;
+    --accent-color: #6f9da8;
+    --accent-color-hover: #82b7c4;
+    --accent-color-active: #5b7f88;
+    --accent-color-disabled: #476266;
+    --accent-color-disabled-text: #FBF9F1;
+    --accent-color-button-text: #FBF9F1;
 }
 
 /* WEBSITE THEMES */
