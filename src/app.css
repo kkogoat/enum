@@ -37,6 +37,8 @@
     --accent-color-disabled: #1e6892;
     --accent-color-disabled-text: #7a7a7a;
     --accent-color-button-text: #ffffff;
+    --accent-color-filtered: invert(53%) sepia(48%) saturate(2480%) hue-rotate(182deg) brightness(110%) contrast(98%);
+    --accent-color-filtered-disabled: invert(23%) sepia(10%) saturate(5113%) hue-rotate(165deg) brightness(90%) contrast(89%);
 }
 
 [data-theme="light"] {
@@ -56,6 +58,8 @@
     --accent-color-disabled: #476266;
     --accent-color-disabled-text: #FBF9F1;
     --accent-color-button-text: #FBF9F1;
+    --accent-color-filtered: invert(66%) sepia(10%) saturate(1060%) hue-rotate(144deg) brightness(88%) contrast(85%);
+    --accent-color-filtered-disabled: invert(34%) sepia(18%) saturate(553%) hue-rotate(140deg) brightness(100%) contrast(89%);
 }
 
 @keyframes dropdown {
@@ -90,7 +94,7 @@ input, select, textarea {
     border: none;
     margin: 0px;
     padding: 0px 0px 0px 10px;
-    transition: .1s ease-out;
+    transition: .2s ease;
     box-sizing: border-box;
     font-family: "Noto Sans JP", sans-serif;
 }
@@ -98,7 +102,7 @@ input, select, textarea {
 input:focus, select:focus, textarea:focus {
     box-shadow: 0 0 15px var(--accent-color);
     outline: 1px solid var(--accent-color);
-    transition: .2s ease-in-out;
+    transition: .2s ease;
 }
 
 input:disabled, select:disabled, textarea:disabled {
@@ -131,7 +135,7 @@ label {
 button {
     background-color: var(--accent-color);
     color: var(--accent-color-button-text);
-    transition: .2s ease-out;
+    transition: .2s ease;
     border-radius: 8px;
     border: none;
     font-weight: bold;

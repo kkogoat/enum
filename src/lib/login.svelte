@@ -63,7 +63,7 @@
         top: -153px;
         left: 118px;
         background: none;
-        filter: invert(53%) sepia(48%) saturate(2480%) hue-rotate(182deg) brightness(110%) contrast(98%);
+        filter: var(--accent-color-filtered);
     }
 
     .login-checkbox:enabled:hover {
@@ -72,7 +72,7 @@
     }
 
     .login-checkbox:disabled {
-        filter: invert(23%) sepia(10%) saturate(5113%) hue-rotate(165deg) brightness(90%) contrast(89%);
+        filter: var(--accent-color-filtered-disabled);
     }
 
     .login-error {
