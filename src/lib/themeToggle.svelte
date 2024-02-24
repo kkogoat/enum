@@ -3,6 +3,7 @@
 
     let theme: string | undefined = "";
     let loading: boolean = false;
+    let buttonRef: HTMLButtonElement;
 
     onMount(() => {
         loading = false;
@@ -29,7 +30,13 @@
         right: 15px;
         transition: .2s ease;
         user-select: none;
+        cursor: pointer;
     }
+
+    .theme-container:hover .theme-toggle {
+        background-color: var(--accent-color-hover);
+    }
+
     .theme-toggle {
         background-color: var(--accent-color);
         height: 30px;
@@ -66,10 +73,10 @@
 </style>
 
 {#if loading}
-    <div class="theme-container">
+    <div class="theme-container" on:click={() => buttonRef.click()}>
         <img class="sun" src="/sun.svg" alt="light-mode"/>
         <img class="moon" src="/moon.svg" alt="dark-mode"/>
-        <button class="theme-toggle {theme}" on:click={theme=="light" ? () => setTheme("dark") : () => setTheme("light")}>
+        <button type="button" class="theme-toggle {theme}" bind:this={buttonRef} on:click={theme=="light" ? () => setTheme("dark") : () => setTheme("light")}>
             &nbsp;
         </button>
     </div>
