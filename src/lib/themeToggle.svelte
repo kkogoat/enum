@@ -63,14 +63,14 @@
         position: relative;
         top: 3px;
         left: 5px;
-        filter: invert(66%) sepia(25%) saturate(425%) hue-rotate(144deg) brightness(85%) contrast(88%);
+        filter: var(--accent-color-filtered);
         pointer-events: none;
     }
     .moon {
         position: relative;
         right: -14px;
         top: 3px;
-        filter: invert(49%) sepia(57%) saturate(617%) hue-rotate(157deg) brightness(94%) contrast(92%);
+        filter: var(--accent-color-filtered);
         pointer-events: none;
     }
 </style>
