@@ -51,6 +51,7 @@
         top: 0px;
         left: 0px;
         transition: .2s ease;
+        user-select: none;
     }
     .dark {
         top: 0px;
@@ -63,19 +64,21 @@
         top: 3px;
         left: 5px;
         filter: invert(66%) sepia(25%) saturate(425%) hue-rotate(144deg) brightness(85%) contrast(88%);
+        pointer-events: none;
     }
     .moon {
         position: relative;
         right: -14px;
         top: 3px;
         filter: invert(49%) sepia(57%) saturate(617%) hue-rotate(157deg) brightness(94%) contrast(92%);
+        pointer-events: none;
     }
 </style>
 
 {#if loading}
-    <div class="theme-container" on:click={() => buttonRef.click()}>
-        <img class="sun" src="/sun.svg" alt="light-mode"/>
-        <img class="moon" src="/moon.svg" alt="dark-mode"/>
+    <div class="theme-container" on:click|self={() => buttonRef.click()}>
+        <img class="sun" src="/sun.svg" alt="light-mode" on:click|self={() => buttonRef.click()}/>
+        <img class="moon" src="/moon.svg" alt="dark-mode" on:click|self={() => buttonRef.click()}/>
         <button type="button" class="theme-toggle {theme}" bind:this={buttonRef} on:click={theme=="light" ? () => setTheme("dark") : () => setTheme("light")}>
             &nbsp;
         </button>
