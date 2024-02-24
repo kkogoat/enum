@@ -76,9 +76,9 @@
 </style>
 
 {#if loading}
-    <div class="theme-container" on:click|self={() => buttonRef.click()}>
-        <img class="sun" src="/sun.svg" alt="light-mode" on:click|self={() => buttonRef.click()}/>
-        <img class="moon" src="/moon.svg" alt="dark-mode" on:click|self={() => buttonRef.click()}/>
+    <div class="theme-container" on:click|self={() => buttonRef.click()} aria-hidden="true">
+        <img class="sun" src="/sun.svg" alt="light-mode" on:click|self={() => buttonRef.click()} aria-hidden="true"/>
+        <img class="moon" src="/moon.svg" alt="dark-mode" on:click|self={() => buttonRef.click()} aria-hidden="true"/>
         <button type="button" class="theme-toggle {theme}" bind:this={buttonRef} on:click={theme=="light" ? () => setTheme("dark") : () => setTheme("light")}>
             &nbsp;
         </button>
