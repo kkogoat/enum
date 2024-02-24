@@ -18,6 +18,19 @@
     --accent-color-disabled-text: #7a7a7a;
 }
 
+/* WEBSITE THEMES */
+[data-theme="dark"] {
+    --foreground-color: #262b35;
+    --background-color: #171a20;
+    --text-color: #ffffff;
+}
+
+[data-theme="light"] {
+    --foreground-color: #AAD7D9;
+    --background-color: #FBF9F1;
+    --text-color: #000000;
+}
+
 @keyframes dropdown {
     0% {
         margin-top: -50vh;
@@ -34,7 +47,7 @@
 
 body {
     margin: 0px;
-    background:#171a20;
+    background: var(--background-color);
     font-family: "Noto Sans JP", sans-serif;
     font-optical-sizing: auto;
     font-weight: bold;

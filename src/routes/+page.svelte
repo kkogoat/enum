@@ -16,6 +16,7 @@
     let list: any = [];
     import { getMediaList } from "$lib/util/mediaFetchUtil";
 	import { browser } from "$app/environment";
+	import ThemeToggle from "$lib/themeToggle.svelte";
     $: if(browser && $authContext) getList();
     async function getList() {
         const response = await getMediaList();
@@ -36,6 +37,7 @@
 </style>
 
 <div id="app-container">
+    <ThemeToggle />
     {#if !loading}
         {#if $authContext}
             {$authContext}
