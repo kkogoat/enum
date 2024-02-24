@@ -2,9 +2,12 @@
 	import { onMount } from "svelte";
 
     let theme: string | undefined = "";
+    let loading: boolean = false;
 
     onMount(() => {
+        loading = false;
         theme = document.documentElement.dataset.theme;
+        loading = true;
     });
 
     // HANDLE THEME
@@ -16,19 +19,60 @@
 </script>
 
 <style>
-    .theme-toggle {
+    .theme-container {
+        background-color: var(--foreground-color);
         position: absolute;
+        width: 70px;
+        height: 30px;
+        border-radius: 50px;
         top: 15px;
         right: 15px;
+        transition: .2s ease;
+        user-select: none;
+    }
+    .theme-toggle {
+        background-color: var(--accent-color);
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        transition: .2s ease;
+        border-radius: 50px;
+        padding: 0px;
+        box-sizing: border-box;
+    }
+    .light {
+        top: 0px;
+        left: 0px;
+        transition: .2s ease;
+    }
+    .dark {
+        top: 0px;
+        left: 39px;
+        transition: .2s ease;
+    }
+
+    .sun {
+        position: relative;
+        top: 3px;
+        left: 5px;
+        filter: invert(66%) sepia(25%) saturate(425%) hue-rotate(144deg) brightness(85%) contrast(88%);
+    }
+    .moon {
+        position: relative;
+        right: -14px;
+        top: 3px;
+        filter: invert(49%) sepia(57%) saturate(617%) hue-rotate(157deg) brightness(94%) contrast(92%);
     }
 </style>
 
-{#if theme == "light"}
-    <button class="theme-toggle" on:click={() => setTheme("dark")}>
-        {theme}
-    </button>
+{#if loading}
+    <div class="theme-container">
+        <img class="sun" src="/sun.svg" alt="light-mode"/>
+        <img class="moon" src="/moon.svg" alt="dark-mode"/>
+        <button class="theme-toggle {theme}" on:click={theme=="light" ? () => setTheme("dark") : () => setTheme("light")}>
+            &nbsp;
+        </button>
+    </div>
 {:else}
-    <button class="theme-toggle" on:click={() => setTheme("light")}>
-        {theme}
-    </button>
+    <span/>
 {/if}
