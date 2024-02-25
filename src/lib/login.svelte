@@ -61,7 +61,7 @@
     .login-checkbox {
         position: relative;
         top: -153px;
-        left: 118px;
+        left: 276px;
         background: none;
         filter: var(--accent-color-filtered);
     }
@@ -90,54 +90,55 @@
         font-size: 13px;
     }
 </style>
+<div>
+    <form class="login" on:submit|preventDefault={handleLoginSubmit}>
+        <!-- USERNAME -->
+        <input 
+            type="text" 
+            name="username"
+            class="login-input"
+            minlength="4"
+            maxlength="15"
+            pattern="^[a-zA-Z0-9]+$"
+            placeholder="ユーザー名"
+            required
+            bind:this={usernameRef}
+            bind:value={username}
+            disabled={disable}
+        >
 
-<form class="login" on:submit|preventDefault={handleLoginSubmit}>
-    <!-- USERNAME -->
-    <input 
-        type="text" 
-        name="username"
-        class="login-input"
-        minlength="4"
-        maxlength="15"
-        pattern="^[a-zA-Z0-9]+$"
-        placeholder="ユーザー名"
-        required
-        bind:this={usernameRef}
-        bind:value={username}
-        disabled={disable}
-    >
+        <!-- PASSWORD -->
+        <input 
+            type="password" 
+            name="password"
+            class="login-input"
+            minlength="8"
+            maxlength="30"
+            placeholder="パスワード"
+            required
+            bind:this={passwordRef}
+            bind:value={password}
+            disabled={disable}
+        >
 
-    <!-- PASSWORD -->
-    <input 
-        type="password" 
-        name="password"
-        class="login-input"
-        minlength="8"
-        maxlength="30"
-        placeholder="パスワード"
-        required
-        bind:this={passwordRef}
-        bind:value={password}
-        disabled={disable}
-    >
+        <!-- SUBMIT -->
+        <button 
+            class="login-button"
+            disabled={disable || !Boolean(username && password)}
+            bind:this={loginButtonRef}
+        > {#if disable}
+            ...
+        {:else}
+            ログイン
+        {/if}
+        </button>
+    </form>
 
-    <!-- SUBMIT -->
-    <button 
-        class="login-button"
-        disabled={disable || !Boolean(username && password)}
-        bind:this={loginButtonRef}
-    > {#if disable}
-        ...
-      {:else}
-        ログイン
-      {/if}
+    <!-- PASSWORD VISIBILITY -->
+    <button disabled={disable || !Boolean(password)} class="login-checkbox" on:click={handlePasswordVisibility}>
+        <img loading=eager src={visible ? '/visOn.svg' : '/visOff.svg'} width="20" alt="visibility-off">
     </button>
-</form>
-
-<!-- PASSWORD VISIBILITY -->
-<button disabled={disable || !Boolean(password)} class="login-checkbox" on:click={handlePasswordVisibility}>
-    <img loading=eager src={visible ? '/visOn.svg' : '/visOff.svg'} width="20" alt="visibility-off">
-</button>
+</div>
 
 {#if showError}
     <div class="login-error">
