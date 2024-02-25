@@ -55,7 +55,7 @@
     }
     .dark {
         top: 0px;
-        left: 39px;
+        left: 40px;
         transition: .2s ease;
     }
 
