@@ -84,6 +84,7 @@ body {
     font-optical-sizing: auto;
     font-weight: bold;
     font-style: normal;
+    overflow-x: hidden;
 }
 
 /* INPUT BOXES */

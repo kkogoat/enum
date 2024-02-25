@@ -31,6 +31,7 @@
         transition: .2s ease;
         user-select: none;
         cursor: pointer;
+        z-index: 999;
     }
 
     .theme-container:hover .theme-toggle {
