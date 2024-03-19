@@ -58,6 +58,16 @@ class Media extends Model<MediaAttributes> {
     })
     declare description: string;
 
+    @Column({
+        type: DataType.STRING(15)
+    })
+    declare type: string;
+
+    @Column({
+        type: DataType.STRING(15)
+    })
+    declare status: string;
+
     // ASSOCIATIONS 
     @BelongsTo(() => User, {
         foreignKey: 'username',
