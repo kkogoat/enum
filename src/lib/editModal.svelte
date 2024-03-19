@@ -111,10 +111,10 @@
     .cancel-button {
         background-color: #b41010;
     }
-    .cancel-button:hover {
+    .cancel-button:enabled:hover {
         background-color: #ff1515;
     }
-    .cancel-button:active {
+    .cancel-button:enabled:active {
         background-color: #d61313;
     }
 </style>
@@ -194,7 +194,7 @@
             <button disabled={disable || !Boolean(title)}>
                 セーブ
             </button>
-            <button class="cancel-button" type="button" on:click={close}>
+            <button disabled={disable} class="cancel-button" type="button" on:click={close}>
                 キャンセル
             </button>
         </div>
