@@ -2,9 +2,6 @@
     let dialogRef: HTMLDialogElement;
     let formRef: HTMLFormElement;
 
-    // INPUT FLAGS
-    let disable: boolean;
-
     // FORM MEMBER
     let title: string;
     let link: string;
@@ -15,10 +12,9 @@
     let status: string;
     let type: string;
 
-    // FETCH UTIL
-    import { addMedia }  from '$lib/util/mediaFetchUtil';
-
     // HANDLE SUBMIT
+    let disable: boolean;
+    import { addMedia }  from '$lib/util/mediaFetchUtil';
     async function handleMediaSubmit() {
         disable = true;
         // NO STATUS OR TYPE
@@ -37,7 +33,6 @@
         formRef.reset();
         title="";
     }
-
 </script>
 
 <style>
@@ -136,7 +131,7 @@
     
                     <label class="label-shorter" for="rating">
                         評価 #:
-                        <input type="number" name="rating" min="1" max="10" step="any" bind:value={rating} disabled={disable}/>
+                        <input type="number" name="rating" min="1" max="10" step="0.1" bind:value={rating} disabled={disable}/>
                     </label>
 
                     <label class="label-shorter" for="status">
