@@ -126,7 +126,7 @@
                 <div style="display: flex; justify-content: space-between; flex-wrap: wrap; row-gap: 10px">
                     <label class="label-shorter" for="current-episode">
                         現在 #:
-                        <input type="number" name="current-episode" min="1" bind:value={current_episode} disabled={disable}/>
+                        <input type="number" name="current-episode" min="0" bind:value={current_episode} disabled={disable}/>
                     </label>
     
                     <label class="label-shorter" for="total-episode">
@@ -136,7 +136,7 @@
     
                     <label class="label-shorter" for="rating">
                         評価 #:
-                        <input type="number" name="rating" min="1" max="10" bind:value={rating} disabled={disable}/>
+                        <input type="number" name="rating" min="1" max="10" step="any" bind:value={rating} disabled={disable}/>
                     </label>
 
                     <label class="label-shorter" for="status">

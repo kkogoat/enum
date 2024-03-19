@@ -49,7 +49,7 @@ class Media extends Model<MediaAttributes> {
     declare total_episodes: number;
 
     @Column({
-        type: DataType.INTEGER,
+        type: DataType.FLOAT,
     })
     declare rating: number;
 
