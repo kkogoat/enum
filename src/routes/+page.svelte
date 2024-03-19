@@ -1,7 +1,8 @@
 <script lang="ts">
-	import MediaItem from "$lib/mediaItem.svelte";
+	import ThemeToggle from "$lib/themeToggle.svelte";
+	import Navbar from "$lib/navbar.svelte";
+	import List from "$lib/list.svelte";
     import Login from "$lib/login.svelte";
-	import AddModal from "$lib/addModal.svelte";
 
     // ON MOUNT
     import { authContext } from "$lib/authContext";
@@ -16,7 +17,6 @@
     let list: any = [];
     import { getMediaList } from "$lib/util/mediaFetchUtil";
 	import { browser } from "$app/environment";
-	import ThemeToggle from "$lib/themeToggle.svelte";
     $: if(browser && $authContext) getList();
     async function getList() {
         const response = await getMediaList();
@@ -28,24 +28,21 @@
     #app-container {
         width: 100vw;
         height: 100vh;
+    }
+
+    .flex {
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
     }
 </style>
 
-<div id="app-container">
+<div id="app-container" class={$authContext ? "" : "flex"}>
     <ThemeToggle />
     {#if !loading}
         {#if $authContext}
-            {$authContext}
-            <button on:click={authContext.logout}>Logout</button>
-            <AddModal />
-            {#each list as item}
-                <MediaItem item={item}/>
-            {/each}
+            <Navbar />
+            <List list={list} />
         {:else}
             <Login />
         {/if}
