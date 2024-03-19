@@ -17,7 +17,6 @@
     import { addMedia }  from '$lib/util/mediaFetchUtil';
     async function handleMediaSubmit() {
         disable = true;
-        // NO STATUS OR TYPE
         await addMedia({title, link, current_episode, total_episodes, rating, description, status, type});
         setTimeout(() => {
             formRef.reset();
