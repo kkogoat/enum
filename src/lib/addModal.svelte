@@ -85,6 +85,14 @@
     button {
         padding: 8px 12px 8px 12px;
     }
+    .add-button {
+        width: 30px;
+        height: 30px;
+        padding-left: 9.3px;
+        padding-top: 7px;
+        border-radius: 50px;
+        text-align: left
+    }
     .cancel-button {
         background-color: #b41010;
     }
@@ -178,6 +186,6 @@
     </form>
 </dialog>
 
-<button on:click={() => dialogRef.showModal()}>
+<button class="add-button" on:click={() => dialogRef.showModal()}>
     +
 </button>

@@ -22,7 +22,7 @@
 <style>
     .theme-container {
         background-color: var(--foreground-color);
-        position: absolute;
+        position: fixed;
         width: 70px;
         height: 30px;
         border-radius: 50px;
