@@ -24,3 +24,16 @@ export const getMediaList = async () => {
     const list = await result.json();
     return list;
 }
+
+export const editMedia = (data: object) => {
+    fetch('/api/media/edit', {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${get(authContext)}`
+        },
+        body: JSON.stringify(data)
+    }).catch((error) => {
+        console.log(error);
+    });
+}
