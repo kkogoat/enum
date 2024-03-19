@@ -1,7 +1,6 @@
 <script lang="ts">
     export let item: any;
     export let pos: any;
-    let buttonRef: HTMLButtonElement;
     
     // DESTRUCTURE ITEM
     let id: string = item["id"];
@@ -11,6 +10,13 @@
     let total_episodes: number = item["total_episodes"];
     let rating: number = item["rating"];
     let description: string = item["description"];
+    let type: string = item["type"];
+    let status: string = item["status"];
+
+    // EDIT MODAL BUTTON
+    import EditModal from "./editModal.svelte";
+    let buttonRef: HTMLButtonElement;
+    let editModalRef: any;
 </script>
 
 <style>
@@ -61,16 +67,18 @@
 
 <div class="media-item-container {pos % 2 == 0 ? "pos-1" : "pos-2"}">
     <div class="media-item media-item-border title" on:click|self={() => buttonRef.click()} aria-hidden="true">
-        {item["title"]}
-        <button class="edit-button" bind:this={buttonRef} on:click={() => console.log("clicked")}>open</button>
+        {title}
+        <button class="edit-button" bind:this={buttonRef} on:click={editModalRef.open}>open</button>
     </div>
     <div class="media-item media-item-border">
-        {item["rating"] ? item["rating"] : "-"}
+        {rating ? rating : "-"}
     </div>
     <div class="media-item media-item-border">
-        {item["rating"] ? item["rating"] : "-"}
+        {type ? type : "-"}
     </div>
     <div class="media-item media-item-progress">
-        {item["current_episode"]} / {item["total_episodes"] ? item["total_episodes"] : "-"}
+        {current_episode} / {total_episodes ? total_episodes : "-"}
     </div>
 </div>
+
+<EditModal bind:this={editModalRef} id={id} bind:title bind:link bind:current_episode bind:total_episodes bind:rating bind:description bind:type bind:status/>
