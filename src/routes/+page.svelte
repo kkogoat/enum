@@ -14,13 +14,13 @@
     })
 
     // LOAD LIST IF LOGGED IN
-    let list: any = [];
+    import { listContext } from "$lib/context/listContext";
     import { getMediaList } from "$lib/util/mediaFetchUtil";
 	import { browser } from "$app/environment";
     $: if(browser && $authContext) getList();
     async function getList() {
         const response = await getMediaList();
-        list = response;
+        listContext.initializeList(response);
     }
 </script>
 
@@ -42,7 +42,7 @@
     {#if !loading}
         {#if $authContext}
             <Navbar />
-            <List list={list} />
+            <List list={$listContext} />
         {:else}
             <Login />
         {/if}
