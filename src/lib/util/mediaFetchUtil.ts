@@ -37,3 +37,16 @@ export const editMedia = (data: object) => {
         console.log(error);
     });
 }
+
+export const deleteMedia = (data: object) => {
+    fetch('/api/media/delete', {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${get(authContext)}`
+        },
+        body: JSON.stringify(data)
+    }).catch((error) => {
+        console.log(error);
+    });
+}
