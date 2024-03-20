@@ -1,4 +1,6 @@
 <script lang="ts">
+	import DeleteMedia from "$lib/deleteMedia.svelte";
+
     let dialogRef: HTMLDialogElement;
     let formRef: HTMLFormElement;
 
@@ -117,6 +119,12 @@
     .cancel-button:enabled:active {
         background-color: #d61313;
     }
+
+    .media-delete-button {
+        position: absolute;
+        right: 30px;
+        bottom: 14px;
+    }
 </style>
 
 <dialog class="dialog" bind:this={dialogRef}>
@@ -199,4 +207,9 @@
             </button>
         </div>
     </form>
+
+    <!-- MEDIA DELETE -->
+    <div class="media-delete-button">
+        <DeleteMedia id={id} parentModal={dialogRef}/>
+    </div>
 </dialog>
