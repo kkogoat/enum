@@ -42,7 +42,7 @@
     {#if !loading}
         {#if $authContext}
             <Navbar />
-            <List list={$listContext} />
+            <List />
         {:else}
             <Login />
         {/if}

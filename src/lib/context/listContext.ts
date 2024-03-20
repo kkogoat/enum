@@ -1,13 +1,20 @@
 import { writable } from "svelte/store";
 
 function createListContext(list: any) {
-    const { subscribe, set } = writable(list);
+    const { subscribe, set, update } = writable(list);
 
     function initializeList(list: any) {
         set(list);
     }
 
-    return { subscribe, initializeList }
+    function removeFromList(id: string) {
+        update((items) => {
+            let result = items.filter((item: any) => {return item.id != id});
+            return result;
+        })
+    }
+
+    return { subscribe, initializeList, removeFromList }
 }
 
 export const listContext = createListContext([]);
