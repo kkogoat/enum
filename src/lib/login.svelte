@@ -21,7 +21,7 @@
     }
 
     // LOGIN SUBMIT
-    import { authContext } from "./authContext";
+    import { authContext } from "$lib/context/authContext";
     const handleLoginSubmit = async () => {
         disable = true;
         showError = false;

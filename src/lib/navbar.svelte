@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { authContext } from "./authContext";
+    import { authContext } from "$lib/context/authContext";
 	import AddModal from "./addModal.svelte";
 </script>
 

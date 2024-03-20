@@ -1,4 +1,4 @@
-import { authContext } from "$lib/authContext"
+import { authContext } from "$lib/context/authContext"
 import { get } from "svelte/store"
 
 export const addMedia = async (data: object) => {

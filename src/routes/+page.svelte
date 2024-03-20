@@ -5,7 +5,7 @@
     import Login from "$lib/login.svelte";
 
     // ON MOUNT
-    import { authContext } from "$lib/authContext";
+    import { authContext } from "$lib/context/authContext";
 	import { onMount } from "svelte";
     let loading: boolean = true;
     onMount(async () => {
