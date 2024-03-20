@@ -173,3 +173,8 @@ dialog::backdrop {
     background-color: var(--background-color-disabled);
     opacity: .65;
 }
+
+/* SVG */
+svg {
+    transition: .2s ease;
+}
