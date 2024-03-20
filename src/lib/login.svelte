@@ -52,6 +52,10 @@
         height: 35px;
     }
 
+    .login-pwd {
+        padding-right: 28px;
+    }
+
     .login-button {
         margin-top: auto;
         height: 40px;
@@ -111,7 +115,7 @@
         <input 
             type="password" 
             name="password"
-            class="login-input"
+            class="login-input login-pwd"
             minlength="8"
             maxlength="30"
             placeholder="パスワード"
