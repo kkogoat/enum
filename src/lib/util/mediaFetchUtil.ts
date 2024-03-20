@@ -1,8 +1,8 @@
 import { authContext } from "$lib/authContext"
 import { get } from "svelte/store"
 
-export const addMedia = (data: object) => {
-    fetch('/api/media/add', {
+export const addMedia = async (data: object) => {
+    const result = fetch('/api/media/add', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -12,6 +12,24 @@ export const addMedia = (data: object) => {
     }).catch((error) => {
         console.log(error);
     });
+
+    const decoded = await (await (result as Promise<Response>)).json();
+    if(!decoded.instance) return null;
+
+    // ENTRY CONSTRUCTION
+    const instance = decoded.instance;
+    let entry = {
+        id: instance.id,
+        title: instance.title,
+        link: instance.link ? instance.link : null,
+        current_episode: instance.current_episode,
+        total_episode: instance.total_episode ? instance.total_episode : null,
+        rating: instance.rating ? instance.rating : null,
+        description: instance.description ? instance.description : null,
+        status: instance.status,
+        type: instance.type
+    }
+    return entry;
 }
 
 export const getMediaList = async () => {

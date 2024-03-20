@@ -18,5 +18,5 @@ export const POST = async ({ request, locals }) => {
     // ADD MEDIA TO MODEL
     const instance = await Media.create(body);
     log("media", `successfully added ${body.title} to ${body.username}`);
-    return new Response(JSON.stringify("Successfully Added"), {status: 200});
+    return new Response(JSON.stringify({message: "Successfully Added", instance}), {status: 200});
 }

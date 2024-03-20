@@ -7,6 +7,13 @@ function createListContext(list: any) {
         set(list);
     }
 
+    function addToList(item: any) {
+        update((items) => {
+            items.push(item);
+            return items;
+        })
+    }
+
     function removeFromList(id: string) {
         update((items) => {
             let result = items.filter((item: any) => {return item.id != id});
@@ -14,7 +21,7 @@ function createListContext(list: any) {
         })
     }
 
-    return { subscribe, initializeList, removeFromList }
+    return { subscribe, initializeList, removeFromList, addToList }
 }
 
 export const listContext = createListContext([]);

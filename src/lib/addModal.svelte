@@ -15,10 +15,12 @@
     // HANDLE SUBMIT
     let disable: boolean;
     import { addMedia }  from '$lib/util/mediaFetchUtil';
+    import { listContext } from './context/listContext';
     async function handleMediaSubmit() {
         disable = true;
-        await addMedia({title, link, current_episode, total_episodes, rating, description, status, type});
+        const entry = await addMedia({title, link, current_episode, total_episodes, rating, description, status, type});
         setTimeout(() => {
+            if(entry) listContext.addToList(entry);
             formRef.reset();
             dialogRef.close();
             title="";
