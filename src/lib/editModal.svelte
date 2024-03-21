@@ -127,7 +127,7 @@
     }
 </style>
 
-<dialog class="dialog" bind:this={dialogRef}>
+<dialog class="dialog" bind:this={dialogRef} on:cancel={close}>
     <form on:submit|preventDefault={handleMediaSubmit} bind:this={formRef} autocomplete="off">
         <!-- LAYER 1 -->
         <div class="layer1">
