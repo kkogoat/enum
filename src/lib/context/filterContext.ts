@@ -7,16 +7,24 @@ function createFilterContext(filters: any) {
         update((filters) => {
             filters.search = input;
             return filters;
-        })
+        });
     }
+
     function alpha(input: any) {
         update((filters) => {
             filters.alpha =  input;
             return filters;
-        })
+        });
     }
 
-    return { subscribe, search, alpha }
+    function type(input: any) {
+        update((filters) => {
+            filters.type = input;
+            return filters;
+        });
+    }
+
+    return { subscribe, search, alpha, type }
 }
 
 export const filterContext = createFilterContext({});

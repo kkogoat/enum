@@ -1,33 +1,34 @@
 <script lang="ts">
-    let charMap: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let alphaBitMap: any = {};
+    let types: Array<string> = [
+        "Anime", "Cartoon", "C-Drama", "J-Drama", "K-Drama", "Manga", "Manhwa", "Manhua"
+    ]
+    let typeBitMap: any = {};
 
-    // ALPHA FILTER
+    // TYPES FILTER
 	import { filterContext } from "./context/filterContext";
-    function toggleBitMap(index: string) {
-        if(alphaBitMap[index]) {
-            delete(alphaBitMap[index])
+    function toggleBitMap(type: string) {
+        if(typeBitMap[type]) {
+            delete(typeBitMap[type]);
         } else {
-            alphaBitMap[index] = 1;
+            typeBitMap[type] = 1;
         }
-        filterContext.alpha(alphaBitMap);
+        filterContext.type(typeBitMap);
     }
 
     // RESET
     function handleReset() {
-        alphaBitMap = {}
-        filterContext.alpha(alphaBitMap);
-        for (let step = 0; step < charMap.length; step++) {
-            (document.getElementById(charMap[step]) as HTMLInputElement).checked = false;
+        typeBitMap = {}
+        filterContext.type(typeBitMap);
+        for (let step = 0; step < types.length; step++) {
+            (document.getElementById(types[step]) as HTMLInputElement).checked = false;
         }
     }
 </script>
 
 <style>
-    .alpha-filter-container {
+    .type-filter-container {
         display: flex;
         gap: 5px;
-        margin-bottom: 17px;
     }
     button {
         border-radius: unset;
@@ -51,11 +52,11 @@
     }
 </style>
 
-<div class="alpha-filter-container">
-    {#each {length: 26} as _, i}
+<div class="type-filter-container">
+    {#each types as item, index}
         <div>
-            <input on:change={() => toggleBitMap(charMap[i])} id={charMap[i]} name={charMap[i]} type="checkbox" />
-            <label for={charMap[i]}>{charMap[i]}</label>
+            <input id={item} name={item} type="checkbox" on:change={() => toggleBitMap(item)}/>
+            <label for={item}>{item}</label>
         </div>
     {/each}
     <button on:click={handleReset}>reset</button>

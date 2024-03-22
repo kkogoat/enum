@@ -10,7 +10,11 @@ export const filteredListContext = derived([listContext, filterContext], ([$list
     }
 
     if($filterContext.alpha && Object.keys($filterContext.alpha).length) {
-        result = result.filter((item: any) => $filterContext.alpha[item.title[0].toUpperCase()])
+        result = result.filter((item: any) => $filterContext.alpha[item.title[0].toUpperCase()]);
+    }
+
+    if($filterContext.type && Object.keys($filterContext.type).length) {
+        result = result.filter((item: any) => $filterContext.type[item.type]);
     }
 
     return result;

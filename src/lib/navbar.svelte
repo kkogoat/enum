@@ -3,6 +3,7 @@
 	import AddModal from "$lib/addModal.svelte";
 	import Search from "$lib/search.svelte";
 	import AlphaFilter from "$lib/alphaFilter.svelte";
+	import TypeFilter from "$lib/typeFilter.svelte";
 </script>
 
 <style>
@@ -41,7 +42,7 @@
     }   
 
     .filter-container {
-        margin-bottom: 20px;
+        margin-bottom: 0px;
     }
 </style>
 
@@ -55,5 +56,6 @@
     </div>
     <div class="filter-container">
         <AlphaFilter />
+        <TypeFilter />
     </div>
 </nav>

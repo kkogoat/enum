@@ -3,14 +3,7 @@
 
     let toSearch: string = "";
 
-    $: toSearch, handleSearch();
-    let timer: any;
-    function handleSearch() {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-            filterContext.search(toSearch);
-        }, 300);
-    }
+    $: toSearch, filterContext.search(toSearch);
 </script>
 
 <style>
