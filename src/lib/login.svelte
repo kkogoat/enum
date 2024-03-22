@@ -107,7 +107,7 @@
 
 <div>
     <div class="title"> enum.usagi </div>
-    <form class="login" on:submit|preventDefault={handleLoginSubmit}>
+    <form class="login" on:submit|preventDefault={handleLoginSubmit} autocomplete="off">
         <!-- USERNAME -->
         <input 
             type="text" 
