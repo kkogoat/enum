@@ -93,8 +93,18 @@
         border-radius: 8px;
         font-size: 13px;
     }
+    
+    .title {
+        display: flex;
+        justify-content: center;
+        font-size: 40px;
+        margin-top: -90px;
+        margin-bottom: 30px;
+    }
 </style>
+
 <div>
+    <div class="title"> enum.usagi </div>
     <form class="login" on:submit|preventDefault={handleLoginSubmit}>
         <!-- USERNAME -->
         <input 
