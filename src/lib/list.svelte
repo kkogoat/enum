@@ -58,4 +58,5 @@
             <MediaItem item={item} pos={index}/>
         {/each}
     </div>    
+    <div style="height: 300px" />
 </div>
