@@ -14,17 +14,17 @@ const retryFetch: any = async (func: any, api: string, data: object, NUM_RETRIES
     const result = await fetch('/api/auth/refresh', {
         method: "GET",
         credentials: "same-origin"
-    }).catch((error) => {
-        return retryFetch(func, api, data, NUM_RETRIES-1);
+    }).catch(async (error) => {
+        return await retryFetch(func, api, data, NUM_RETRIES-1);
     });
 
     // IF SUCCESSFUL REFRESH, FIRE INTENDED FETCH
     if(result && result.ok) {
         const res = await (result as Response).json();
         authContext.refresh(res.username, res.access_token);
-        return func(api, data);
+        return await func(api, data);
     } else {
-        return retryFetch(func, api, data, NUM_RETRIES-1);
+        return await retryFetch(func, api, data, NUM_RETRIES-1);
     }
 }
 
@@ -35,11 +35,11 @@ const GET = (api: string, data: object = {}) => {
         headers: {
             "Authorization": `Bearer ${get(authContext)}`
         },
-    }).then((res) => {
+    }).then(async (res) => {
         if(res.status == 401) {
-            const retryResult = retryFetch(GET, api, {});
+            const retryResult = await retryFetch(GET, api, {});
             if(!retryResult) {
-                authContext.logout();
+                authContext.refreshLogout();
             }
             return retryResult;
         }
@@ -58,11 +58,11 @@ const POST = (api: string, data: object) => {
             "Authorization": `Bearer ${get(authContext)}`
         },
         body: JSON.stringify(data)
-    }).then((res) => {
+    }).then(async (res) => {
         if(res.status == 401) {
-            const retryResult = retryFetch(POST, api, data);
+            const retryResult = await retryFetch(POST, api, data);
             if(!retryResult) {
-                authContext.logout();
+                authContext.refreshLogout();
             }
             return retryResult;
         }
@@ -81,14 +81,15 @@ const PUT = (api: string, data: object) => {
             "Authorization": `Bearer ${get(authContext)}`
         },
         body: JSON.stringify(data)
-    }).then((res) => {
+    }).then(async (res) => {
         if(res.status == 401) {
-            const retryResult = retryFetch(PUT, api, data);
+            const retryResult = await retryFetch(PUT, api, data);
             if(!retryResult) {
-                authContext.logout();
+                authContext.refreshLogout();
             }
             return retryResult;
         }
+        return res;
     }).catch((error) => {
         console.log(error);
     });
@@ -103,14 +104,15 @@ const DELETE = (api: string, data: object) => {
             "Authorization": `Bearer ${get(authContext)}`
         },
         body: JSON.stringify(data)
-    }).then((res) => {
+    }).then(async (res) => {
         if(res.status == 401) {
-            const retryResult = retryFetch(DELETE, api, data);
+            const retryResult = await retryFetch(DELETE, api, data);
             if(!retryResult) {
-                authContext.logout();
+                authContext.refreshLogout();
             }
             return retryResult;
         }
+        return res;
     }).catch((error) => {
         console.log(error);
     });

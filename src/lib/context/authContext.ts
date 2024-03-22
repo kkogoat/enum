@@ -45,7 +45,12 @@ function createAuthContext(user: string) {
         username = username;
     }
 
-    return { subscribe, login, logout, autoLogin, refresh }
+    async function refreshLogout() {
+        set("");
+        username = "";
+    }
+
+    return { subscribe, login, logout, autoLogin, refresh, refreshLogout }
 }
 
 export const authContext = createAuthContext("");
