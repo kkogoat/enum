@@ -20,7 +20,8 @@ export const PUT = async ({ request, locals }) => {
     delete(body["id"]);
     Media.update(
         body,
-        { where: {id: id, username: username}})
+        { where: {id: id, username: username}}
+    )
         
     log("media", `successfully edited ${body.title} for ${body.username}`);
     return new Response(JSON.stringify("Successfully Edited"), {status: 200});

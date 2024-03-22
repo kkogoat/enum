@@ -32,6 +32,25 @@
             progressFontSize = "font-size: 10px; line-height: 26px;"
         }
     }
+
+    // INCREMENT DECREMENT
+	import { editMedia } from "./util/mediaFetchUtil";
+    let timer: any;
+    function incdec(value: number) {
+        if(current_episode == 0 && value == -1) {
+            return
+        }
+        if(current_episode == 2147483647 && value == 1) {
+            return
+        }
+        current_episode = current_episode + value;
+
+        // DEBOUNCE
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            editMedia({id, current_episode});
+        }, 300);
+    }
 </script>
 
 <style>
@@ -78,9 +97,11 @@
         color: var(--accent-color);
     }
     .media-item-progress-button:hover {
+        background: none;
         color: var(--accent-color-hover);
     }
     .media-item-progress-button:active {
+        background: none;
         color: var(--accent-color-active);
     }
 
@@ -125,11 +146,11 @@
         {type ? type : "-"}
     </div>
     <div class="media-item media-item-progress">
-        <button class="media-item-progress-button">-</button>
+        <button class="media-item-progress-button" on:click={() => incdec(-1)}>-</button>
         <div class="media-item-progress-stat" style={progressFontSize}>
             {current_episode ? current_episode : "-"} / {total_episodes ? total_episodes : "-"}
         </div>
-        <button class="media-item-progress-button">+</button>
+        <button class="media-item-progress-button" on:click={() => incdec(1)}>+</button>
     </div>
 </div>
 
