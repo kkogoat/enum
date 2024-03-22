@@ -29,17 +29,23 @@ function createAuthContext(user: string) {
     }
 
     async function logout() {
+        let user = username;
         set("");
         username = "";
         const result = await fetch('/api/auth/logout', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "same-origin",
-            body: JSON.stringify({username: username})
+            body: JSON.stringify({username: user})
         })
     }
 
-    return { subscribe, login, logout, autoLogin}
+    async function refresh(username: string, access_token: string) {
+        set(access_token);
+        username = username;
+    }
+
+    return { subscribe, login, logout, autoLogin, refresh }
 }
 
 export const authContext = createAuthContext("");

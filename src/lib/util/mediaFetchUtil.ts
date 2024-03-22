@@ -1,18 +1,7 @@
-import { authContext } from "$lib/context/authContext"
-import { get } from "svelte/store"
+import { customFetch } from "$lib/util/customFetchUtil";
 
 export const addMedia = async (data: object) => {
-    const result = fetch('/api/media/add', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${get(authContext)}`
-        },
-        body: JSON.stringify(data)
-    }).catch((error) => {
-        console.log(error);
-    });
-
+    const result = await customFetch.post('/api/media/add', data);
     const decoded = await (await (result as Promise<Response>)).json();
     if(!decoded.instance) return null;
 
@@ -33,38 +22,15 @@ export const addMedia = async (data: object) => {
 }
 
 export const getMediaList = async () => {
-    const result = await fetch('/api/media/get-list',{
-        method: "GET",
-        headers: {
-            "Authorization": `Bearer ${get(authContext)}`
-        }
-    })
+    const result = await customFetch.get('/api/media/get-list');
     const list = await result.json();
     return list;
 }
 
 export const editMedia = (data: object) => {
-    fetch('/api/media/edit', {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${get(authContext)}`
-        },
-        body: JSON.stringify(data)
-    }).catch((error) => {
-        console.log(error);
-    });
+    const result = customFetch.put('/api/media/edit', data);
 }
 
 export const deleteMedia = (data: object) => {
-    fetch('/api/media/delete', {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${get(authContext)}`
-        },
-        body: JSON.stringify(data)
-    }).catch((error) => {
-        console.log(error);
-    });
+    const result = customFetch.delete('/api/media/delete', data);
 }
