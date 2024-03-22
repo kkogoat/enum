@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from '$env/static/private';
+import { ACCESS_TOKEN_EXPIRY, ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from '$env/static/private';
 import User from '$lib/server/db/models/user.js';
 import { log } from '$lib/server/util/loggerUtil.js';
 import bcrypt from "bcrypt";
@@ -26,7 +26,7 @@ export const GET = async ({ cookies }) => {
 
         // SIGN NEW ACCESS_TOKEN
         log("auth", `refresh user: ${instance.username}`);
-        const access_token = jwt.sign({username: username}, ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
+        const access_token = jwt.sign({username: username}, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
         return new Response(JSON.stringify({username: username, access_token: access_token}), {status: 200});
     })
 
