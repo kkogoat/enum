@@ -9,8 +9,14 @@ function createFilterContext(filters: any) {
             return filters;
         })
     }
+    function alpha(input: any) {
+        update((filters) => {
+            filters.alpha =  input;
+            return filters;
+        })
+    }
 
-    return { subscribe, search }
+    return { subscribe, search, alpha }
 }
 
 export const filterContext = createFilterContext({});

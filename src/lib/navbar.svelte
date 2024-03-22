@@ -2,6 +2,7 @@
     import { authContext } from "$lib/context/authContext";
 	import AddModal from "$lib/addModal.svelte";
 	import Search from "$lib/search.svelte";
+	import AlphaFilter from "$lib/alphaFilter.svelte";
 </script>
 
 <style>
@@ -31,12 +32,11 @@
     .search-container {
         display: flex;
         margin-left: 35px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }   
 
     .filter-container {
-        width: 600px;
-        height: 60px;
+        margin-bottom: 20px;
     }
 </style>
 
@@ -48,6 +48,6 @@
         <AddModal />
     </div>
     <div class="filter-container">
-
+        <AlphaFilter />
     </div>
 </nav>

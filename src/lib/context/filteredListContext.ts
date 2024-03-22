@@ -6,7 +6,11 @@ export const filteredListContext = derived([listContext, filterContext], ([$list
     let result: any = $listContext;
 
     if($filterContext.search) {
-        result = result.filter((item: any) => item.title.toLowerCase().startsWith($filterContext.search.toLowerCase()));
+        result = result.filter((item: any) => item.title.toLowerCase().includes($filterContext.search.toLowerCase()));
+    }
+
+    if($filterContext.alpha && Object.keys($filterContext.alpha).length) {
+        result = result.filter((item: any) => $filterContext.alpha[item.title[0].toUpperCase()])
     }
 
     return result;

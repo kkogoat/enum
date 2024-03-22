@@ -9,7 +9,7 @@
         clearTimeout(timer);
         timer = setTimeout(() => {
             filterContext.search(toSearch);
-        }, 800);
+        }, 300);
     }
 </script>
 
