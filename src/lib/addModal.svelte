@@ -122,12 +122,12 @@
                 <div style="display: flex; justify-content: space-between; flex-wrap: wrap; row-gap: 10px">
                     <label class="label-shorter" for="current-episode">
                         現在 #:
-                        <input type="number" name="current-episode" min="0" bind:value={current_episode} disabled={disable}/>
+                        <input type="number" name="current-episode" min="0" max="2147483647" bind:value={current_episode} disabled={disable}/>
                     </label>
     
                     <label class="label-shorter" for="total-episode">
                         全 #:
-                        <input type="number" name="total-episode" min="1" bind:value={total_episodes} disabled={disable}/>
+                        <input type="number" name="total-episode" min="0" max="2147483647" bind:value={total_episodes} disabled={disable}/>
                     </label>
     
                     <label class="label-shorter" for="rating">
