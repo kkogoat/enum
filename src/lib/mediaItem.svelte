@@ -17,6 +17,21 @@
     import EditModal from "./editModal.svelte";
     let buttonRef: HTMLButtonElement;
     let editModalRef: any;
+
+    // FONT SIZE CHANGE FOR PROGRESS
+    $: current_episode, changeFont();
+    $: total_episodes, changeFont();
+    let progressFontSize = "font-size: 16px;";
+    function changeFont() {
+        let length1 = current_episode ? Math.log(current_episode) * Math.LOG10E + 1 | 0 : 1;
+        let length2 = total_episodes ? Math.log(total_episodes) * Math.LOG10E + 1 | 0 : 1;
+        let total_length = length1+length2;
+        if(total_length < 5) {
+            progressFontSize = "font-size: 16px;";
+        } else {
+            progressFontSize = "font-size: 10px; line-height: 26px;"
+        }
+    }
 </script>
 
 <style>
@@ -24,7 +39,8 @@
     .media-item-container {
         height: 30px;
         display: grid;
-        grid-template-columns: minmax(200px, 500px) 100px 100px 100px;
+        grid-template-columns: minmax(200px, 500px) 100px 100px 120px;
+        grid-template-rows: 30px;
         border-bottom: 1px solid var(--foreground-color);
     }
 
@@ -43,8 +59,31 @@
         border-right: 1px solid var(--foreground-color);
     }
     .media-item-progress {
-        padding-left: 0px;
         justify-self: center;
+        padding-left: 0px;
+        display: grid;
+        grid-template-columns: 20px 70px 20px;
+        align-items: center;
+    }
+    .media-item-progress-stat {
+        height: 30px;
+        max-width: 70px;
+        justify-self: center;
+        align-self: center;
+        overflow-x: hidden;
+        white-space: nowrap;
+    }
+    .media-item-progress-button {
+        margin-top: -4px;
+        font-size: 18px;
+        background: none;
+        color: var(--accent-color);
+    }
+    .media-item-progress-button:hover {
+        color: var(--accent-color-hover);
+    }
+    .media-item-progress-button:active {
+        color: var(--accent-color-active);
     }
 
     .edit-button {
@@ -77,7 +116,11 @@
         {type ? type : "-"}
     </div>
     <div class="media-item media-item-progress">
-        {current_episode} / {total_episodes ? total_episodes : "-"}
+        <button class="media-item-progress-button">-</button>
+        <div class="media-item-progress-stat" style={progressFontSize}>
+            {current_episode ? current_episode : "-"} / {total_episodes ? total_episodes : "-"}
+        </div>
+        <button class="media-item-progress-button">+</button>
     </div>
 </div>
 

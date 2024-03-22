@@ -17,7 +17,7 @@
         position: fixed;
         background-color: var(--background-color);
         display: grid;
-        grid-template-columns: minmax(200px, 500px) 100px 100px 100px;
+        grid-template-columns: minmax(200px, 500px) 100px 100px 120px;
     }
 
     .list-labels-item {
