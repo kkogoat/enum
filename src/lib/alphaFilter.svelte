@@ -16,6 +16,15 @@
             filterContext.alpha(alphaBitMap);
         }, 300)
     }
+
+    // RESET
+    function handleReset() {
+        alphaBitMap = {}
+        filterContext.alpha(alphaBitMap);
+        for (let step = 0; step <= 25; step++) {
+            (document.getElementById(charMap[step]) as HTMLInputElement).checked = false;
+        }
+    }
 </script>
 
 <style>
@@ -23,12 +32,13 @@
         display: flex;
         gap: 5px;
     }
-
+    button {
+        border-radius: unset;
+    }
     label {
         padding: 5px;
         user-select: none;
     }
-
     input[type="checkbox"] {
         display: none;
     }
@@ -47,8 +57,9 @@
 <div class="alpha-filter-container">
     {#each {length: 26} as _, i}
         <div>
-            <input id={charMap[i]} name={charMap[i]} type="checkbox"/>
-            <label for={charMap[i]} on:click={() => toggleBitMap(charMap[i])} aria-hidden="true">{charMap[i]}</label>
+            <input on:change={() => toggleBitMap(charMap[i])} id={charMap[i]} name={charMap[i]} type="checkbox" />
+            <label for={charMap[i]}>{charMap[i]}</label>
         </div>
     {/each}
+    <button on:click={handleReset}>reset</button>
 </div>
