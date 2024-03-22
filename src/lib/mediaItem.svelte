@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Open from "$lib/assets/open.svelte";
     export let item: any;
     export let pos: any;
     
@@ -15,7 +16,6 @@
 
     // EDIT MODAL BUTTON
     import EditModal from "./editModal.svelte";
-    let buttonRef: HTMLButtonElement;
     let editModalRef: any;
 
     // FONT SIZE CHANGE FOR PROGRESS
@@ -35,11 +35,10 @@
 </script>
 
 <style>
-
     .media-item-container {
         height: 30px;
         display: grid;
-        grid-template-columns: minmax(200px, 500px) 100px 100px 120px;
+        grid-template-columns: minmax(200px, 500px) 50px 100px 100px 120px;
         grid-template-rows: 30px;
         border-bottom: 1px solid var(--foreground-color);
     }
@@ -52,7 +51,6 @@
     }
 
     .media-item {
-        height: 100%;
         padding: 1px 0px 0px 8px;
     }
     .media-item-border {
@@ -86,28 +84,39 @@
         color: var(--accent-color-active);
     }
 
-    .edit-button {
-        float: right;
-        margin: 5px 7px 0px 0px;
-        display: none;
+    .title {
+        overflow: hidden;
     }
     .title:hover {
         text-decoration: underline;
         cursor: pointer;
     }
-    .title:hover > .edit-button {
-        display: block;
-        background-color: var(--accent-color-hover);
+
+    .media-link {
+        width: 32px;
+        padding-top: 2px;
+        --link-base: var(--accent-color);
+        display: flex;
+        justify-content: center;
     }
-    .title:active > .edit-button {
-        background-color: var(--accent-color-active);
+    .media-link:hover {
+        --link-base: var(--accent-color-hover);
+    }
+    .media-link:active {
+        --link-base: var(--accent-color-active);
     }
 </style>
 
 <div class="media-item-container {pos % 2 == 0 ? "pos-1" : "pos-2"}">
-    <div class="media-item media-item-border title" on:click|self={() => buttonRef.click()} aria-hidden="true">
+    <div title="edit" class="media-item media-item-border title" on:click|self={editModalRef.open} aria-hidden="true">
         {title}
-        <button class="edit-button" bind:this={buttonRef} on:click={editModalRef.open}>open</button>
+    </div>
+    <div class="media-item media-item-border">
+        {#if link}
+            <div class="media-link"><a href={link} target="_black" rel="noopener noreferrer"><Open fill="var(--link-base)" size="15px"/></a></div>
+        {:else}
+            <span></span>
+        {/if}
     </div>
     <div class="media-item media-item-border">
         {rating ? rating : "-"}

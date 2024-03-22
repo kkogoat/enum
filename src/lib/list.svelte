@@ -17,7 +17,7 @@
         position: fixed;
         background-color: var(--background-color);
         display: grid;
-        grid-template-columns: minmax(200px, 500px) 100px 100px 120px;
+        grid-template-columns: minmax(200px, 500px) 50px 100px 100px 120px;
     }
 
     .list-labels-item {
@@ -38,6 +38,9 @@
     <div class="list-labels-container">
         <div class="list-labels-item list-labels-item-border">
             Title
+        </div>
+        <div class="list-labels-item list-labels-item-border">
+            Link
         </div>
         <div class="list-labels-item list-labels-item-border">
             Rating
