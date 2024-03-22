@@ -29,6 +29,11 @@
         padding-bottom: 15px;
     }
 
+    .title {
+        font-size: 40px;
+        margin-bottom: 50px;
+    }
+
     .search-container {
         display: flex;
         margin-left: 35px;
@@ -43,6 +48,7 @@
 <button class="logout-button" on:click={authContext.logout}>ログアウト</button>
 
 <nav>
+    <div class="title"> enum.usagi </div>
     <div class="search-container">
         <Search />
         <AddModal />
