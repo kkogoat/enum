@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+    import VisOff from "$lib/assets/visOff.svelte";
+    import VisOn from "$lib/assets/visOn.svelte";
 
     let usernameRef: HTMLElement;
     let passwordRef: HTMLElement;
@@ -150,7 +152,11 @@
 
     <!-- PASSWORD VISIBILITY -->
     <button disabled={disable || !Boolean(password)} class="login-checkbox" on:click={handlePasswordVisibility}>
-        <img loading=eager src={visible ? '/visOn.svg' : '/visOff.svg'} width="20" alt="visibility-off">
+        {#if visible}
+            <VisOn />
+        {:else}
+            <VisOff />
+        {/if}
     </button>
 </div>
 
