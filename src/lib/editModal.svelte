@@ -2,7 +2,6 @@
 	import DeleteMedia from "$lib/deleteMedia.svelte";
 
     let dialogRef: HTMLDialogElement;
-    let formRef: HTMLFormElement;
 
     // FORM MEMBER
     export let id: string;
@@ -128,7 +127,7 @@
 </style>
 
 <dialog class="dialog" bind:this={dialogRef} on:cancel={close}>
-    <form on:submit|preventDefault={handleMediaSubmit} bind:this={formRef} autocomplete="off">
+    <form on:submit|preventDefault={handleMediaSubmit} autocomplete="off">
         <!-- LAYER 1 -->
         <div class="layer1">
             <!-- LEFT COLUMN -->
