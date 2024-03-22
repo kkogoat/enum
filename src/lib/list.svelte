@@ -1,7 +1,7 @@
 <script lang="ts">
 	import MediaItem from "./mediaItem.svelte";
 
-    import { listContext } from "./context/listContext";
+    import { filteredListContext } from "$lib/context/filteredListContext";
 </script>
 
 <style>
@@ -54,7 +54,7 @@
     </div>
 
     <div class="list-items">
-        {#each $listContext as item, index (item.id)}
+        {#each $filteredListContext as item, index (item.id)}
             <MediaItem item={item} pos={index}/>
         {/each}
     </div>    

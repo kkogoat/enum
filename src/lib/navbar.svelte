@@ -1,6 +1,7 @@
 <script lang="ts">
     import { authContext } from "$lib/context/authContext";
-	import AddModal from "./addModal.svelte";
+	import AddModal from "$lib/addModal.svelte";
+	import Search from "$lib/search.svelte";
 </script>
 
 <style>
@@ -31,14 +32,7 @@
         display: flex;
         margin-left: 35px;
         margin-bottom: 10px;
-    }
-
-    .search-input {
-        background-color: var(--foreground-color);
-        margin-right: 5px;
-        border-radius: 50px;
-        width: 450px;
-    }
+    }   
 
     .filter-container {
         width: 600px;
@@ -50,10 +44,8 @@
 
 <nav>
     <div class="search-container">
-        <input class="search-input" placeholder="サーチ" type="text"/>
-        <div style="">
-            <AddModal />
-        </div>
+        <Search />
+        <AddModal />
     </div>
     <div class="filter-container">
 
