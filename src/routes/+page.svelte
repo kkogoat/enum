@@ -30,6 +30,11 @@
         max-height: 100vh;
     }
 
+    #app-container-login {
+        width: 100vw;
+        height: 100vh;
+    }
+
     .flex {
         display: flex;
         justify-content: center;
@@ -37,7 +42,7 @@
     }
 </style>
 
-<div id="app-container" class={$authContext ? "" : "flex"}>
+<div id={$authContext ? "app-container" : "app-container-login"} class={$authContext ? "" : "flex"}>
     <ThemeToggle />
     {#if !loading}
         {#if $authContext}
