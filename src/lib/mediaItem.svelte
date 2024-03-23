@@ -57,7 +57,7 @@
     .media-item-container {
         height: 30px;
         display: grid;
-        grid-template-columns: minmax(200px, 500px) 50px 100px 100px 120px;
+        grid-template-columns: minmax(200px, 500px) 50px 85px 100px 120px;
         grid-template-rows: 30px;
         border-bottom: 1px solid var(--foreground-color);
     }
