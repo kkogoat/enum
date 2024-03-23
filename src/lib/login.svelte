@@ -34,7 +34,7 @@
                 disable = false;
                 showError = true;
             } 
-        }, 1000);
+        }, 500);
     }
 </script>
 
@@ -95,6 +95,7 @@
         background-color: var(--foreground-color);
         border-radius: 8px;
         font-size: 13px;
+        transition: color var(--color-animation-timing) ease, background-color var(--color-animation-timing) ease;
     }
     
     .title {
