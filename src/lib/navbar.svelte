@@ -4,6 +4,15 @@
 	import Search from "$lib/search.svelte";
 	import AlphaFilter from "$lib/alphaFilter.svelte";
 	import TypeFilter from "$lib/typeFilter.svelte";
+
+    let dialogRef: HTMLDialogElement;
+    function handleLogout() {
+        dialogRef.showModal();
+        setTimeout(() => {
+            authContext.logout();
+            dialogRef.close();
+        }, 1000);
+    }
 </script>
 
 <style>
@@ -46,9 +55,16 @@
     .filter-container {
         margin-bottom: 0px;
     }
+    dialog {
+        width: 0px;
+        height: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
 </style>
 
-<button class="logout-button" on:click={authContext.logout}>ログアウト</button>
+<dialog bind:this={dialogRef}></dialog>
+<button class="logout-button" on:click={handleLogout}>ログアウト</button>
 
 <nav>
     <div class="title"> enum.usagi </div>
