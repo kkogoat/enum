@@ -64,9 +64,11 @@
 
     .pos-1 {
         background-color: var(--background-color);
+        transition: color var(--color-animation-timing) ease, background-color var(--color-animation-timing) ease, border-bottom var(--color-animation-timing) ease;
     }
     .pos-2 {
         background-color: var(--background-color-disabled);
+        transition: color var(--color-animation-timing) ease, background-color var(--color-animation-timing) ease, border-bottom var(--color-animation-timing) ease;
     }
 
     .media-item {
@@ -74,6 +76,7 @@
     }
     .media-item-border {
         border-right: 1px solid var(--foreground-color);
+        transition: border-right var(--color-animation-timing) ease;
     }
     .media-item-progress {
         justify-self: center;

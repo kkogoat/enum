@@ -28,11 +28,13 @@
         justify-content: end;
         align-items: center;
         padding-bottom: 15px;
+        transition: background-color var(--color-animation-timing) ease;
     }
 
     .title {
         font-size: 40px;
         margin-bottom: 50px;
+        transition: color var(--color-animation-timing) ease;
     }
 
     .search-container {

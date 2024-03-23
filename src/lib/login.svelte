@@ -48,6 +48,7 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
+        transition: background-color var(--color-animation-timing) ease;
     }
 
     .login-input {
@@ -102,6 +103,7 @@
         font-size: 40px;
         margin-top: -90px;
         margin-bottom: 30px;
+        transition: color var(--color-animation-timing) ease;
     }
 </style>
 

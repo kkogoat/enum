@@ -28,7 +28,7 @@
         border-radius: 50px;
         top: 15px;
         right: 15px;
-        transition: .2s ease;
+        transition: var(--color-animation-timing) ease;
         user-select: none;
         cursor: pointer;
         z-index: 999;
@@ -43,7 +43,7 @@
         height: 30px;
         width: 30px;
         position: absolute;
-        transition: .2s ease;
+        transition: var(--color-animation-timing) ease;
         border-radius: 50px;
         padding: 0px;
         box-sizing: border-box;
@@ -51,13 +51,13 @@
     .light {
         top: 0px;
         left: 0px;
-        transition: .2s ease;
+        transition: var(--color-animation-timing) ease;
         user-select: none;
     }
     .dark {
         top: 0px;
         left: 40px;
-        transition: .2s ease;
+        transition: var(--color-animation-timing) ease;
     }
 
     .sun {
@@ -66,6 +66,7 @@
         left: 5px;
         filter: var(--accent-color-filtered);
         pointer-events: none;
+        transition: var(--color-animation-timing) ease;
     }
     .moon {
         position: relative;
@@ -73,6 +74,7 @@
         top: 3px;
         filter: var(--accent-color-filtered);
         pointer-events: none;
+        transition: var(--color-animation-timing) ease;
     }
 </style>
 

@@ -31,12 +31,14 @@
         background-color: var(--background-color);
         display: grid;
         grid-template-columns: minmax(200px, 500px) 50px 85px 100px 120px;
+        transition: background-color var(--color-animation-timing) ease, color var(--color-animation-timing) ease;
     }
 
     .list-labels-item {
         padding: 0px 0px 2px 8px;
         border-bottom: 1px solid var(--foreground-color);
         user-select: none;
+        transition: border-bottom var(--color-animation-timing) ease, border-right var(--color-animation-timing) ease;
     }
 
     .list-labels-item-border {
@@ -45,11 +47,11 @@
     
     .can-sort {
         cursor: pointer;
-        transition: .2s ease;
     }
     .can-sort:hover {
         color: var(--accent-color);
         cursor: pointer;
+        transition: .2s ease;
     }
 
     .active {

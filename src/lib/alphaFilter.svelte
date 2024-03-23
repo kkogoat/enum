@@ -44,6 +44,10 @@
         border: 1px solid var(--accent-color);
         color: var(--accent-color);
         cursor: pointer;
+        transition: background-color var(--color-animation-timing) ease, color var(--color-animation-timing) ease, border var(--color-animation-timing) ease;
+    }
+    input[type="checkbox"]:hover + label {
+        color: var(--text-color);
     }
     input[type="checkbox"]:checked + label {
         background-color: var(--accent-color);
