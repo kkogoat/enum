@@ -132,7 +132,7 @@
 </style>
 
 <div class="media-item-container {pos % 2 == 0 ? "pos-1" : "pos-2"}">
-    <div title="edit" class="media-item media-item-border title" on:click|self={editModalRef.open} aria-hidden="true">
+    <div title="Click to edit!" class="media-item media-item-border title" on:click|self={editModalRef.open} aria-hidden="true">
         {title}
     </div>
     <div class="media-item media-item-border">

@@ -17,7 +17,7 @@
             listContext.removeFromList(id);
             if(parentModal) parentModal.close();
             disable = false;
-        }, 1000);
+        }, 300);
     }
 </script>
 

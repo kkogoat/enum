@@ -38,7 +38,7 @@
         padding: 0px 0px 2px 8px;
         border-bottom: 1px solid var(--foreground-color);
         user-select: none;
-        transition: border-bottom var(--color-animation-timing) ease, border-right var(--color-animation-timing) ease;
+        transition: border-bottom var(--color-animation-timing) ease, border-right var(--color-animation-timing) ease, color .5s ease;
     }
 
     .list-labels-item-border {
@@ -51,7 +51,6 @@
     .can-sort:hover {
         color: var(--accent-color);
         cursor: pointer;
-        transition: .2s ease;
     }
 
     .active {
