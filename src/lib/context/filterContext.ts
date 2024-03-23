@@ -23,8 +23,15 @@ function createFilterContext(filters: any) {
             return filters;
         });
     }
+    
+    function sort(input: any) {
+        update((filters) => {
+            filters.sort = input;
+            return filters;
+        });
+    }
 
-    return { subscribe, search, alpha, type }
+    return { subscribe, search, alpha, type, sort }
 }
 
 export const filterContext = createFilterContext({});
