@@ -2,6 +2,7 @@
 	import DeleteMedia from "$lib/deleteMedia.svelte";
 
     let dialogRef: HTMLDialogElement;
+    let errorRef: HTMLDialogElement;
 
     // FORM MEMBER
     export let id: string;
@@ -32,43 +33,51 @@
     // MODAL CLOSE
     function close() {
         dialogRef.close();
-        title = d_title;
-        link = d_link;
-        current_episode = d_current_episode;
-        total_episodes = d_total_episodes;
-        rating = d_rating;
-        description = d_description;
-        type = d_type;
-        status = d_status;
+        [title, link, current_episode] = [d_title, d_link, d_current_episode];
+        [total_episodes, rating, description] = [d_total_episodes, d_rating, d_description];
+        [type, status] = [d_type, d_status];
     }
     
     // HANDLE SUBMIT
+    let errorMessage: string;
     let disable: boolean;
     import { editMedia } from "$lib/util/mediaFetchUtil";
     async function handleMediaSubmit() {
         disable = true;
-        await editMedia({id, title, link, current_episode, total_episodes, rating, description, status, type});
-        setTimeout(() => {
-            dialogRef.close();
-            d_title = title;
-            d_link = link;
-            d_current_episode = current_episode;
-            d_total_episodes = total_episodes;
-            d_rating = rating;
-            d_description = description;
-            d_type = type;
-            d_status = status;
-            disable = false;
-        }, 1000);
+        const result = await editMedia({id, title, link, current_episode, total_episodes, rating, description, status, type});
+        const decoded = await result.json();
+        if(decoded.details) {
+            setTimeout(() => {
+                errorMessage = decoded.details[0].message;
+                errorRef.showModal();
+                disable = false;
+            }, 500);
+        } else {
+            setTimeout(() => {
+                dialogRef.close();
+                [d_title, d_link, d_current_episode] = [title, link, current_episode];
+                [d_total_episodes, d_rating, d_description] = [total_episodes, rating, description];
+                [d_type, d_status] = [type, status]
+                disable = false;
+            }, 1000);
+        }
     }
 
 </script>
 
 <style>
-    dialog {
+    .edit-dialog {
         width: 600px;
         height: 435px;
         padding: 30px 30px 12px 30px;
+    }
+    .error-dialog {
+        color: var(--text-color-error);
+    }
+    .error-dialog button {
+        margin-top: 15px;
+        margin-left: 37%;
+        margin-right: 37%;
     }
     .layer1 {
         width: 100%;
@@ -126,7 +135,7 @@
     }
 </style>
 
-<dialog class="dialog" bind:this={dialogRef} on:cancel={close}>
+<dialog class="edit-dialog" bind:this={dialogRef} on:cancel={close}>
     <form on:submit|preventDefault={handleMediaSubmit} autocomplete="off">
         <!-- LAYER 1 -->
         <div class="layer1">
@@ -211,4 +220,10 @@
     <div class="media-delete-button">
         <DeleteMedia id={id} parentModal={dialogRef}/>
     </div>
+    
+    <!-- ERROR -->
+    <dialog class="error-dialog" bind:this={errorRef}>
+        <div>{errorMessage}</div>
+        <button on:click={() => errorRef.close()}>はい</button>
+    </dialog>
 </dialog>

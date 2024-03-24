@@ -29,8 +29,10 @@ export const getMediaList = async () => {
 
 export const editMedia = (data: object) => {
     const result = customFetch.put('/api/media/edit', data);
+    return result;
 }
 
 export const deleteMedia = (data: object) => {
     const result = customFetch.delete('/api/media/delete', data);
+    return result;
 }
