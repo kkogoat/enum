@@ -24,6 +24,7 @@
 		"eslint": "^8.56.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.35.1",
+		"joi": "^17.12.2",
 		"jsonwebtoken": "^9.0.2",
 		"mysql2": "^3.9.1",
 		"prettier": "^3.1.1",
