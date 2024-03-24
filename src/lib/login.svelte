@@ -3,8 +3,8 @@
     import VisOff from "$lib/assets/visOff.svelte";
     import VisOn from "$lib/assets/visOn.svelte";
 
-    let usernameRef: HTMLElement;
-    let passwordRef: HTMLElement;
+    let usernameRef: HTMLInputElement;
+    let passwordRef: HTMLInputElement;
     let loginButtonRef: HTMLElement;
     let username: string;
     let password: string;
@@ -123,6 +123,7 @@
             required
             bind:this={usernameRef}
             bind:value={username}
+            on:invalid={() => usernameRef.setCustomValidity(`Alpha: a-z, A-Z\nDigit: 0-9`)}
             disabled={disable}
         >
 
@@ -133,10 +134,12 @@
             class="login-input login-pwd"
             minlength="8"
             maxlength="30"
+            pattern="^[a-zA-Z0-9!@#$%^&*]+$"
             placeholder="パスワード"
             required
             bind:this={passwordRef}
             bind:value={password}
+            on:invalid={() => passwordRef.setCustomValidity(`Alpha: a-z, A-Z\nDigit: 0-9\nSpecial: !@#$%^&*`)}
             disabled={disable}
         >
 

@@ -1,9 +1,11 @@
 import sequelize from "$lib/server/db/db";
 import { authenticateToken } from "./hooks/authHook";
+import { validator } from "./hooks/validationHook";
 
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
 
+    // Protected Path
     if(event.url.pathname.startsWith('/api/media')) {
         const bearer = event.request.headers.get("authorization");
         if(!bearer) return new Response(JSON.stringify("Forbidden"), {status: 403});
@@ -15,9 +17,16 @@ export async function handle({ event, resolve }) {
         }
     }
 
+    // JOI Validation
+    const validatorResult = await validator(event.url.pathname, event.request.clone());
+    if(validatorResult) {
+        return new Response(JSON.stringify(validatorResult), {status: 400});
+    }
+
     // SITE THEME
     const theme = event.cookies.get("theme");
 
+    // Request Processing
     const response = await resolve(event, {
         transformPageChunk: ({html}) => html.replace('data-theme=""', `data-theme="${theme}"`)
     });
