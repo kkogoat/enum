@@ -1,3 +1,4 @@
+import { log } from "$lib/server/util/loggerUtil";
 import joi from "joi";
 
 const loginSchema = joi.object({
@@ -11,25 +12,37 @@ const logoutSchema = joi.object({
 
 const mediaAddSchema = joi.object({
     title: joi.string().min(1).max(100).required(),
-    link: joi.string().min(1).max(100).uri(),
+    link: joi.string().min(1).max(100).uri().allow(''),
     current_episode: joi.number().min(0).max(2147483647),
-    total_episodes: joi.number().min(0).max(2147483647),
-    rating: joi.number().min(0).max(10),
-    description: joi.string().min(0).max(200),
+    total_episodes: joi.number().min(0).max(2147483647).allow(null),
+    rating: joi.number().min(0).max(10).allow(null),
+    description: joi.string().min(0).max(200).allow(null),
     status: joi.string().valid('','Completed','In Progress','Planned'),
     type: joi.string().valid('','Anime','Cartoon','C-Drama','J-Drama','K-Drama','Manga','Manhwa','Manhua')
+});
+
+const mediaEditSchema = mediaAddSchema.append({
+    id: joi.string().uuid().required()
+});
+
+const mediaDeleteSchema = joi.object({
+    id: joi.string().uuid().required()
 });
 
 const schemaTable: {[key: string]: any} = {
     "/api/auth/login" : loginSchema,
     "/api/auth/logout": logoutSchema,
     "/api/media/add": mediaAddSchema,
+    "/api/media/edit": mediaEditSchema,
+    "/api/media/delete": mediaDeleteSchema
 }
 
 export const validator = async (api: string, request: any) => {
     if(schemaTable[api]) {
         const params = await request.json();
         const { _, error } = schemaTable[api].validate(params)
+        if(!error) log('joi', `Validated ${api} request`);
+        else log('joi', `Rejected ${api} request: ${error}`);
         return error;
     }
     return 0;
