@@ -1,8 +1,8 @@
 <script lang="ts">
 	import DeleteMedia from "$lib/deleteMedia.svelte";
+    import ErrorModal from "$lib/errorModal.svelte";
 
     let dialogRef: HTMLDialogElement;
-    let errorRef: HTMLDialogElement;
 
     // FORM MEMBER
     export let id: string;
@@ -39,6 +39,7 @@
     }
     
     // HANDLE SUBMIT
+    let errorRef: any;
     let errorMessage: string;
     let disable: boolean;
     import { editMedia } from "$lib/util/mediaFetchUtil";
@@ -70,14 +71,6 @@
         width: 600px;
         height: 435px;
         padding: 30px 30px 12px 30px;
-    }
-    .error-dialog {
-        color: var(--text-color-error);
-    }
-    .error-dialog button {
-        margin-top: 15px;
-        margin-left: 37%;
-        margin-right: 37%;
     }
     .layer1 {
         width: 100%;
@@ -136,6 +129,7 @@
 </style>
 
 <dialog class="edit-dialog" bind:this={dialogRef} on:cancel={close}>
+    <ErrorModal bind:this={errorRef} errorMessage={errorMessage}/>
     <form on:submit|preventDefault={handleMediaSubmit} autocomplete="off">
         <!-- LAYER 1 -->
         <div class="layer1">
@@ -220,10 +214,4 @@
     <div class="media-delete-button">
         <DeleteMedia id={id} parentModal={dialogRef}/>
     </div>
-    
-    <!-- ERROR -->
-    <dialog class="error-dialog" bind:this={errorRef}>
-        <div>{errorMessage}</div>
-        <button on:click={() => errorRef.close()}>はい</button>
-    </dialog>
 </dialog>

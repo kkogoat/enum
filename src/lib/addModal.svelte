@@ -1,6 +1,7 @@
 <script lang="ts">
+    import ErrorModal from '$lib/errorModal.svelte';
+   
     let dialogRef: HTMLDialogElement;
-    let errorRef: HTMLDialogElement;
     let formRef: HTMLFormElement;
 
     // FORM MEMBER
@@ -16,6 +17,7 @@
     // HANDLE SUBMIT
     let disable: boolean;
     let errorMessage: string;
+    let errorRef: any;
     import { addMedia }  from '$lib/util/mediaFetchUtil';
     import { listContext } from '$lib/context/listContext';
     async function handleMediaSubmit() {
@@ -51,14 +53,6 @@
         width: 600px;
         height: 435px;
         padding: 30px 30px 12px 30px;
-    }
-    .error-dialog {
-        color: var(--text-color-error);
-    }
-    .error-dialog button {
-        margin-top: 15px;
-        margin-left: 37%;
-        margin-right: 37%;
     }
     .layer1 {
         width: 100%;
@@ -119,6 +113,7 @@
 </style>
 
 <dialog class="add-dialog" bind:this={dialogRef} on:cancel={handleDialogClose}>
+    <ErrorModal bind:this={errorRef} errorMessage={errorMessage}/>
     <form on:submit|preventDefault={handleMediaSubmit} bind:this={formRef} autocomplete="off">
         <!-- LAYER 1 -->
         <div class="layer1">
@@ -198,13 +193,6 @@
             </button>
         </div>
     </form>
-
-    <!-- ERROR -->
-    <dialog class="error-dialog" bind:this={errorRef}>
-        <div>{errorMessage}</div>
-        <button on:click={() => errorRef.close()}>はい</button>
-    </dialog>
-
 </dialog>
 
 <button class="add-button" on:click={() => dialogRef.showModal()}>
