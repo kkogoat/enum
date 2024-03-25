@@ -10,6 +10,11 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+
+	interface JwtPayload {
+        username: string;
+		exp: number;
+    }
 }
 
 export {};

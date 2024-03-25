@@ -1,11 +1,6 @@
 import { ACCESS_TOKEN_SECRET } from "$env/static/private";
 import jwt from "jsonwebtoken";
 
-interface JwtPayload {
-    username: string;
-    exp: number;
-}
-
 export const authenticateToken = async (header: string) => {
     // GET TOKEN
     const token = header.split(' ')[1];
