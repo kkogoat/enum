@@ -6,10 +6,6 @@ import jwt from "jsonwebtoken";
 
 /** @type {import('./$types').RequestHandler} */
 export const POST = async ({ cookies }) => {
-    interface JwtPayload {
-        username: string,
-    }
-
     // CHECK IF COOKIE EXISTS
     const refresh = cookies.get("session");
     if(!refresh) return new Response(JSON.stringify("No Cookie"), {status: 200});
@@ -22,8 +18,10 @@ export const POST = async ({ cookies }) => {
         // COMPARE STORED REFRESH_TOKEN & COOKIE
         const username: string = (user as JwtPayload).username;
         const instance = await User.findOne({where: {username: username}});
-        if(!instance || !await bcrypt.compare(refresh, instance.refresh_token)) return new Response(JSON.stringify("Bad Refresh"), {status: 400});
-
+        if(!instance || !await bcrypt.compare(refresh, instance.refresh_token)) {
+            log("auth", `bad refresh for ${username}`);
+            return new Response(JSON.stringify("Bad Refresh"), {status: 400});
+        }
         // @TODO SLIDING REFRESH_TOKEN & HARD LIMIT
         
         // SIGN NEW ACCESS_TOKEN

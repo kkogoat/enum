@@ -13,14 +13,14 @@ export const POST = async ({ request, cookies }) => {
     if(!refresh) return new Response(JSON.stringify("Already Logged Out"), {status: 400});
 
     // VERIFY REFRESH
-    interface JwtPayload {
-        username: string,
-    }
     const result = await jwt.verify(refresh, REFRESH_TOKEN_SECRET, async (err, user) => {
         // COMPARE STORED REFRESH_TOKEN & COOKIE
         const username: string = (user as JwtPayload).username;
         const instance = await User.findOne({where: {username: username}});
-        if(!instance || !await bcrypt.compare(refresh, instance.refresh_token)) return new Response(JSON.stringify("Mismatched Refresh"), {status: 400});
+        if(!instance || !await bcrypt.compare(refresh, instance.refresh_token)) {
+            log("auth", `mismatched refresh for ${username}`);
+            return new Response(JSON.stringify("Mismatched Refresh"), {status: 400});
+        }
         return new Response(JSON.stringify(""), {status: 200});
     });
 
