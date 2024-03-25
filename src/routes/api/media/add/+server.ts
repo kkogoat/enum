@@ -13,10 +13,15 @@ export const POST = async ({ request, locals }) => {
             username: body.username
         }
     })
-    if(check) return new Response(JSON.stringify("Duplicate Record Exists"), {status: 409});
+    if(check) {
+        log("media", `Duplicate record ${body.title} exists for ${body.username}`);
+        return new Response(JSON.stringify("Duplicate Record Exists"), {status: 409});
+    }
 
-    // ADD MEDIA TO MODEL
+    // ADD NEW MEDIA TO MODEL
     const instance = await Media.create(body);
     log("media", `successfully added ${body.title} to ${body.username}`);
+
+    // RESPONSE
     return new Response(JSON.stringify({message: "Successfully Added", instance}), {status: 200});
 }

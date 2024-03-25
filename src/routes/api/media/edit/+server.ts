@@ -14,15 +14,19 @@ export const PUT = async ({ request, locals }) => {
             username: username
         }
     })
-    if(!check) return new Response(JSON.stringify("Record Does Not Exist"), {status: 404});
+    if(!check) {
+        log("media", `Failed to edit, ${body.title} does not exist for ${body.username}`)
+        return new Response(JSON.stringify("Record Does Not Exist"), {status: 404});
+    }
 
-    // EDIT MEDIA
+    // EDIT SELECTED MEDIA
     delete(body["id"]);
     Media.update(
         body,
         { where: {id: id, username: username}}
     )
-        
     log("media", `successfully edited ${body.title} for ${body.username}`);
+
+    // RESPONSE
     return new Response(JSON.stringify("Successfully Edited"), {status: 200});
 }

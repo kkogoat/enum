@@ -14,11 +14,15 @@ export const DELETE = async ({ request, locals }) => {
             username: username
         }
     })
-    if(!instance) return new Response(JSON.stringify("Record Does Not Exist"), {status: 404});
+    if(!instance) {
+        log("media", `Failed to delete, ${id} does not exist for ${username}`);
+        return new Response(JSON.stringify("Record Does Not Exist"), {status: 404});
+    }
 
-    // DESTROYS INSTANCE
+    // DESTROYS SELECTED INSTANCE
     instance.destroy();
-
     log("media", `successfully deleted ${id} for ${username}`);
+
+    // RESPONSE
     return new Response(JSON.stringify("Successfully Deleted"), {status: 200});
 }
