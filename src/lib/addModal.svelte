@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { PUBLIC_ALLOWED_TYPES, PUBLIC_ALLOWED_TYPES_DELIMITER } from '$env/static/public';
-    import ErrorModal from '$lib/errorModal.svelte';
+    import ErrorModal from '$lib/components/error/errorModal.svelte';
    
     let dialogRef: HTMLDialogElement;
     let formRef: HTMLFormElement;
