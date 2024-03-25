@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { PUBLIC_ALLOWED_TYPES, PUBLIC_ALLOWED_TYPES_DELIMITER } from '$env/static/public';
 	import DeleteMedia from "$lib/deleteMedia.svelte";
     import ErrorModal from "$lib/errorModal.svelte";
 
@@ -178,14 +179,9 @@
                         媒体:
                         <select name="type" bind:value={type} disabled={disable}>
                             <option></option>
-                            <option>Anime</option>
-                            <option>Cartoon</option>
-                            <option>C-Drama</option>
-                            <option>J-Drama</option>
-                            <option>K-Drama</option>
-                            <option>Manga</option>
-                            <option>Manhwa</option>
-                            <option>Manhua</option>
+                            {#each PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER) as item}
+                                <option>{item}</option>
+                            {/each}
                         </select>
                     </label>
                     <div class="label-shorter"/>

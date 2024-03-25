@@ -1,3 +1,4 @@
+import { PUBLIC_ALLOWED_TYPES, PUBLIC_ALLOWED_TYPES_DELIMITER } from "$env/static/public";
 import { log } from "$lib/server/util/loggerUtil";
 import joi from "joi";
 
@@ -18,7 +19,7 @@ const mediaAddSchema = joi.object({
     rating: joi.number().min(0).max(10).allow(null),
     description: joi.string().min(0).max(200).allow(null),
     status: joi.string().valid('','Completed','In Progress','Planned'),
-    type: joi.string().valid('','Anime','Cartoon','C-Drama','J-Drama','K-Drama','Manga','Manhwa','Manhua')
+    type: joi.string().valid('', ...PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER))
 });
 
 const mediaEditSchema = mediaAddSchema.append({

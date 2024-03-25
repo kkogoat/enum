@@ -1,7 +1,6 @@
 <script lang="ts">
-    let types: Array<string> = [
-        "Anime", "Cartoon", "C-Drama", "J-Drama", "K-Drama", "Manga", "Manhwa", "Manhua"
-    ]
+	import { PUBLIC_ALLOWED_TYPES, PUBLIC_ALLOWED_TYPES_DELIMITER } from "$env/static/public";
+    let types: Array<string> = PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER);
     let typeBitMap: any = {};
 
     // TYPES FILTER
