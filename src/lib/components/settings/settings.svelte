@@ -22,7 +22,6 @@
     .settings-dialog {
         display: none;
         grid-template-columns: 100px 300px;
-        grid-template-rows: 300px;
         color: var(--text-color);
     }
 
