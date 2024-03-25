@@ -3,7 +3,7 @@ import { customFetch } from "$lib/util/customFetchUtil";
 export const addMedia = async (data: object) => {
     const result = await customFetch.post('/api/media/add', data);
     const decoded = await (await (result as Promise<Response>)).json();
-    if(!decoded.instance) return null;
+    if(decoded.details) return decoded;
 
     // ENTRY CONSTRUCTION
     const instance = decoded.instance;
@@ -18,7 +18,8 @@ export const addMedia = async (data: object) => {
         status: instance.status,
         type: instance.type
     }
-    return entry;
+    decoded.entry = entry;
+    return decoded;
 }
 
 export const getMediaList = async () => {

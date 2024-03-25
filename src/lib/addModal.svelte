@@ -1,5 +1,6 @@
 <script lang="ts">
     let dialogRef: HTMLDialogElement;
+    let errorRef: HTMLDialogElement;
     let formRef: HTMLFormElement;
 
     // FORM MEMBER
@@ -14,18 +15,27 @@
 
     // HANDLE SUBMIT
     let disable: boolean;
+    let errorMessage: string;
     import { addMedia }  from '$lib/util/mediaFetchUtil';
     import { listContext } from '$lib/context/listContext';
     async function handleMediaSubmit() {
         disable = true;
-        const entry = await addMedia({title, link, current_episode, total_episodes, rating, description, status, type});
-        setTimeout(() => {
-            if(entry) listContext.addToList(entry);
-            formRef.reset();
-            dialogRef.close();
-            title="";
-            disable = false;
-        }, 1000);
+        const decoded = await addMedia({title, link, current_episode, total_episodes, rating, description, status, type});
+        if(decoded.details) {
+            setTimeout(() => {
+                errorMessage = decoded.details[0].message;
+                errorRef.showModal();
+                disable = false;
+            }, 500);
+        } else {
+            setTimeout(() => {
+                listContext.addToList(decoded.entry);
+                formRef.reset();
+                dialogRef.close();
+                title="";
+                disable = false;
+            }, 1000);
+        }
     }
 
     // HANDLE DIALOG CLOSE
@@ -37,10 +47,18 @@
 </script>
 
 <style>
-    dialog {
+    .add-dialog {
         width: 600px;
         height: 435px;
         padding: 30px 30px 12px 30px;
+    }
+    .error-dialog {
+        color: var(--text-color-error);
+    }
+    .error-dialog button {
+        margin-top: 15px;
+        margin-left: 37%;
+        margin-right: 37%;
     }
     .layer1 {
         width: 100%;
@@ -100,7 +118,7 @@
     }
 </style>
 
-<dialog class="dialog" bind:this={dialogRef} on:cancel={handleDialogClose}>
+<dialog class="add-dialog" bind:this={dialogRef} on:cancel={handleDialogClose}>
     <form on:submit|preventDefault={handleMediaSubmit} bind:this={formRef} autocomplete="off">
         <!-- LAYER 1 -->
         <div class="layer1">
@@ -180,6 +198,13 @@
             </button>
         </div>
     </form>
+
+    <!-- ERROR -->
+    <dialog class="error-dialog" bind:this={errorRef}>
+        <div>{errorMessage}</div>
+        <button on:click={() => errorRef.close()}>はい</button>
+    </dialog>
+
 </dialog>
 
 <button class="add-button" on:click={() => dialogRef.showModal()}>
