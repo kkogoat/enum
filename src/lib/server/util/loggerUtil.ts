@@ -1,3 +1,4 @@
+import { LOGGING_ENABLED } from "$env/static/private";
 import fs from "fs";
 
 // LOG CREATION
@@ -6,13 +7,14 @@ let todayString: string = String(today.getMonth()+1).padStart(2, '0') + '-'
                         + String(today.getDate()).padStart(2, '0') + '-'
                         + String(today.getFullYear());
 
-const serverFS = fs.createWriteStream(
+const serverFS = LOGGING_ENABLED == "false" ? null : fs.createWriteStream(
     `./logs/${todayString}_server.log`, 
     {'flags': 'w'} // @TODO CHANGE TO APPEND WHEN BACKEND IN FINISHED STATE
 );
 
 // LOGGER
 export const log = (system: string, message: string) => {
+    if(LOGGING_ENABLED == "false") return;
 
     // MSG BUILING
     let currTime: Date = new Date();
@@ -25,5 +27,5 @@ export const log = (system: string, message: string) => {
     msg += message + "\n";
 
     // WRITE
-    serverFS.write(msg);
+    if(serverFS) serverFS.write(msg);
 }
