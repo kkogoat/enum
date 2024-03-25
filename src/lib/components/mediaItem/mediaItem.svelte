@@ -34,7 +34,7 @@
     }
 
     // INCREMENT DECREMENT
-	import { editMedia } from "./util/mediaFetchUtil";
+	import { editMedia } from "$lib/util/mediaFetchUtil";
     let timer: any;
     function incdec(value: number) {
         if(current_episode == 0 && value == -1) {

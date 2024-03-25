@@ -1,6 +1,6 @@
 <script lang="ts">
     import { authContext } from "$lib/context/authContext";
-	import AddModal from "$lib/addModal.svelte";
+	import AddModal from "$lib/components/mediaItem/addModal.svelte";
 	import Search from "$lib/search.svelte";
 	import AlphaFilter from "$lib/alphaFilter.svelte";
 	import TypeFilter from "$lib/typeFilter.svelte";

@@ -7,7 +7,7 @@
 
     
     import { listContext } from "$lib/context/listContext";
-    import { deleteMedia } from "./util/mediaFetchUtil";
+    import { deleteMedia } from "$lib/util/mediaFetchUtil";
     let disable: boolean = false;
     async function handleDeleteMedia() {
         disable = true;

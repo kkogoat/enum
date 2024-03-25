@@ -1,6 +1,6 @@
 <script lang="ts">
     import { PUBLIC_ALLOWED_TYPES, PUBLIC_ALLOWED_TYPES_DELIMITER } from '$env/static/public';
-	import DeleteMedia from "$lib/deleteMedia.svelte";
+	import DeleteMedia from "./deleteMedia.svelte";
     import ErrorModal from "$lib/components/error/errorModal.svelte";
 
     let dialogRef: HTMLDialogElement;
