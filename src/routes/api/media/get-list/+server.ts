@@ -11,5 +11,6 @@ export const GET = async({ locals }) => {
         },
         attributes: { exclude: ['username', 'updated_at']}
     });
+    log('media', `successfully got media list for ${locals.username}`)
     return new Response(JSON.stringify(list), {status: 200});
 }
