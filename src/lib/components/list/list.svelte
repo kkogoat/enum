@@ -1,6 +1,6 @@
 <script lang="ts">
-    import LabelSort from "./labelSort.svelte";
-	import MediaItem from "./mediaItem.svelte";
+    import LabelSort from "../../labelSort.svelte";
+	import MediaItem from "../../mediaItem.svelte";
     import { filteredListContext } from "$lib/context/filteredListContext";
 </script>
 

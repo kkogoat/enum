@@ -1,8 +1,8 @@
 <script lang="ts">
 	import ThemeToggle from "$lib/components/theme/themeToggle.svelte";
     import Login from "$lib/components/login/login.svelte";
-	import Navbar from "$lib/navbar.svelte";
-	import List from "$lib/list.svelte";
+	import Navbar from "$lib/components/navbar/navbar.svelte";
+	import List from "$lib/components/list/list.svelte";
 
     // ON MOUNT
     import { authContext } from "$lib/context/authContext";
