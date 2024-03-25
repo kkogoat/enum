@@ -3,7 +3,7 @@
     let alphaBitMap: any = {};
 
     // ALPHA FILTER
-	import { filterContext } from "./context/filterContext";
+	import { filterContext } from "$lib/context/filterContext";
     function toggleBitMap(index: string) {
         if(alphaBitMap[index]) {
             delete(alphaBitMap[index])

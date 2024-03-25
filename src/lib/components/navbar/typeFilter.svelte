@@ -4,7 +4,7 @@
     let typeBitMap: any = {};
 
     // TYPES FILTER
-	import { filterContext } from "./context/filterContext";
+	import { filterContext } from "$lib/context/filterContext";
     function toggleBitMap(type: string) {
         if(typeBitMap[type]) {
             delete(typeBitMap[type]);
