@@ -1,6 +1,6 @@
 <script lang="ts">
     export let select: string;
-    let options = ["analytics"];
+    let options = ["analytics", "data"];
 
     // NAV SELECT
     function handleSelect(option: string) {

@@ -1,7 +1,8 @@
 <script lang="ts">
     import Nav from "./nav.svelte";
     import Analytics from "./analytics.svelte";
-    let options: {[key: string]: any} = {"analytics": Analytics};
+	import Data from "./data.svelte";
+    let options: {[key: string]: any} = {"analytics": Analytics, "data": Data};
     let select: string = "analytics";
     let settingsDialogRef: HTMLDialogElement;
 
