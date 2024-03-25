@@ -2,7 +2,7 @@
 	import ThemeToggle from "$lib/themeToggle.svelte";
 	import Navbar from "$lib/navbar.svelte";
 	import List from "$lib/list.svelte";
-    import Login from "$lib/login.svelte";
+    import Login from "$lib/components/login/login.svelte";
 
     // ON MOUNT
     import { authContext } from "$lib/context/authContext";
