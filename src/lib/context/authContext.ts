@@ -4,6 +4,7 @@ function createAuthContext(user: string) {
     const { subscribe, set } = writable(user);
     let username: string = "";
 
+    // LOGIN FUNCTION
     async function login(account: {username: string; password: string}) {
         const result = await fetch('/api/auth/login', {
             method: "POST",
@@ -17,6 +18,7 @@ function createAuthContext(user: string) {
         return result.status;
     }
 
+    // AUTO LOGIN
     async function autoLogin() {
         const result = await fetch('/api/auth/auto-login', {
             method: "POST",
@@ -28,6 +30,7 @@ function createAuthContext(user: string) {
         username = decoded.username;
     }
 
+    // LOGOUT
     async function logout() {
         let user = username;
         set("");
@@ -40,11 +43,13 @@ function createAuthContext(user: string) {
         })
     }
 
+    // REFRESH
     async function refresh(username: string, access_token: string) {
         set(access_token);
         username = username;
     }
-
+    
+    // IF REFRESH FAILS -> LOGOUT
     async function refreshLogout() {
         set("");
         username = "";

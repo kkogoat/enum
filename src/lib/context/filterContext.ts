@@ -3,6 +3,7 @@ import { writable } from "svelte/store";
 function createFilterContext(filters: any) {
     const { subscribe, update } = writable(filters);
 
+    // SEARCH FILTER
     function search(input: string) {
         update((filters) => {
             filters.search = input;
@@ -10,6 +11,7 @@ function createFilterContext(filters: any) {
         });
     }
 
+    // ALPHABETICAL FILTER
     function alpha(input: any) {
         update((filters) => {
             filters.alpha =  input;
@@ -17,6 +19,7 @@ function createFilterContext(filters: any) {
         });
     }
 
+    // TYPES FILTER
     function type(input: any) {
         update((filters) => {
             filters.type = input;
@@ -24,6 +27,7 @@ function createFilterContext(filters: any) {
         });
     }
     
+    // SORTING OPTIONS
     function sort(input: any) {
         update((filters) => {
             filters.sort = input;
