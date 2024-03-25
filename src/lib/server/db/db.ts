@@ -12,9 +12,10 @@ const sequelize = new Sequelize ({
     password: DB_PWD,
     host: DB_HOST,
     port: Number(DB_PORT),
-    logging: (msg) => {
-        log("db", msg)
-    },
+    logging: false,
+    // logging: (msg) => {
+    //     log("db", msg)
+    // },
     models: [User, Media],
 });
 
