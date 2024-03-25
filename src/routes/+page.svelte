@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ThemeToggle from "$lib/components/theme/themeToggle.svelte";
     import Login from "$lib/components/login/login.svelte";
+    import Settings from "$lib/components/settings/settings.svelte";
 	import Navbar from "$lib/components/navbar/navbar.svelte";
 	import List from "$lib/components/list/list.svelte";
 
@@ -47,6 +48,7 @@
     {#if !loading}
         {#if $authContext}
             <Navbar />
+            <Settings />
             <List />
         {:else}
             <Login />
