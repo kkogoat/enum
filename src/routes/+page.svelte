@@ -51,7 +51,5 @@
         {:else}
             <Login />
         {/if}
-    {:else}
-        <span></span>
     {/if}
 </div>

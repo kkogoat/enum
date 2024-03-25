@@ -138,8 +138,6 @@
     <div class="media-item media-item-border">
         {#if link}
             <div class="media-link"><a href={link} target="_black" rel="noopener noreferrer"><Open fill="var(--link-base)" size="15px"/></a></div>
-        {:else}
-            <span></span>
         {/if}
     </div>
     <div class="media-item media-item-border">

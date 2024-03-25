@@ -171,6 +171,4 @@
         <div>ログインに失敗しました</div>
         <div>ユーザーが見つかりません</div>
     </div>
-{:else}
-    <span></span>
 {/if}

@@ -86,6 +86,4 @@
             &nbsp;
         </button>
     </div>
-{:else}
-    <span/>
 {/if}
