@@ -5,7 +5,8 @@ import {
     DataType,
     CreatedAt,
     UpdatedAt,
-    BelongsTo
+    BelongsTo,
+    PrimaryKey
 } from 'sequelize-typescript';
 import User from './user.js';
 
@@ -19,13 +20,14 @@ class Media extends Model<MediaAttributes> {
     
     // IDENTIFIERS
     @Column({
-        primaryKey: true,
+        unique: true,
         type: DataType.UUID,
         defaultValue: DataType.UUIDV4
     })
     declare id: string;
 
     // DATA
+    @PrimaryKey
     @Column({
         type: DataType.STRING(100),
         allowNull: false
@@ -58,6 +60,7 @@ class Media extends Model<MediaAttributes> {
     })
     declare description: string;
 
+    @PrimaryKey
     @Column({
         type: DataType.STRING(15)
     })
@@ -69,9 +72,16 @@ class Media extends Model<MediaAttributes> {
     declare status: string;
 
     // ASSOCIATIONS 
+    @PrimaryKey
+    @Column({
+        type: DataType.STRING(15),
+        allowNull: false
+    })
+    declare username: string;
+
     @BelongsTo(() => User, {
         foreignKey: 'username',
-        targetKey: 'username'
+        targetKey: 'username',
     })
     user: User;
 
