@@ -18,7 +18,7 @@ export async function handle({ event, resolve }) {
             event.locals.username = result.username;
         } else {
             log('auth', `Forbidden ${event.url.pathname} request`);
-            return new Response(JSON.stringify("Forbidden"), {status: 403});
+            return new Response(JSON.stringify("Unauthorized"), {status: 401});
         }
         log('auth', `Authorized ${event.url.pathname} request`);
     }
