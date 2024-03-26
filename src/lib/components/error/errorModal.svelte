@@ -14,8 +14,8 @@
     .error-dialog button {
         padding: 8px 12px 8px 12px;
         margin-top: 15px;
-        margin-left: 37%;
-        margin-right: 37%;
+        margin-left: 36%;
+        margin-right: 36%;
     }
 </style>
 
