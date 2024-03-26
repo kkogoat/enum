@@ -42,3 +42,8 @@ export const deleteMedia = (data: object) => {
     const result = customFetch.delete('/api/media/delete', data);
     return result;
 }
+
+export const importMediaList = async (file: string) => {
+    const result = customFetch.post('/api/media/import', JSON.parse(file));
+    return result;
+}
