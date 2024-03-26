@@ -12,11 +12,26 @@ export const PUT = async ({ request, locals }) => {
         where: {
             id: id,
             username: username
-        }
+        },
+        raw: true
     })
     if(!check) {
-        log("media", `Failed to edit, ${body.title} does not exist for ${body.username}`)
-        return new Response(JSON.stringify("Record Does Not Exist"), {status: 404});
+        log("media", `Failed to edit, ${body.title} does not exist for ${username}`)
+        return new Response(JSON.stringify({details:[{ message:"Record Does Not Exist" }]}), {status: 404});
+    }
+
+    // CHECK IF DUPLICATE EXISTS
+    const dupe = await Media.findOne({
+        where: {
+            title: body.title,
+            type: body.type,
+            username: username
+        },
+        raw: true
+    })
+    if(dupe && (dupe.title != check.title) && (dupe.type != check.type)) {
+        log("media", `Failed to edit, ${body.title}:${body.type} already exists for ${username}`)
+        return new Response(JSON.stringify({details:[{ message:"Duplicate Record Exists" }]}), {status: 400});
     }
 
     // EDIT SELECTED MEDIA

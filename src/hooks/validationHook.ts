@@ -13,7 +13,7 @@ const logoutSchema = joi.object({
 
 const mediaAddSchema = joi.object({
     title: joi.string().min(1).max(100).required(),
-    link: joi.string().min(1).max(100).uri().allow(''),
+    link: joi.string().min(1).max(100).uri().allow('', null),
     current_episode: joi.number().min(0).max(2147483647),
     total_episodes: joi.number().min(0).max(2147483647).allow(null),
     rating: joi.number().min(0).max(10).allow(null),
