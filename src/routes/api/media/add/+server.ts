@@ -10,6 +10,7 @@ export const POST = async ({ request, locals }) => {
     const check = await Media.findOne({
         where: {
             title: body.title,
+            type: body.type,
             username: body.username
         }
     })
