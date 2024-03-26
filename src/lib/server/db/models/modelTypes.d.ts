@@ -15,6 +15,8 @@ interface MediaAttributes {
     total_episodes: number;
     rating: number;
     description: string;
+    type: string;
+    status: string;
     created_at: Date;
     updated_at: Date;
     username: string;
