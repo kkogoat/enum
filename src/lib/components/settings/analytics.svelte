@@ -3,7 +3,7 @@
     import { listContext } from "$lib/context/listContext";
     let types = PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER)
     let stats = ["Total Media", "Total Episodes", "Average Rating", ...types];
-    let vars: any = new Array(3);
+    let vars: any = new Array();
 
     // Analytics
     $: if($listContext.length) {
@@ -13,6 +13,8 @@
         for(let i = 0; i < types.length; i++) { // Types count
             vars[i+3] = $listContext.reduce((a: any, b: any) => a + (b.type == types[i] ? 1 : 0), 0);
         }
+    } else {
+        vars = new Array();
     }
 </script>
 
@@ -37,7 +39,7 @@
 <div class="analytics-container">
     {#each stats as stat, index}
         <div class={index % 2 ? "pos-2" : "pos-1"}>
-            {stat}: <div class="float-right">{vars[index]}</div>
+            {stat}: <div class="float-right">{vars[index] ? vars[index] : 0}</div>
         </div>
     {/each}
 </div>

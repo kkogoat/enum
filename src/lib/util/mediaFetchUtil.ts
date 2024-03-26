@@ -3,7 +3,12 @@ import { customFetch } from "$lib/util/customFetchUtil";
 export const addMedia = async (data: object) => {
     const result = await customFetch.post('/api/media/add', data);
     const decoded = await (await (result as Promise<Response>)).json();
+
+    // ERROR DETAILS
     if(decoded.details) return decoded;
+    if(!decoded.instance) {
+        return {details: [{message: decoded}]};
+    }
 
     // ENTRY CONSTRUCTION
     const instance = decoded.instance;
