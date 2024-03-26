@@ -48,7 +48,7 @@
         // DEBOUNCE
         clearTimeout(timer);
         timer = setTimeout(() => {
-            editMedia({id, current_episode});
+            editMedia({id, title, current_episode});
         }, 300);
     }
 </script>
