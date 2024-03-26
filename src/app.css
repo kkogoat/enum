@@ -6,6 +6,25 @@
     font-optical-sizing: auto;
     font-weight: bold;
     font-style: normal;
+    --background-color: #FBF9F1;
+    --background-color-placeholder-text: #949494;
+    --background-color-disabled: #cfcec7;
+    --background-color-disabled-text: #818181;
+
+    --foreground-color: #AAD7D9;
+
+    --text-color: #555555;
+    --text-color-error: #f01717;
+
+    --accent-color: #6f9da8;
+    --accent-color-hover: #82b7c4;
+    --accent-color-active: #5b7f88;
+    --accent-color-disabled: #476266;
+    --accent-color-disabled-text: #FBF9F1;
+    --accent-color-button-text: #FBF9F1;
+    --accent-color-filtered: invert(66%) sepia(10%) saturate(1060%) hue-rotate(144deg) brightness(88%) contrast(85%);
+    --accent-color-filtered-disabled: invert(34%) sepia(18%) saturate(553%) hue-rotate(140deg) brightness(100%) contrast(89%);
+
     --color-animation-timing: .5s;
 }
 

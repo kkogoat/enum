@@ -7,7 +7,7 @@
 
     onMount(() => {
         loading = false;
-        theme = document.documentElement.dataset.theme;
+        theme = document.documentElement.dataset.theme != "undefined" ? document.documentElement.dataset.theme : 'light'
         loading = true;
     });
 
