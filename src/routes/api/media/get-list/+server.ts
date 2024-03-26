@@ -10,7 +10,7 @@ export const GET = async({ locals }) => {
         where: {
             username: locals.username
         },
-        attributes: { exclude: ['username', 'updated_at']}
+        attributes: { exclude: ['username', 'created_at', 'updated_at']}
     });
     log('media', `successfully got media list for ${locals.username}`)
 
