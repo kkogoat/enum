@@ -28,7 +28,7 @@
     }
 
     .open-button {
-        position: absolute;
+        position: fixed;
         padding: 5px 20px 5px 20px;
         border-radius: 50px;
         right: 15px;
