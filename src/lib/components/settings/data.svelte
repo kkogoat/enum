@@ -51,8 +51,9 @@
 
 <style>
     .data-container {
+        margin-top: 45px;
         padding-top: 3px;
-        margin-left: 23%;
+        margin-left: 20%;
     }
 
     .prompt {
@@ -75,6 +76,7 @@
 
     .data-button {
         padding: 20px;
+        margin-right: 15px;
     }
 </style>
 

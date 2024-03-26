@@ -1,4 +1,5 @@
 <script lang="ts">
+    export let dialogClose: any;
     export let select: string;
     let options = ["analytics", "data"];
 
@@ -10,6 +11,7 @@
 
 <style>
     .nav-container {
+        min-height: 150px;
         display: flex;
         flex-direction: column;
         border-right: 2px solid var(--accent-color-disabled);
@@ -30,6 +32,22 @@
     .selected {
         color: var(--accent-color);
     }
+
+    .close-button {
+        padding: 5px 0px 5px 0px;
+        margin-right: 7px;
+        color: var(--background-color-disabled-text);
+        background-color: #520606;
+    }
+    .close-button:hover {
+        background-color: #b41010;
+        color: var(--text-color);
+        transition: var(--color-animation-timing);
+    }
+    .close-button:active {
+        background-color: #880c0c;
+        color: var(--background-color-placeholder-text);
+    }
 </style>
 
 <div class="nav-container">
@@ -38,4 +56,5 @@
             {option}
         </div>
     {/each}
+    <button class="close-button" on:click={dialogClose} style="margin-top: auto;">close</button>
 </div>

@@ -15,6 +15,7 @@
     // SETTINGS CLOSE
     function handleClose() {
         settingsDialogRef.style.display = "none";
+        select = "analytics";
         settingsDialogRef.close();
     }
 </script>
@@ -36,7 +37,7 @@
 </style>
 
 <dialog class="settings-dialog" bind:this={settingsDialogRef} on:cancel={handleClose}>
-    <Nav bind:select/>
+    <Nav bind:select dialogClose={handleClose}/>
     <svelte:component this={options[select]}/>
 </dialog>
 
