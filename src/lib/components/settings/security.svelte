@@ -37,6 +37,9 @@
                 } else if(res.status == 200) {
                     errorMessage = "Password Successfully Changed";
                     errorRef.showModal("ok");
+                } else if(res.status == 403) {
+                    errorMessage = "Cannot change this account's password";
+                    errorRef.showModal();
                 }
                 formRef.reset();
                 disable = false;

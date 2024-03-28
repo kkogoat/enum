@@ -1,3 +1,4 @@
+import { APP_DEFAULT_ACC, APP_DEFAULT_ALLOW_PWD_CHANGE } from "$env/static/private";
 import User from "$lib/server/db/models/user.js";
 import { log } from "$lib/server/util/loggerUtil.js";
 import bcrypt from "bcrypt";
@@ -7,6 +8,10 @@ export const PUT = async({ request, locals }) => {
     let body = await request.json();
     let username = locals.username;
     let newPass = await bcrypt.hash(body.newPass, 10);
+
+    if(username == APP_DEFAULT_ACC && APP_DEFAULT_ALLOW_PWD_CHANGE == "false") {
+        return new Response(JSON.stringify({message: "Cannot change this account password"}), {status: 403});
+    }
     
     // CHECK IF PASSWORDS CONFIRMED
     if(body.newPass != body.confirm) {
