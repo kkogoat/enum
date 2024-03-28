@@ -39,6 +39,7 @@ try {
 // DEFAULT ACCOUNT
 const instance = await User.findOne({where: {username: APP_DEFAULT_ACC}});
 if(!instance) {
+    log("db", `created default account ${APP_DEFAULT_ACC}`)
     const body = {username: APP_DEFAULT_ACC.toLowerCase(), password: await bcrypt.hash(APP_DEFAULT_PWD, 10)};
     await User.create(body)
 }
