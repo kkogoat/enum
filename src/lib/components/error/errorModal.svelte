@@ -18,16 +18,21 @@
     .error-dialog {
         color: var(--text-color-error);
     }
+    .modal-alignment {
+        display: flex;
+        flex-direction: column;
+    }
     .error-dialog-button {
         padding: 8px 12px 8px 12px;
         margin-top: 15px;
-        margin-left: 36%;
-        margin-right: 36%;
+        align-self: center;
     }
 </style>
 
 <!-- ERROR -->
 <dialog class="{ok ? "ok-dialog" : "error-dialog"}" bind:this={errorRef}>
-    <div>{errorMessage}</div>
-    <button class="error-dialog-button"on:click={() => errorRef.close()}>はい</button>
+    <div class="modal-alignment">
+        <div>{errorMessage}</div>
+        <button class="error-dialog-button"on:click={() => errorRef.close()}>はい</button>
+    </div>
 </dialog>
