@@ -11,6 +11,11 @@ const logoutSchema = joi.object({
     username: joi.string().min(4).max(15).alphanum().required()
 });
 
+const changeSchema = joi.object({
+    current: joi.string().min(8).max(30).pattern(new RegExp('^[a-zA-Z0-9!@#$%^&*]+$')).required(),
+    newPass: joi.string().min(8).max(30).pattern(new RegExp('^[a-zA-Z0-9!@#$%^&*]+$')).required(),
+})
+
 const mediaAddSchema = joi.object({
     title: joi.string().min(1).max(100).required(),
     link: joi.string().min(1).max(100).uri().allow('', null),
@@ -32,7 +37,9 @@ const mediaDeleteSchema = joi.object({
 
 const schemaTable: {[key: string]: any} = {
     "/api/auth/login" : loginSchema,
+    "/api/auth/signup" : loginSchema,
     "/api/auth/logout": logoutSchema,
+    "/api/auth/change": changeSchema,
     "/api/media/add": mediaAddSchema,
     "/api/media/edit": mediaEditSchema,
     "/api/media/delete": mediaDeleteSchema
