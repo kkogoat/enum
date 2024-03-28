@@ -3,11 +3,28 @@ import { log } from "$lib/server/util/loggerUtil";
 import { authenticateToken } from "./hooks/authHook";
 import { validator } from "./hooks/validationHook";
 
+const protectedPath: {[key: string]: any}= {
+    // AUTH
+    '/api/auth/auto-login': 0,
+    '/api/auth/login': 0,
+    '/api/auth/logout': 0,
+    '/api/auth/refresh': 0,
+    '/api/auth/signup': 0,
+    '/api/auth/change': 1, 
+    
+    // MEDIA
+    '/api/media/add': 1,
+    '/api/media/delete': 1,
+    '/api/media/edit': 1,
+    '/api/media/get-list': 1,
+    '/api/media/import': 1,
+}
+
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
 
     // Protected Path
-    if(event.url.pathname.startsWith('/api/media')) {
+    if(protectedPath[event.url.pathname]) {
         const bearer = event.request.headers.get("authorization");
         if(!bearer) {
             log('auth', `Unauthorized ${event.url.pathname} request`);
