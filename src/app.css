@@ -15,6 +15,7 @@
 
     --text-color: #555555;
     --text-color-error: #f01717;
+    --text-color-ok: #8dcc9e;
 
     --accent-color: #6f9da8;
     --accent-color-hover: #82b7c4;
@@ -39,6 +40,7 @@
 
     --text-color: #ffffff;
     --text-color-error: #d11313;
+    --text-color-ok: #aef5c1;
 
     --accent-color: #2b93cf;
     --accent-color-hover: #33b3fd;
@@ -60,6 +62,7 @@
 
     --text-color: #555555;
     --text-color-error: #f01717;
+    --text-color-ok: #8dcc9e;
 
     --accent-color: #6f9da8;
     --accent-color-hover: #82b7c4;
