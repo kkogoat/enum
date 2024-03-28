@@ -14,6 +14,7 @@ const logoutSchema = joi.object({
 const changeSchema = joi.object({
     current: joi.string().min(8).max(30).pattern(new RegExp('^[a-zA-Z0-9!@#$%^&*]+$')).required(),
     newPass: joi.string().min(8).max(30).pattern(new RegExp('^[a-zA-Z0-9!@#$%^&*]+$')).required(),
+    confirm: joi.string().min(8).max(30).pattern(new RegExp('^[a-zA-Z0-9!@#$%^&*]+$')).required(),
 })
 
 const mediaAddSchema = joi.object({

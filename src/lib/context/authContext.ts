@@ -1,4 +1,4 @@
-import { writable } from "svelte/store";
+import { writable, get } from "svelte/store";
 
 function createAuthContext(user: string) {
     const { subscribe, set } = writable(user);
@@ -53,6 +53,20 @@ function createAuthContext(user: string) {
         })
     }
 
+    // CHANGE PASSWORD
+    async function change(data: {current: string; newPass: string; confirm: string;}) {
+        const result = await fetch('/api/auth/change', {
+            method: "PUT",
+            headers: { 
+                "Content-Type": "application/json", 
+                "Authorization": `Bearer ${get(authContext)}`
+            },
+            credentials: "same-origin",
+            body: JSON.stringify(data)
+        })
+        return result;
+    }
+
     // REFRESH
     async function refresh(username: string, access_token: string) {
         set(access_token);
@@ -65,7 +79,7 @@ function createAuthContext(user: string) {
         username = "";
     }
 
-    return { subscribe, login, signup, logout, autoLogin, refresh, refreshLogout }
+    return { subscribe, login, signup, logout, autoLogin, change, refresh, refreshLogout }
 }
 
 export const authContext = createAuthContext("");
