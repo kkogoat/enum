@@ -1,4 +1,5 @@
 import { writable, get } from "svelte/store";
+import { customFetch } from "$lib/util/customFetchUtil";
 
 function createAuthContext(user: string) {
     const { subscribe, set } = writable(user);
@@ -55,15 +56,7 @@ function createAuthContext(user: string) {
 
     // CHANGE PASSWORD
     async function change(data: {current: string; newPass: string; confirm: string;}) {
-        const result = await fetch('/api/auth/change', {
-            method: "PUT",
-            headers: { 
-                "Content-Type": "application/json", 
-                "Authorization": `Bearer ${get(authContext)}`
-            },
-            credentials: "same-origin",
-            body: JSON.stringify(data)
-        })
+        const result = await customFetch.put('/api/auth/change', data);
         return result;
     }
 

@@ -27,7 +27,7 @@ export const POST = async({ request, locals, cookies }) => {
     })
     if(!(refresh_result as any as Response).ok) {
         log("media", `bad refresh for import for ${username}`);
-        return new Response(JSON.stringify("Uauthorized"), {status: 401});
+        return new Response(JSON.stringify("Forbidden"), {status: 403});
     }
 
     // ADD USERNAME/REMOVE IDS, THEN PERFORM SAFE DELETE

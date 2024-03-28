@@ -28,7 +28,7 @@
         } else {
             const res = await authContext.change({current, newPass, confirm});
             setTimeout(() => {
-                if(res.status == 401) {
+                if(res.status == 403) {
                     errorMessage = "Wrong current password";
                     errorRef.showModal();
                 } else if(res.status == 500) {
@@ -37,7 +37,7 @@
                 } else if(res.status == 200) {
                     errorMessage = "Password Successfully Changed";
                     errorRef.showModal("ok");
-                } else if(res.status == 403) {
+                } else if(res.status == 405) {
                     errorMessage = "Cannot change this account's password";
                     errorRef.showModal();
                 }

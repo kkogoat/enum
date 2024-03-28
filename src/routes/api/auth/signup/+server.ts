@@ -6,7 +6,7 @@ import bcrypt from "bcrypt";
 /** @type {import('./$types').RequestHandler} */
 export const POST = async ({ request }) => {
     if(PUBLIC_ALLOW_NEW_ACC == "false") {
-        return new Response(JSON.stringify({message: "Forbidden"}), {status: 403});
+        return new Response(JSON.stringify({message: "Invalid Method"}), {status: 405});
     }
 
     // GET USERNAME & SALTED PWD
