@@ -1,7 +1,7 @@
 <script lang="ts">
     export let dialogClose: any;
     export let select: string;
-    let options = ["analytics", "data"];
+    export let options: any;
 
     // NAV SELECT
     function handleSelect(option: string) {

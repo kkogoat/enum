@@ -2,7 +2,8 @@
     import Nav from "./nav.svelte";
     import Analytics from "./analytics.svelte";
 	import Data from "./data.svelte";
-    let options: {[key: string]: any} = {"analytics": Analytics, "data": Data};
+    import Security from "./security.svelte";
+    let options: {[key: string]: any} = {"analytics": Analytics, "data": Data, "security": Security};
     let select: string = "analytics";
     let settingsDialogRef: HTMLDialogElement;
 
@@ -37,7 +38,7 @@
 </style>
 
 <dialog class="settings-dialog" bind:this={settingsDialogRef} on:cancel={handleClose}>
-    <Nav bind:select dialogClose={handleClose}/>
+    <Nav options={Object.keys(options)} bind:select dialogClose={handleClose}/>
     <svelte:component this={options[select]}/>
 </dialog>
 
