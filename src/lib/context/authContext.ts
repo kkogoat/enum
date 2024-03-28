@@ -18,6 +18,16 @@ function createAuthContext(user: string) {
         return result.status;
     }
 
+    // SIGNUP FUNCTION
+    async function signup(account: {username: string; password: string}) {
+        const result = await fetch('/api/auth/signup', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(account)
+        })
+        return result;
+    }
+
     // AUTO LOGIN
     async function autoLogin() {
         const result = await fetch('/api/auth/auto-login', {
@@ -55,7 +65,7 @@ function createAuthContext(user: string) {
         username = "";
     }
 
-    return { subscribe, login, logout, autoLogin, refresh, refreshLogout }
+    return { subscribe, login, signup, logout, autoLogin, refresh, refreshLogout }
 }
 
 export const authContext = createAuthContext("");
