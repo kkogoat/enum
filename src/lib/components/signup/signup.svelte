@@ -117,7 +117,7 @@
 
 <div class="signup-container">
     <div class="title"> enum.usagi </div>
-    <form class="signup" on:submit|preventDefault ={handleSignupSubmit} autocomplete="off" bind:this={formRef}>
+    <form class="signup" on:submit|preventDefault={handleSignupSubmit} autocomplete="off" bind:this={formRef}>
         <!-- USERNAME -->
         <input 
             type="text" 
@@ -158,7 +158,7 @@
             minlength="8"
             maxlength="30"
             pattern="^[a-zA-Z0-9!@#$%^&*]+$"
-            placeholder="確認"
+            placeholder="パスワードの確認"
             required
             bind:this={confirmRef}
             bind:value={confirm}
