@@ -1,10 +1,10 @@
 interface UserAttributes {
-    id: string;
+    id?: string;
     username: string;
     password: string;
-    refresh_token: string;
-    created_at: Date;
-    updated_at: Date;
+    refresh_token?: string;
+    created_at?: Date;
+    updated_at?: Date;
 }
 
 interface MediaAttributes {
