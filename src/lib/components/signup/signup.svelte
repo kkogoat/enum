@@ -82,7 +82,7 @@
 
     .signup-error {
         position: absolute;
-        transform: translate(0px, 150px);
+        transform: translate(0px, 165px);
         width: 200px;
         margin-top: 10px;
         padding: 5px 0px 5px 0px;
@@ -111,6 +111,7 @@
 
     .login-link {
         margin: -12px 0px 0px 8px;
+        transition: color var(--color-animation-timing) ease;
     }
 </style>
 

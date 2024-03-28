@@ -110,6 +110,7 @@
 
     .signup-link {
         margin: -12px 0px 0px 8px;
+        transition: color var(--color-animation-timing) ease;
     }
 </style>
 
