@@ -1,12 +1,21 @@
-import { PUBLIC_ALLOW_NEW_ACC } from '$env/static/public';
+import { PUBLIC_ALLOW_MAX_ACC, PUBLIC_ALLOW_MAX_LIMIT, PUBLIC_ALLOW_NEW_ACC } from '$env/static/public';
 import User from '$lib/server/db/models/user.js';
 import { log } from '$lib/server/util/loggerUtil.js';
 import bcrypt from "bcrypt";
 
 /** @type {import('./$types').RequestHandler} */
 export const POST = async ({ request }) => {
+    // ALLOW NEW ACCOUNTS ENV
     if(PUBLIC_ALLOW_NEW_ACC == "false") {
         return new Response(JSON.stringify({message: "Invalid Method"}), {status: 405});
+    }
+
+    // MAX # OF ACCOUNTS ENV
+    if(PUBLIC_ALLOW_MAX_LIMIT == "true") {
+        let numAccs = (await User.findAll({raw: true})).length;
+        if(numAccs >= parseInt(PUBLIC_ALLOW_MAX_ACC)) {
+            return new Response(JSON.stringify({message: "Invalid Method: Max # of accounts reached"}), {status: 405});
+        }
     }
 
     // GET USERNAME & SALTED PWD
