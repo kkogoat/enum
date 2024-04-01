@@ -5,12 +5,11 @@ import { validator } from "./hooks/validationHook";
 
 const protectedPath: {[key: string]: any}= {
     // AUTH
-    '/api/auth/auto-login': 0,
+    '/api/auth/refresh': 0,
     '/api/auth/login': 0,
     '/api/auth/logout': 0,
-    '/api/auth/refresh': 0,
     '/api/auth/signup': 0,
-    '/api/auth/change': 1, 
+    '/api/auth/change': 1,
     
     // MEDIA
     '/api/media/add': 1,
