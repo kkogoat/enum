@@ -7,51 +7,28 @@ function createAuthContext(user: string) {
 
     // LOGIN FUNCTION
     async function login(account: {username: string; password: string}) {
-        const result = await fetch('/api/auth/login', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "same-origin",
-            body: JSON.stringify(account)
-        })
-        const decoded = await result.json();
-        set(decoded.access_token);
-        username = decoded.username;
+        const result = await customFetch.postNoAuth('/api/auth/login', account);
+        
+        // STATUS CODE HANDLER
+        if(result.ok) {
+            const acc = await result.json();
+            set(acc.access_token);
+            username = acc.username;
+        }
         return result.status;
     }
 
     // SIGNUP FUNCTION
     async function signup(account: {username: string; password: string}) {
-        const result = await fetch('/api/auth/signup', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(account)
-        })
+        const result = await customFetch.postNoAuth('/api/auth/signup', account);
         return result;
-    }
-
-    // AUTO LOGIN
-    async function autoLogin() {
-        const result = await fetch('/api/auth/auto-login', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "same-origin"
-        })
-        const decoded = await result.json();
-        set(decoded.access_token);
-        username = decoded.username;
     }
 
     // LOGOUT
     async function logout() {
         let user = username;
-        set("");
-        username = "";
-        const result = await fetch('/api/auth/logout', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "same-origin",
-            body: JSON.stringify({username: user})
-        })
+        refreshLogout();
+        const result = await customFetch.postNoAuth('/api/auth/logout', {username: user});
     }
 
     // CHANGE PASSWORD
@@ -60,16 +37,26 @@ function createAuthContext(user: string) {
         return result;
     }
 
-    // REFRESH
+
+    // AUTO LOGIN ON PAGE REFRESH
+    async function autoLogin() {
+        const result = await customFetch.getNoAuth('/api/auth/refresh');
+
+        // STATUS CODE HANDLER
+        const response_body = await result.json();
+        if(result.ok) { // ACCEPTED REFRESH
+            set(response_body.access_token); // NEW ACCESS TOKEN
+            username = response_body.username; // ASSOCIATED USERNAME W/TOKEN
+        } else { // REJECTED REFRESH
+            refreshLogout();
+        }
+    }
+
+    // FETCH REFRESH RESULTS
+    async function refreshLogout() { refresh("", "") }
     async function refresh(username: string, access_token: string) {
         set(access_token);
         username = username;
-    }
-    
-    // IF REFRESH FAILS -> LOGOUT
-    async function refreshLogout() {
-        set("");
-        username = "";
     }
 
     return { subscribe, login, signup, logout, autoLogin, change, refresh, refreshLogout }

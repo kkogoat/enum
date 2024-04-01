@@ -10,7 +10,7 @@ const retryFetch: any = async (func: any, api: string, data: object, NUM_RETRIES
         return null;
     };
 
-    // REFRESH RETRY
+    // REFRESH WITH LIMITED RETRIES
     const result = await fetch('/api/auth/refresh', {
         method: "GET",
         credentials: "same-origin"
@@ -18,13 +18,15 @@ const retryFetch: any = async (func: any, api: string, data: object, NUM_RETRIES
         return await retryFetch(func, api, data, NUM_RETRIES-1);
     });
 
-    // IF SUCCESSFUL REFRESH, FIRE INTENDED FETCH
-    if(result && result.ok) {
-        const res = await (result as Response).json();
-        authContext.refresh(res.username, res.access_token);
-        return await func(api, data);
+    // REFRESH CASES
+    if(result == null) {
+        return {error: "RETRY LIMIT REACHED", result: null};
+    } else if(result.ok) { // GOOD REFRESH? FIRE ORIGINAL REQUEST
+        const credentials = await result.json();
+        authContext.refresh(credentials.usesrname, credentials.access_token);
+        return {error: null, result: await func(api, data)};
     } else {
-        return await retryFetch(func, api, data, NUM_RETRIES-1);
+        return {error: await result.json(), result: null};
     }
 }
 
@@ -37,11 +39,9 @@ const GET = (api: string, data: object = {}) => {
         },
     }).then(async (res) => {
         if(res.status == 401) {
-            const retryResult = await retryFetch(GET, api, {});
-            if(!retryResult) {
-                authContext.refreshLogout();
-            }
-            return retryResult;
+            const {error, result} = await retryFetch(GET, api, data);
+            if(result) return result;
+            if(error) authContext.refreshLogout();
         }
         return res;
     }).catch((error) => {
@@ -60,11 +60,9 @@ const POST = (api: string, data: object) => {
         body: JSON.stringify(data)
     }).then(async (res) => {
         if(res.status == 401) {
-            const retryResult = await retryFetch(POST, api, data);
-            if(!retryResult) {
-                authContext.refreshLogout();
-            }
-            return retryResult;
+            const {error, result} = await retryFetch(POST, api, data);
+            if(result) return result;
+            if(error) authContext.refreshLogout();
         }
         return res;
     }).catch((error) => {
@@ -83,11 +81,9 @@ const PUT = (api: string, data: object) => {
         body: JSON.stringify(data)
     }).then(async (res) => {
         if(res.status == 401) {
-            const retryResult = await retryFetch(PUT, api, data);
-            if(!retryResult) {
-                authContext.refreshLogout();
-            }
-            return retryResult;
+            const {error, result} = await retryFetch(PUT, api, data);
+            if(result) return result;
+            if(error) authContext.refreshLogout();
         }
         return res;
     }).catch((error) => {
@@ -106,16 +102,32 @@ const DELETE = (api: string, data: object) => {
         body: JSON.stringify(data)
     }).then(async (res) => {
         if(res.status == 401) {
-            const retryResult = await retryFetch(DELETE, api, data);
-            if(!retryResult) {
-                authContext.refreshLogout();
-            }
-            return retryResult;
+            const {error, result} = await retryFetch(DELETE, api, data);
+            if(result) return result;
+            if(error) authContext.refreshLogout();
         }
         return res;
     }).catch((error) => {
         console.log(error);
     });
+}
+
+// FETCHES WITHOUT AUTHORIZATION
+const GET_NO_AUTH = async (api: string) => {
+    return await fetch(api, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin"
+    });
+}
+
+const POST_NO_AUTH = async (api: string, data: object) => {
+    return await fetch(api, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify(data)
+    })
 }
 
 export const customFetch = {
@@ -124,4 +136,6 @@ export const customFetch = {
     post: POST,
     put: PUT,
     delete: DELETE,
+    getNoAuth: GET_NO_AUTH,
+    postNoAuth: POST_NO_AUTH
 }

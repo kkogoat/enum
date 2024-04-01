@@ -10,23 +10,17 @@ export const POST = async ({ request, cookies }) => {
     // FIND USER & IF USER DNE || PASSWORD AUTHENTICATION
     const instance = await User.findOne({where: {username: body.username}});
     if(!instance || !await bcrypt.compare(body.password, instance.password)) {
-        log("auth", `invalid details for ${body.username}`);
+        log(`auth`, `rejected login details for ${body.username}`);
         return new Response(JSON.stringify("Invalid username/password."), {status: 401});
     }
 
     // GENERATE TOKENS & SAVES REFRESH
     const tokens = generateTokens({username: instance.username});
     instance.update({refresh_token: await bcrypt.hash(tokens.refresh_token, 10)});
-    instance.save();
 
     // CREATE REFRESH_TOKEN COOKIE & LOGIN USER
-    cookies.set("session", tokens.refresh_token, {
-        path: '/',
-        httpOnly: true,
-        sameSite: 'strict',
-        secure: true,
-    })
-    log("auth", `logging in user: ${instance.username}`);
+    cookies.set("session", tokens.refresh_token, {path: '/', httpOnly: true, sameSite: 'strict', secure: true});
+    log(`auth`, `logging in user: ${instance.username}`);
 
     // RESSPONSE
     return new Response(JSON.stringify({
