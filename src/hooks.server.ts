@@ -25,19 +25,21 @@ export async function handle({ event, resolve }) {
 
     // Protected Path
     if(protectedPath[event.url.pathname]) {
+        // CHECK IF ACCESS TOKEN EXISTS
         const bearer = event.request.headers.get("authorization");
-        if(!bearer) {
-            log('auth', `Unauthorized ${event.url.pathname} request`);
-            return new Response(JSON.stringify("Unauthorized"), {status: 401});
-        }
-        const result = (await authenticateToken(bearer)) as any;
-        if(result.status == 200) {
-            event.locals.username = result.username;
+        if(!bearer) return new Response(JSON.stringify("No Access Token Provided"), {status: 400});
+
+        // IF ACCESS TOKEN EXISTS -> HANDLE
+        const access_result = await authenticateToken(bearer) as any as Response;
+        if(access_result.ok) {
+            log('auth', `Authorized ${event.url.pathname} request`);
+            event.locals.username = (await access_result.json()).username;
+        } else if(access_result.status == 401) {
+            log(`auth`, `Rejected ${event.url.pathname} request`);
+            return new Response(JSON.stringify("Expired Token"),  {status: 401});
         } else {
-            log('auth', `Forbidden ${event.url.pathname} request`);
-            return new Response(JSON.stringify("Unauthorized"), {status: 401});
+            return new Response(JSON.stringify("Unprocessable Token"), {status: 422});
         }
-        log('auth', `Authorized ${event.url.pathname} request`);
     }
 
     // JOI Validation
