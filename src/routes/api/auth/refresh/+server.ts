@@ -23,6 +23,10 @@ export const GET = async ({ cookies }) => {
         const device = await Device.findOne({where: {id: device_id, username: username}});
         if(!device || !await bcrypt.compare(refresh, device.token)) {
             log(`auth`, `rejected refresh for user: ${username}`);
+            if(device) { // GIVEN TWO VALID MISMATCHED TOKEN -> ONE IS COMPROMISED, LOGOUT
+                device.destroy();
+                cookies.delete("session", {path: '/', httpOnly: true, sameSite: 'strict', secure: true});
+            }
             return new Response(JSON.stringify("Unauthorized Refresh Token"), {status: 401});
         }
 
