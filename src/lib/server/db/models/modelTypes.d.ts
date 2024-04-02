@@ -7,6 +7,13 @@ interface UserAttributes {
     updated_at?: Date;
 }
 
+interface DevicesAttributes {
+    id: string;
+    token: string;
+    device: string;
+    username: string;
+}
+
 interface MediaAttributes {
     id: string;
     title: string;

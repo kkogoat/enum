@@ -8,6 +8,7 @@ import {
     HasMany
 } from 'sequelize-typescript';
 import Media from "./media.js";
+import Device from "./devices.js";
 
 // USER SCHEMA DEFINITION
 @Table({
@@ -39,17 +40,18 @@ class User extends Model<UserAttributes> {
     })
     declare password: string;
 
-    @Column({
-        type: DataType.STRING(128),
-    })
-    declare refresh_token: string;
-
     // ASSOCIATIONS
     @HasMany(() => Media, {
         foreignKey: 'username',
         sourceKey: 'username'
     })
     medias: Media[];
+
+    @HasMany(() => Device, {
+        foreignKey: 'username',
+        sourceKey: 'username'
+    })
+    devices: Device[];
 
     @CreatedAt
     declare created_at: Date;
