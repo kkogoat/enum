@@ -1,19 +1,9 @@
+import { generateTokens, jwtErrorHandling } from "$lib/server/util/authUtil.js";
 import { REFRESH_TOKEN_SECRET } from "$env/static/private";
-import { generateTokens } from "$lib/server/util/authUtil.js";
 import { log } from "$lib/server/util/loggerUtil.js";
 import User from "$lib/server/db/models/user.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-
-function jwtErrorHandling(err: any) {
-    switch(err.name) {
-        case "NotBeforeError":
-        case "TokenExpiredError": // Expired Token
-            return new Response(JSON.stringify(err.message), {status: 401});
-        case "JsonWebTokenError": // Unprocessable Refresh
-            return new Response(JSON.stringify("Bad Refresh Token"), {status: 422});
-    }
-}
 
 /** @type {import('./$types').RequestHandler} */
 export const GET = async ({ cookies }) => {

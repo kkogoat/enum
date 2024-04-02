@@ -1,15 +1,6 @@
 import { ACCESS_TOKEN_SECRET } from "$env/static/private";
+import { jwtErrorHandling } from "$lib/server/util/authUtil";
 import jwt from "jsonwebtoken";
-
-function jwtErrorHandling(err: any) {
-    switch(err.name) {
-        case "NotBeforeError":
-        case "TokenExpiredError": // Expired Token
-            return new Response(JSON.stringify(err.message), {status: 401});
-        case "JsonWebTokenError": // Unprocessable Refresh
-            return new Response(JSON.stringify("Bad Refresh Token"), {status: 422});
-    }
-}
 
 export const authenticateToken = async (header: string) => {
     // GET TOKEN
