@@ -8,9 +8,9 @@ interface UserAttributes {
 }
 
 interface DevicesAttributes {
-    id: string;
-    token: string;
-    device: string;
+    id?: string;
+    token?: string;
+    device?: string;
     username: string;
 }
 

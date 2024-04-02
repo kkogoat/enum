@@ -2,10 +2,10 @@ import { ACCESS_TOKEN_EXPIRY, ACCESS_TOKEN_SECRET, REFRESH_TOKEN_EXPIRY, REFRESH
 import { log } from './loggerUtil';
 import jwt from "jsonwebtoken";
 
-export const generateTokens = (username: {username: string}) => {
-    log('auth', `generating tokens for ${username.username}`)
-    const access_token: string = jwt.sign(username, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
-    const refresh_token: string = jwt.sign(username, REFRESH_TOKEN_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRY });
+export const generateTokens = (details: {username: string, device_id: string}) => {
+    log('auth', `generating tokens for ${details.username}:${details.device_id}`)
+    const access_token: string = jwt.sign(details, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
+    const refresh_token: string = jwt.sign(details, REFRESH_TOKEN_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRY });
     return { access_token: access_token, refresh_token: refresh_token };
 }
 
