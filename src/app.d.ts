@@ -13,6 +13,7 @@ declare global {
 
 	interface JwtPayload {
         username: string;
+		device_id: string;
 		exp: number;
     }
 }
