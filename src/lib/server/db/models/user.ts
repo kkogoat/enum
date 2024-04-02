@@ -8,7 +8,7 @@ import {
     HasMany
 } from 'sequelize-typescript';
 import Media from "./media.js";
-import Device from "./devices.js";
+import Device from "./device.js";
 
 // USER SCHEMA DEFINITION
 @Table({

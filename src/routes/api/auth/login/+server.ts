@@ -1,5 +1,5 @@
 import User from '$lib/server/db/models/user.js';
-import Device from '$lib/server/db/models/devices.js';
+import Device from '$lib/server/db/models/device.js';
 import { generateTokens } from '$lib/server/util/authUtil.js';
 import { log } from '$lib/server/util/loggerUtil.js';
 import bcrypt from "bcrypt";

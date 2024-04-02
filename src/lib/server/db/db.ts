@@ -2,7 +2,7 @@ import { DB_NAME, DB_USER, DB_PWD, DB_HOST, DB_PORT, APP_DEFAULT_ACC, APP_DEFAUL
 import { Sequelize } from "sequelize-typescript";
 import User from './models/user.js';
 import Media from "./models/media.js";
-import Device from './models/devices.js';
+import Device from './models/device.js';
 import { log } from '../util/loggerUtil.js';
 import bcrypt from "bcrypt";
 
