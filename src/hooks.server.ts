@@ -10,6 +10,8 @@ const protectedPath: {[key: string]: any}= {
     '/api/auth/logout': 0,
     '/api/auth/signup': 0,
     '/api/auth/change': 1,
+    '/api/auth/get-devices': 1,
+    '/api/auth/logout-device': 1,
     
     // MEDIA
     '/api/media/add': 1,

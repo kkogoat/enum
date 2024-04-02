@@ -3,7 +3,8 @@
     import Analytics from "./analytics.svelte";
 	import Data from "./data.svelte";
     import Security from "./security.svelte";
-    let options: {[key: string]: any} = {"analytics": Analytics, "data": Data, "security": Security};
+    import Devices from "./devices.svelte";
+    let options: {[key: string]: any} = {"analytics": Analytics, "data": Data, "security": Security, "devices": Devices};
     let select: string = "analytics";
     let settingsDialogRef: HTMLDialogElement;
 
