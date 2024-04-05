@@ -15,7 +15,14 @@ export const GET = async ({ cookies }) => {
     // IF REFRESH EXISTS, VERIFY
     const refresh_result = await jwt.verify(refresh, REFRESH_TOKEN_SECRET, async (err, user) => {
         // ERRORS?
-        if(err) return jwtErrorHandling(err);
+        if(err) {
+            if(err.name == "TokenExpiredError") {
+                const payload = await jwt.verify(refresh, REFRESH_TOKEN_SECRET, {ignoreExpiration: true});
+                await Device.destroy({where: {id: (payload as JwtPayload).device_id}});
+                cookies.delete("session", {path: '/', httpOnly: true, sameSite: 'strict', secure: true});
+            }
+            return jwtErrorHandling(err);
+        }
 
         // IF NO ERRORS, CHECK IF SESSION EXISTS
         const username: string = (user as JwtPayload).username;
