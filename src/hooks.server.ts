@@ -3,7 +3,7 @@ import { log } from "$lib/server/util/loggerUtil";
 import { authenticateToken } from "./hooks/authHook";
 import { validator } from "./hooks/validationHook";
 
-const protectedPath: {[key: string]: any}= {
+const protectedPath: {[key: string]: any} = {
     // AUTH
     '/api/auth/refresh': 0,
     '/api/auth/login': 0,
