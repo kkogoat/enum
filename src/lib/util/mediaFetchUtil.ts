@@ -4,7 +4,9 @@ export const addMedia = async (data: object) => {
     // FORM CREATION
     let form = new FormData();
     for (const [key, value] of Object.entries(data)) {
-        form.append(key, value);
+        if(value) {
+            form.append(key, value);
+        }
     }
 
     const result = await customFetch.post('/api/media/add', form);
@@ -43,7 +45,9 @@ export const editMedia = (data: object) => {
     // FORM CREATION
     let form = new FormData();
     for (const [key, value] of Object.entries(data)) {
-        form.append(key, value);
+        if(value) {
+            form.append(key, value);
+        }
     }
 
     const result = customFetch.put('/api/media/edit', form);
