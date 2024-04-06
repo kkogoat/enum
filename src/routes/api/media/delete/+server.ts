@@ -1,5 +1,6 @@
 import Media from "$lib/server/db/models/media";
 import { log } from "$lib/server/util/loggerUtil";
+import fs from "fs";
 
 /** @type {import('./types').RequestHandler} */
 export const DELETE = async ({ request, locals }) => {
@@ -20,8 +21,15 @@ export const DELETE = async ({ request, locals }) => {
     }
 
     // DESTROYS SELECTED INSTANCE
-    instance.destroy();
-    log("media", `successfully deleted ${id} for ${username}`);
+    let image = instance.image;
+    instance.destroy().then(() => {
+        if(image) {
+            fs.unlink(`static/${instance.image}`, (err) => {
+                if(err) console.log(err);
+            });
+        }
+        log("media", `successfully deleted ${id} for ${username}`);
+    });
 
     // RESPONSE
     return new Response(JSON.stringify("Successfully Deleted"), {status: 200});
