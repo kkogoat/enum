@@ -54,7 +54,7 @@ const POST = (api: string, data: object) => {
     return fetch(api, {
         method: "POST",
         headers: {
-            "Content--Type": "application/json",
+            "Content-Type": "application/json",
             "Authorization": `Bearer ${get(authContext)}`
         },
         body: JSON.stringify(data)
@@ -75,7 +75,7 @@ const PUT = (api: string, data: object) => {
     return fetch(api, {
         method: "PUT",
         headers: {
-            "Content--Type": "application/json",
+            "Content-Type": "application/json",
             "Authorization": `Bearer ${get(authContext)}`
         },
         body: JSON.stringify(data)
@@ -96,7 +96,7 @@ const DELETE = (api: string, data: object) => {
     return fetch(api, {
         method: "DELETE",
         headers: {
-            "Content--Type": "application/json",
+            "Content-Type": "application/json",
             "Authorization": `Bearer ${get(authContext)}`
         },
         body: JSON.stringify(data)
