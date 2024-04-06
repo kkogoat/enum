@@ -82,7 +82,7 @@
 
 <ErrorModal bind:this={errorRef} errorMessage={errorMessage}/>
 <dialog class="prompt" bind:this={promptDialogRef}>
-    <div class="prompt-text">Are you sure? This will replace your current list with the imported list.</div>
+    <div class="prompt-text">Are you sure? This will replace your current list with the imported list. Image data will be deleted.</div>
     <div>
         <button class="prompt-button" on:click={() => {handleSubmit(true); promptDialogRef.close()}}>yes</button>
         <button class="prompt-button" on:click={() => {handleSubmit(false); promptDialogRef.close()}}>no</button>
