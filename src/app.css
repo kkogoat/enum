@@ -6,6 +6,7 @@
     font-optical-sizing: auto;
     font-weight: bold;
     font-style: normal;
+    --background-color-rgb: 251, 249, 241;
     --background-color: #FBF9F1;
     --background-color-placeholder-text: #949494;
     --background-color-disabled: #cfcec7;
@@ -31,6 +32,7 @@
 
 /* WEBSITE THEMES */
 [data-theme="dark"] {
+    --background-color-rgb: 23, 26, 32;
     --background-color: #171a20;
     --background-color-placeholder-text: #949494;
     --background-color-disabled: #101216;
@@ -53,6 +55,7 @@
 }
 
 [data-theme="light"] {
+    --background-color-rgb: 251, 249, 241;
     --background-color: #FBF9F1;
     --background-color-placeholder-text: #949494;
     --background-color-disabled: #cfcec7;
