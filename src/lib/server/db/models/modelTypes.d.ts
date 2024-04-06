@@ -18,6 +18,7 @@ interface MediaAttributes {
     id: string;
     title: string;
     link: string;
+    image: string;
     current_episode: number;
     total_episodes: number;
     rating: number;

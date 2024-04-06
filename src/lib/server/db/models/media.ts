@@ -40,6 +40,11 @@ class Media extends Model<MediaAttributes> {
     declare link: string;
 
     @Column({
+        type: DataType.STRING
+    })
+    declare image: string;
+
+    @Column({
         type: DataType.INTEGER,
         defaultValue: 0
     })
