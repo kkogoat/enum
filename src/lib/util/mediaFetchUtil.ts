@@ -1,7 +1,13 @@
 import { customFetch } from "$lib/util/customFetchUtil";
 
 export const addMedia = async (data: object) => {
-    const result = await customFetch.post('/api/media/add', data);
+    // FORM CREATION
+    let form = new FormData();
+    for (const [key, value] of Object.entries(data)) {
+        form.append(key, value);
+    }
+
+    const result = await customFetch.post('/api/media/add', form);
     const decoded = await (await (result as Promise<Response>)).json();
 
     // ERROR DETAILS
@@ -34,7 +40,13 @@ export const getMediaList = async () => {
 }
 
 export const editMedia = (data: object) => {
-    const result = customFetch.put('/api/media/edit', data);
+    // FORM CREATION
+    let form = new FormData();
+    for (const [key, value] of Object.entries(data)) {
+        form.append(key, value);
+    }
+
+    const result = customFetch.put('/api/media/edit', form);
     return result;
 }
 
@@ -44,6 +56,6 @@ export const deleteMedia = (data: object) => {
 }
 
 export const importMediaList = async (file: string) => {
-    const result = customFetch.post('/api/media/import', JSON.parse(file));
+    const result = customFetch.post('/api/media/import', file);
     return result;
 }

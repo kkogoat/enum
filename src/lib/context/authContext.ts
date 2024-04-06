@@ -33,7 +33,7 @@ function createAuthContext(user: string) {
 
     // CHANGE PASSWORD
     async function change(data: {current: string; newPass: string; confirm: string;}) {
-        const result = await customFetch.put('/api/auth/change', data);
+        const result = await customFetch.put('/api/auth/change', JSON.stringify(data));
         return result;
     }
 

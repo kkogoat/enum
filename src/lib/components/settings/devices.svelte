@@ -28,7 +28,7 @@
     let disable: boolean = false;
     async function logout(id: string) {
         disable = true;
-        const result = await customFetch.post('/api/auth/logout-device', {id});
+        const result = await customFetch.post('/api/auth/logout-device', JSON.stringify({id}));
         setTimeout(() => {
             if(result.ok) {
                 list = list.filter((item: any) => item.id != id);

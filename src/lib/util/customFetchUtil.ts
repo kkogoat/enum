@@ -50,14 +50,13 @@ const GET = (api: string, data: object = {}) => {
 }
 
 // POST
-const POST = (api: string, data: object) => {
+const POST = (api: string, data: any) => {
     return fetch(api, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
             "Authorization": `Bearer ${get(authContext)}`
         },
-        body: JSON.stringify(data)
+        body: data
     }).then(async (res) => {
         if(res.status == 401) {
             const {error, result} = await retryFetch(POST, api, data);
@@ -71,14 +70,13 @@ const POST = (api: string, data: object) => {
 }
 
 // PUT
-const PUT = (api: string, data: object) => {
+const PUT = (api: string, data: any) => {
     return fetch(api, {
         method: "PUT",
         headers: {
-            "Content-Type": "application/json",
             "Authorization": `Bearer ${get(authContext)}`
         },
-        body: JSON.stringify(data)
+        body: data
     }).then(async (res) => {
         if(res.status == 401) {
             const {error, result} = await retryFetch(PUT, api, data);
