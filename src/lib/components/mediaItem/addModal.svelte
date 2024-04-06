@@ -23,7 +23,7 @@
     import { listContext } from '$lib/context/listContext';
     async function handleMediaSubmit() {
         disable = true;
-        const decoded = await addMedia({title, link, current_episode, total_episodes, rating, description, status, type});
+        const decoded = await addMedia({title, link, current_episode, total_episodes, rating, description, status, type, image});
         if(decoded.details) {
             setTimeout(() => {
                 errorMessage = decoded.details[0].message;
@@ -46,6 +46,40 @@
         dialogRef.close();
         formRef.reset();
         title="";
+        URL.revokeObjectURL(url);
+        url = null;
+    }
+
+    // HANDLE IMAGE UPLOAD
+    let input_ref: HTMLInputElement;
+    let upload_button_ref: HTMLButtonElement;
+    let over_browser = false;
+    let over_zone = false;
+    let url: any = null;
+    let image: any;
+    function handleDrop(event: any, area: number) {
+        if(area) {
+            if((event.dataTransfer && event.dataTransfer.items) || event.target.files) {
+                const file = event.dataTransfer ? event.dataTransfer.items[0].getAsFile() : event.target.files[0];
+                if(file.size > 5242880) {
+                    errorMessage = "Please insert an image file less than 5MB";
+                    errorRef.showModal();
+                } else {
+                    if(url) URL.revokeObjectURL(url);
+                    image = file;
+                    url = URL.createObjectURL(file);
+                }
+            }
+        }
+        over_browser = false;
+        over_zone = false;
+    }
+    function handleDrag(area: number) {
+        if(area) { // mouse over div
+            over_zone = !over_zone;
+        } else { // mouse over overlay
+            over_browser = !over_browser;
+        }
     }
 </script>
 
@@ -61,6 +95,9 @@
         margin-bottom: 3px;
     }
     .layer1-left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 27%;
         height: 222px;
         background-color: var(--background-color);
@@ -111,16 +148,70 @@
     .cancel-button:enabled:active {
         background-color: #d61313;
     }
+
+    /* DRAGZONE + UPLOAD BUTTON */
+    .image-preview {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+    }
+    .image-input {
+        display: none;
+    }
+    .image-upload {
+        position: absolute;
+    }
+    .image-upload:has(+ img) {
+        opacity: 0%;
+    }
+    .image-upload:has(+ img:hover) { 
+        opacity: 100%;
+    }
+    .image-upload:hover {
+        opacity: 100%;
+    }
+    .drag-zone {
+        display: none;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 435px;
+        color: var(--text-color);
+        z-index: 999;
+    }
+    .drag-zone-active {
+        display: block !important;
+        background-color: rgba(var(--background-color-rgb), .95);
+    }
+    .drag-zone-enabled {
+        display: block !important;
+        background-color: rgba(var(--background-color-rgb), .70);
+    }
+    .add-dialog:has(:is(.drag-zone-enabled, .drag-zone-active)) {
+        outline: 1px dashed var(--accent-color-disabled);
+    }
 </style>
 
-<dialog class="add-dialog" bind:this={dialogRef} on:cancel={handleDialogClose}>
+<dialog class="add-dialog" bind:this={dialogRef} on:cancel={handleDialogClose} on:dragenter={() => handleDrag(0)} on:dragleave={() => handleDrag(0)} on:drop|preventDefault={(e) => handleDrop(e, 0)} on:dragover|preventDefault>
     <ErrorModal bind:this={errorRef} errorMessage={errorMessage}/>
+    <div class="drag-zone {over_browser && !over_zone ? "drag-zone-enabled" : ""} {over_zone ? "drag-zone-active": ""}" on:dragenter={() => handleDrag(1)} on:dragleave={() => handleDrag(1)} on:drop|preventDefault|stopPropagation={(e) => handleDrop(e, 1)} aria-hidden="true">
+        {over_browser && !over_zone ? "Drag Here" : ""}
+        {over_zone ? "Drop Image" : ""}
+    </div>
     <form on:submit|preventDefault={handleMediaSubmit} bind:this={formRef} autocomplete="off">
         <!-- LAYER 1 -->
         <div class="layer1">
             <!-- LEFT COLUMN -->
             <div class="layer1-left">
-
+                <input bind:this={input_ref} class="image-input" type="file" on:cancel|stopPropagation on:change={(e) => handleDrop(e, 1)}/>
+                <button bind:this={upload_button_ref} class="image-upload" on:click|preventDefault={() => input_ref.click()}>click or drag</button>
+                {#if url}
+                    <img class="image-preview" src={url} draggable="false" alt="cover" on:click={() => upload_button_ref.click()} aria-hidden="true"/>
+                {/if}
             </div>
 
             <!-- RIGHT COLUMN -->

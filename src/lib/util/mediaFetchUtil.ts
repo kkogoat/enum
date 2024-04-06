@@ -24,6 +24,7 @@ export const addMedia = async (data: object) => {
         id: instance.id,
         title: instance.title,
         link: instance.link ? instance.link : null,
+        image: instance.image ? instance.image : null,
         current_episode: instance.current_episode,
         total_episode: instance.total_episode ? instance.total_episode : null,
         rating: instance.rating ? instance.rating : null,

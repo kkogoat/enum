@@ -1,11 +1,18 @@
 import { APP_DEFAULT_MAX_ENTRIES, APP_DEFAULT_MAX_ENTRY_LIMIT } from '$env/static/private';
 import Media from '$lib/server/db/models/media.js';
 import { log } from '$lib/server/util/loggerUtil.js';
+import { writeFileSync } from 'fs';
+import crypto from "crypto";
 
 /** @type {import('./$types').RequestHandler} */
 export const POST = async ({ request, locals }) => {
-    let body = await request.json();
-    body.username = locals.username;
+    // FORM DATA -> JSON OBJECT
+    const form = await request.formData();
+    let body: any = {};
+    for (const pair of form.entries()) {
+        body[pair[0]] = pair[1];
+    }
+    body["username"] = locals.username;
 
     // MAX ENTRIES
     if(APP_DEFAULT_MAX_ENTRY_LIMIT == "true") {
@@ -27,7 +34,14 @@ export const POST = async ({ request, locals }) => {
         return new Response(JSON.stringify("Duplicate Record Exists"), {status: 409});
     }
 
-    // ADD NEW MEDIA TO MODEL
+    // UPLOAD IMAGE, THEN ADD NEW MEDIA TO MODEL
+    const image = form.get("image") as File;
+    let image_name = undefined;
+    if(image) {
+        image_name = `${crypto.randomUUID()}.${image.name.split('.').pop()}`;
+        writeFileSync(`static/${image_name}`, Buffer.from(await image.arrayBuffer()));
+        body["image"] = image_name;
+    }
     const instance = await Media.create(body);
     log("media", `successfully added ${body.title} to ${body.username}`);
 
