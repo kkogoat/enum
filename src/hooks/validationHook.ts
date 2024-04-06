@@ -25,7 +25,14 @@ const mediaAddSchema = joi.object({
     rating: joi.number().min(0).max(10).allow(null),
     description: joi.string().min(0).max(200).allow(null),
     status: joi.string().valid('','Completed','In Progress','Planned'),
-    type: joi.string().valid('', ...PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER))
+    type: joi.string().valid('', ...PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER)),
+    image: joi.object({
+        type: joi.string().valid("image/png", "image/jpeg"),
+        size: joi.number().min(1).max(5242880).messages({
+            'number.min': `"image" should have a minimum size of 1 Byte`,
+            'number.max': `"image" should have a maximum size of 5 MB`
+        })
+    }).allow(null)
 });
 
 const mediaEditSchema = mediaAddSchema.append({
@@ -46,9 +53,27 @@ const schemaTable: {[key: string]: any} = {
     "/api/media/delete": mediaDeleteSchema
 }
 
+const multipart: {[key: string]: any} = {
+    "/api/media/add": 1,
+    "/api/media/edit": 1
+}
+
 export const validator = async (api: string, request: any) => {
     if(schemaTable[api]) {
-        const params = await request.json();
+        let params: any;
+        if(multipart[api]) {
+            let form = await request.formData();
+            let param_build:any = {};
+            for (const pair of form.entries()) {
+                param_build[pair[0]] = pair[1];
+            }
+            if(form.get("image")) {
+                param_build["image"] = {type: form.get("image").type, size: form.get("image").size};
+            }
+            params = param_build;
+        } else {
+            params = await request.json();
+        }
         const { _, error } = schemaTable[api].validate(params)
         if(!error) log('joi', `Validated ${api} request`);
         else log('joi', `Rejected ${api} request: ${error}`);
