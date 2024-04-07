@@ -24,7 +24,16 @@ function createListContext(list: any) {
         })
     }
 
-    return { subscribe, initializeList, removeFromList, addToList }
+    // Client-side LIST ENTRY UPDATE
+    function updateIdFromList(item: any) {
+        update((items) => {
+            let entry = items.findIndex((obj: any) => obj.id == item.id);
+            items[entry] = item;
+            return items;
+        });
+    }
+
+    return { subscribe, initializeList, removeFromList, addToList, updateIdFromList }
 }
 
 export const listContext = createListContext([]);
