@@ -58,7 +58,7 @@
     let url: any = null;
     let image: any;
     function handleDrop(event: any, area: number) {
-        if(area) {
+        if(area && !disable) {
             if((event.dataTransfer && event.dataTransfer.items) || event.target.files) {
                 const file = event.dataTransfer ? event.dataTransfer.items[0].getAsFile() : event.target.files[0];
                 if(file.size > 5242880) {
@@ -207,8 +207,8 @@
         <div class="layer1">
             <!-- LEFT COLUMN -->
             <div class="layer1-left">
-                <input bind:this={input_ref} class="image-input" type="file" on:cancel|stopPropagation on:change={(e) => handleDrop(e, 1)}/>
-                <button bind:this={upload_button_ref} class="image-upload" on:click|preventDefault={() => input_ref.click()}>click or drag</button>
+                <input bind:this={input_ref} class="image-input" type="file" on:cancel|stopPropagation on:change={(e) => handleDrop(e, 1)} disabled={disable}/>
+                <button bind:this={upload_button_ref} class="image-upload" on:click|preventDefault={() => input_ref.click()} disabled={disable}>click or drag</button>
                 {#if url}
                     <img class="image-preview" src={url} draggable="false" alt="cover" on:click={() => upload_button_ref.click()} aria-hidden="true"/>
                 {/if}
