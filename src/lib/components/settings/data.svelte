@@ -40,7 +40,8 @@
                 if(result.ok) {
                     window.location.reload();
                 } else {
-                    errorMessage = (await result.json()).message;
+                    let res = await result.json();
+                    errorMessage = res.details[0].message;
                     errorRef.showModal();
                 }
             }

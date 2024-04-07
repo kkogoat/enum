@@ -43,6 +43,19 @@ const mediaDeleteSchema = joi.object({
     id: joi.string().uuid().required()
 });
 
+const importSchema = joi.array().items(joi.object({
+    id: joi.any(),
+    title: joi.string().min(1).max(100).required(),
+    link: joi.string().min(1).max(100).uri().allow('', null),
+    current_episode: joi.number().min(0).max(2147483647),
+    total_episodes: joi.number().min(0).max(2147483647).allow(null),
+    rating: joi.number().min(0).max(10).allow(null),
+    description: joi.string().min(0).max(200).allow(null),
+    status: joi.string().valid('','Completed','In Progress','Planned'),
+    type: joi.string().valid('', ...PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER)),
+    image: joi.any()
+}));
+
 const schemaTable: {[key: string]: any} = {
     "/api/auth/login" : loginSchema,
     "/api/auth/signup" : loginSchema,
@@ -50,7 +63,8 @@ const schemaTable: {[key: string]: any} = {
     "/api/auth/change": changeSchema,
     "/api/media/add": mediaAddSchema,
     "/api/media/edit": mediaEditSchema,
-    "/api/media/delete": mediaDeleteSchema
+    "/api/media/delete": mediaDeleteSchema,
+    "/api/media/import": importSchema
 }
 
 const multipart: {[key: string]: any} = {
@@ -64,7 +78,7 @@ export const validator = async (api: string, request: any) => {
         if(multipart[api]) {
             let form;
             try { form = await request.formData(); }
-            catch(error) {return "Unprocessable Form Data"}
+            catch(error) {return {details: [{message: "Unprocessable Data"}]}}
 
             let param_build:any = {};
             for (const pair of form.entries()) {
@@ -76,7 +90,7 @@ export const validator = async (api: string, request: any) => {
             params = param_build;
         } else {
             try { params = await request.json(); }
-            catch(error) {return "Unprocessable JSON Data"}
+            catch(error) {return {details: [{message: "Unprocessable Data"}]}}
         }
         const { _, error } = schemaTable[api].validate(params)
         if(!error) log('joi', `Validated ${api} request`);

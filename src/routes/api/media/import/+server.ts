@@ -19,9 +19,11 @@ export const POST = async({ request, locals }) => {
     try {
         result = await Media.bulkCreate(body, { validate: true, individualHooks: true }).then((res) => {
             for (const {image} of previous) {
-                fs.unlink(`static/covers/${image}`, (err) => {
-                    if(err) console.log(err);
-                });
+                if(image) {
+                    fs.unlink(`static/covers/${image}`, (err) => {
+                        if(err) console.log(err);
+                    });
+                }
             }
             log("media", `successfully imported list for ${username}`);
             return new Response(JSON.stringify({message: `Successfully Imported for ${username}`}), {status: 200});
