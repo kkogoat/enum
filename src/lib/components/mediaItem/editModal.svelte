@@ -237,7 +237,7 @@
                 {#if url}
                     <img class="image-preview" src={url} draggable="false" alt="cover" on:click={() => upload_button_ref.click()} aria-hidden="true"/>
                 {:else if image}
-                    <img loading="lazy" class="image-preview" src={`/covers/${image}`} draggable="false" alt="cover" on:click={() => upload_button_ref.click()} aria-hidden="true"/>
+                    <img loading="lazy" class="image-preview" src={`covers/${image}`} draggable="false" alt="cover" on:click={() => upload_button_ref.click()} aria-hidden="true"/>
                 {/if}
             </div>
 
