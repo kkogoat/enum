@@ -1,8 +1,18 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-
     /** @type {import('./$types').PageData} */
+    import { onMount } from "svelte";
     export let data: any;
+    let imgsrc: any;
+    onMount(async () => {
+        const result = await fetch(`/covers/${data.image}`, {
+            method: "GET"
+        });
+        if(result.ok) {
+            imgsrc = URL.createObjectURL(await result.blob());
+        } else {
+            window.location.replace('/');
+        }
+    })
 </script>
 
 <style>
@@ -16,5 +26,5 @@
 </style>
 
 <div class="center">
-    <img src={data.image} alt="Cover Does Not Exist"/>
+    <img src={imgsrc} alt="Cover"/>
 </div>
