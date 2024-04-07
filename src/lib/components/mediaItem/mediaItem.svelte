@@ -7,6 +7,7 @@
     let id: string = item["id"];
     let title: string = item["title"];
     let link: string = item["link"];
+    let image: string = item["image"];
     let current_episode: number = item["current_episode"];
     let total_episodes: number = item["total_episodes"];
     let rating: number = item["rating"];
@@ -155,4 +156,4 @@
     </div>
 </div>
 
-<EditModal bind:this={editModalRef} id={id} bind:title bind:link bind:current_episode bind:total_episodes bind:rating bind:description bind:type bind:status/>
+<EditModal bind:this={editModalRef} id={id} bind:title bind:link bind:image bind:current_episode bind:total_episodes bind:rating bind:description bind:type bind:status/>
