@@ -1,6 +1,7 @@
 import Media from "$lib/server/db/models/media";
 import { log } from "$lib/server/util/loggerUtil";
 import { writeFileSync, unlink } from "fs";
+import { extname } from 'path';
 
 /** @type {import('./$types').RequestHandler} */
 export const PUT = async ({ request, locals }) => {
@@ -44,7 +45,7 @@ export const PUT = async ({ request, locals }) => {
     const image = form.get("image") as File;
     let image_name = undefined;
     if(image) {
-        image_name = `${crypto.randomUUID()}.${image.name.split('.').pop()}`;
+        image_name = `${crypto.randomUUID()}${extname(image.name)}`;
         writeFileSync(`static/covers/${image_name}`, Buffer.from(await image.arrayBuffer()));
         body["image"] = image_name;
     }
