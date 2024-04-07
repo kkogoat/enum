@@ -62,7 +62,10 @@ export const validator = async (api: string, request: any) => {
     if(schemaTable[api]) {
         let params: any;
         if(multipart[api]) {
-            let form = await request.formData();
+            let form;
+            try { form = await request.formData(); }
+            catch(error) {return "Unprocessable Form Data"}
+
             let param_build:any = {};
             for (const pair of form.entries()) {
                 param_build[pair[0]] = pair[1];
@@ -72,7 +75,8 @@ export const validator = async (api: string, request: any) => {
             }
             params = param_build;
         } else {
-            params = await request.json();
+            try { params = await request.json(); }
+            catch(error) {return "Unprocessable JSON Data"}
         }
         const { _, error } = schemaTable[api].validate(params)
         if(!error) log('joi', `Validated ${api} request`);

@@ -4,7 +4,9 @@ import fs from "fs";
 
 /** @type {import('./$types').RequestHandler} */
 export const POST = async({ request, locals }) => {
-    let body = await request.json();
+    let body;
+    try { body = await request.json() } 
+    catch(error) { return new Response(JSON.stringify({message: "Unprocessable Import..."}), {status: 422}); }
     const username = locals.username;
 
     // ADD USERNAME, REMOVE IDS & PICTURES, THEN PERFORM SAFE DELETE
