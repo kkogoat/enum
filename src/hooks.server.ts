@@ -36,7 +36,7 @@ export async function handle({ event, resolve }) {
     if(protectedPath[event.url.pathname]) {
         // CHECK IF ACCESS TOKEN EXISTS
         const bearer = event.request.headers.get("authorization");
-        if(!bearer) return new Response(JSON.stringify("No Access Token Provided"), {status: 400});
+        if(!bearer) return new Response(JSON.stringify("No Access Token Provided"), {status: 302, headers: { Location: '/' }});
 
         // IF ACCESS TOKEN EXISTS -> HANDLE
         const access_result = await authenticateToken(bearer) as any as Response;
