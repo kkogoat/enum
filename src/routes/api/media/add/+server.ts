@@ -40,7 +40,7 @@ export const POST = async ({ request, locals }) => {
     let image_name = undefined;
     if(image) {
         image_name = `${crypto.randomUUID()}${extname(image.name)}`;
-        writeFileSync(`static/covers/${image_name}`, Buffer.from(await image.arrayBuffer()));
+        writeFileSync(`covers/${image_name}`, Buffer.from(await image.arrayBuffer()));
         body["image"] = image_name;
     }
     const instance = await Media.create(body);

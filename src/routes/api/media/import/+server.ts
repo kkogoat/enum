@@ -20,7 +20,7 @@ export const POST = async({ request, locals }) => {
         result = await Media.bulkCreate(body, { validate: true, individualHooks: true }).then((res) => {
             for (const {image} of previous) {
                 if(image) {
-                    fs.unlink(`static/covers/${image}`, (err) => {
+                    fs.unlink(`covers/${image}`, (err) => {
                         if(err) console.log(err);
                     });
                 }

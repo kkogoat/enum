@@ -24,7 +24,7 @@ export const DELETE = async ({ request, locals }) => {
     let image = instance.image;
     instance.destroy().then(() => {
         if(image) {
-            fs.unlink(`static/covers/${instance.image}`, (err) => {
+            fs.unlink(`covers/${instance.image}`, (err) => {
                 if(err) console.log(err);
             });
         }

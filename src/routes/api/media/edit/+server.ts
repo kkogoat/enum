@@ -46,7 +46,7 @@ export const PUT = async ({ request, locals }) => {
     let image_name = undefined;
     if(image) {
         image_name = `${crypto.randomUUID()}${extname(image.name)}`;
-        writeFileSync(`static/covers/${image_name}`, Buffer.from(await image.arrayBuffer()));
+        writeFileSync(`covers/${image_name}`, Buffer.from(await image.arrayBuffer()));
         body["image"] = image_name;
     }
     delete(body["id"]);
@@ -56,13 +56,13 @@ export const PUT = async ({ request, locals }) => {
         { where: {id: id, username: username} },
     ).then(() => { // IF SUCCESSFUL UPDATE, DELETE OLD IMAGE IF NEW IMAGE WAS CREATED
         if(image_name && old_image) {
-            unlink(`static/covers/${old_image}`, (err) => {
+            unlink(`covers/${old_image}`, (err) => {
                 if(err) console.log(err);
             })
         }
     }).catch(() => {
         if(image_name) { // IF FAILED UPDATE, DELETE NEW IMAGE IF IT WAS CREATED
-            unlink(`static/covers/${image_name}`, (err) => {
+            unlink(`covers/${image_name}`, (err) => {
                 if(err) console.log(err);
             })
         }
