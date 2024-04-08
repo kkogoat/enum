@@ -142,7 +142,7 @@
         {/if}
     </div>
     <div class="media-item media-item-border">
-        {rating ? rating : "-"}
+        {rating !== null ? rating : "-"}
     </div>
     <div class="media-item media-item-border">
         {type ? type : "-"}

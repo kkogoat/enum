@@ -268,7 +268,7 @@
     
                     <label class="label-shorter" for="rating">
                         評価 #:
-                        <input type="number" name="rating" min="1" max="10" step="0.1" bind:value={rating} disabled={disable}/>
+                        <input type="number" name="rating" min="0" max="10" step="0.1" bind:value={rating} disabled={disable}/>
                     </label>
 
                     <label class="label-shorter" for="status">
