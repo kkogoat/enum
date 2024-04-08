@@ -27,7 +27,7 @@
         for(let i = 0; i < types.length; i++) {
             vars[i+3] = $listContext.reduce((a: any, b: any) => a + (b.type == types[i] ? 1 : 0), 0);
         }
-        stats[stats.length-1] = "Uncategorized";
+        stats[stats.length-1] = "Unclassified";
     } else {
         vars = new Array();
     }

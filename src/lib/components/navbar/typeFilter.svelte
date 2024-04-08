@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { PUBLIC_ALLOWED_TYPES, PUBLIC_ALLOWED_TYPES_DELIMITER } from "$env/static/public";
     let types: Array<string> = PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER);
+    types.push('');
     let typeBitMap: any = {};
 
     // TYPES FILTER
@@ -19,7 +20,7 @@
         typeBitMap = {}
         filterContext.type(typeBitMap);
         for (let step = 0; step < types.length; step++) {
-            (document.getElementById(types[step]) as HTMLInputElement).checked = false;
+            (document.getElementById(types[step] ? types[step] : 'Unclassified') as HTMLInputElement).checked = false;
         }
     }
 </script>
@@ -58,8 +59,8 @@
 <div class="type-filter-container">
     {#each types as item, index}
         <div>
-            <input id={item} name={item} type="checkbox" on:change={() => toggleBitMap(item)}/>
-            <label for={item}>{item}</label>
+            <input id={item ? item : 'Unclassified'} name={item ? item : 'Unclassified'} type="checkbox" on:change={() => toggleBitMap(item)}/>
+            <label for={item ? item : 'Unclassified'}>{item ? item : 'Unclassified'}</label>
         </div>
     {/each}
     <button on:click={handleReset}>reset</button>
