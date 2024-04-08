@@ -23,8 +23,11 @@
         justify-content: center;
         align-items: center;
     }
+    .image {
+        max-height: 90vh;
+    }
 </style>
 
 <div class="center">
-    <img src={imgsrc} alt="Cover"/>
+    <img class="image" src={imgsrc} alt="Cover"/>
 </div>
