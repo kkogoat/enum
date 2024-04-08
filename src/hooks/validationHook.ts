@@ -7,10 +7,6 @@ const loginSchema = joi.object({
     password: joi.string().min(8).max(30).pattern(new RegExp('^[a-zA-Z0-9!@#$%^&*]+$')).required(),
 });
 
-const logoutSchema = joi.object({
-    username: joi.string().min(4).max(15).alphanum().required()
-});
-
 const changeSchema = joi.object({
     current: joi.string().min(8).max(30).pattern(new RegExp('^[a-zA-Z0-9!@#$%^&*]+$')).required(),
     newPass: joi.string().min(8).max(30).pattern(new RegExp('^[a-zA-Z0-9!@#$%^&*]+$')).required(),
@@ -59,7 +55,6 @@ const importSchema = joi.array().items(joi.object({
 const schemaTable: {[key: string]: any} = {
     "/api/auth/login" : loginSchema,
     "/api/auth/signup" : loginSchema,
-    "/api/auth/logout": logoutSchema,
     "/api/auth/change": changeSchema,
     "/api/media/add": mediaAddSchema,
     "/api/media/edit": mediaEditSchema,

@@ -5,8 +5,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 /** @type {import('./$types').RequestHandler} */
-export const POST = async ({ request, cookies }) => {
-    const body = await request.json();
+export const POST = async ({ locals, cookies }) => {
+    const username = locals.username;
 
     // CHECK IF COOKIE EXISTS
     const refresh = cookies.get("session");
@@ -14,8 +14,13 @@ export const POST = async ({ request, cookies }) => {
 
     // VERIFY REFRESH
     const result = await jwt.verify(refresh, REFRESH_TOKEN_SECRET, async (err, user) => {
-        const username: string = (user as JwtPayload).username;
+        const name: string = (user as JwtPayload).username == username ? username : "";
         const device_id: string = (user as JwtPayload).device_id;
+
+        // IF AUTH BEARER NAME & REFRESH TOKEN NAME DO NOT EQUAL, GIVE UP REQUEST
+        if(name == "") {
+            return new Response(JSON.stringify("Mismatched Logout Details"), {status: 403});
+        }
 
         // GET DEVICE & COMPARE STORED TOKEN & GIVEN REFRESH
         const device = await Device.findOne({where: {id: device_id, username: username}});
@@ -27,7 +32,7 @@ export const POST = async ({ request, cookies }) => {
         // IF SUCCESSFUL, SIGN OUT DEVICE & DELETE COOKIE
         await device.destroy();
         cookies.delete("session", {path: '/', httpOnly: true, sameSite: 'strict', secure: true});
-        log("auth", `logging out user: ${body.username}`);
+        log("auth", `logging out user: ${username}`);
         return new Response(JSON.stringify("Successfully Logged Out"), {status: 200});
     });
 

@@ -15,7 +15,7 @@ const protectedPath: {[key: string]: any} = {
     // AUTH
     '/api/auth/refresh': 0,
     '/api/auth/login': 0,
-    '/api/auth/logout': 0,
+    '/api/auth/logout': 1,
     '/api/auth/signup': 0,
     '/api/auth/change': 1,
     '/api/auth/get-devices': 1,

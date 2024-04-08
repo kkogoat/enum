@@ -1,4 +1,4 @@
-import { writable, get } from "svelte/store";
+import { writable } from "svelte/store";
 import { customFetch } from "$lib/util/customFetchUtil";
 
 function createAuthContext(user: string) {
@@ -27,8 +27,8 @@ function createAuthContext(user: string) {
     // LOGOUT
     async function logout() {
         let user = username;
+        const result = customFetch.post('/api/auth/logout', {});
         refreshLogout();
-        const result = await customFetch.postNoAuth('/api/auth/logout', {username: user});
     }
 
     // CHANGE PASSWORD
