@@ -29,11 +29,11 @@
     async function logout(id: string) {
         disable = true;
         const result = await customFetch.post('/api/auth/logout-device', JSON.stringify({id}));
-        setTimeout(() => {
+        setTimeout(async () => {
             if(result.ok) {
                 list = list.filter((item: any) => item.id != id);
             } else {
-                errorMessage = "Unsuccessful logout for this device";
+                errorMessage = await result.json();
                 errorRef.showModal();
             }
             disable = false;
