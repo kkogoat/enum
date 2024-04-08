@@ -4,7 +4,7 @@
     import ArrowDown from "$lib/assets/arrow_down.svelte";
 
     let sortColumn:any = {};
-    let sortMap:any = {"t":"title", "r":"rating", "p":"total_episodes"};
+    let sortMap:any = {"t":"title", "r":"rating", "p":"current_episode"};
     let stage1: string, stage2: string;
     function handleSort(column: string) {
         if(stage1 == column) {
