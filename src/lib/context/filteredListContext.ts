@@ -26,10 +26,24 @@ export const filteredListContext = derived([listContext, filterContext], ([$list
         let value = $filterContext.sort[key];
         let t = 1, f = -1;
         if(value) { t = -1, f = 1};
-        if(key == "title") {f = [t, t = f][0]};
-        result.sort((a: any, b: any) => {
-            return a[key] > b[key] ? t : f;
-        });
+        if(key == "title") {
+            f = [t, t = f][0];
+            result.sort((a: any, b: any) => { return a["title"] > b["title"] ? t : f; });
+        } else if(key == "current_episode") {
+            result.sort((a: any, b: any) => {
+                if(a[key] === 0 || a[key] === null) return 1;
+                if(b[key] === 0 || b[key] === null) return -1;
+                if(value) return b[key] - a[key];
+                else return a[key] - b[key];
+            });
+        } else {
+            result.sort((a: any, b: any) => {
+                if(a[key] === null) return 1;
+                if(b[key] === null) return -1;
+                if(value) return b[key] - a[key];
+                else return a[key] - b[key];
+            });
+        }
     } else {
         result.sort((a: any, b: any) => {
             return a["title"] > b["title"] ? 1 : -1;
