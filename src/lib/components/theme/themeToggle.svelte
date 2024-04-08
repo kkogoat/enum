@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Sun from "$lib/assets/sun.svelte";
+	import Moon from "$lib/assets/moon.svelte";
 	import { onMount } from "svelte";
 
     let theme: string | undefined = "";
@@ -48,40 +50,24 @@
         padding: 0px;
         box-sizing: border-box;
     }
+
     .light {
         top: 0px;
         left: 0px;
         transition: var(--color-animation-timing) ease;
         user-select: none;
     }
+
     .dark {
         top: 0px;
         left: 40px;
-        transition: var(--color-animation-timing) ease;
-    }
-
-    .sun {
-        position: relative;
-        top: 3px;
-        left: 5px;
-        filter: var(--accent-color-filtered);
-        pointer-events: none;
-        transition: var(--color-animation-timing) ease;
-    }
-    .moon {
-        position: relative;
-        right: -14px;
-        top: 3px;
-        filter: var(--accent-color-filtered);
-        pointer-events: none;
         transition: var(--color-animation-timing) ease;
     }
 </style>
 
 {#if loading}
     <div class="theme-container" on:click|self={() => buttonRef.click()} aria-hidden="true">
-        <img class="sun" src="/sun.svg" alt="light-mode" on:click|self={() => buttonRef.click()} aria-hidden="true"/>
-        <img class="moon" src="/moon.svg" alt="dark-mode" on:click|self={() => buttonRef.click()} aria-hidden="true"/>
+        <Sun /> <Moon />
         <button type="button" class="theme-toggle {theme}" bind:this={buttonRef} on:click={theme=="light" ? () => setTheme("dark") : () => setTheme("light")}>
             &nbsp;
         </button>
