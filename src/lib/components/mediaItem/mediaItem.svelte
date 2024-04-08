@@ -36,6 +36,7 @@
 
     // INCREMENT DECREMENT
 	import { editMedia } from "$lib/util/mediaFetchUtil";
+	import { listContext } from "$lib/context/listContext";
     let timer: any;
     function incdec(value: number) {
         if(current_episode == 0 && value == -1) {
@@ -50,6 +51,7 @@
         clearTimeout(timer);
         timer = setTimeout(() => {
             editMedia({id, title, type, current_episode});
+            listContext.updateIdFromList({id, title, link, image, current_episode, total_episodes, rating, description, type, status});
         }, 300);
     }
 </script>
