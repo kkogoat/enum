@@ -70,6 +70,10 @@
                     image = decoded.image;
                     d_image = decoded.image;
                     upload_image = null;
+                    if(url) {
+                        URL.revokeObjectURL(url);
+                        url = null;
+                    }
                 }
                 listContext.updateIdFromList({id, title: d_title, link: d_link, current_episode: d_current_episode, total_episodes: d_total_episodes, rating: d_rating, description: d_description, type: d_type, status: d_status, image: d_image});
                 disable = false;
