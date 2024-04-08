@@ -1,18 +1,33 @@
 <script lang="ts">
     import { PUBLIC_ALLOWED_TYPES, PUBLIC_ALLOWED_TYPES_DELIMITER } from "$env/static/public";
     import { listContext } from "$lib/context/listContext";
-    let types = PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER)
+
+    // TYPES & STATS INITIALIZATION
+    let types = PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER);
+    types.push(""); // Uncategorized Entries
     let stats = ["Total Media", "Total Episodes", "Average Rating", ...types];
     let vars: any = new Array();
 
-    // Analytics
+    // Analytics Calculation
     $: if($listContext.length) {
-        vars[0] = $listContext.length; // Total Media
-        vars[1] = $listContext.reduce((a: any, b: any) => a + b.current_episode, 0); // Total Episodes
-        vars[2] = Math.round(($listContext.reduce((a: any, b: any) => a + b.rating, 0) / vars[0]) * 10) / 10; // Average Rating
-        for(let i = 0; i < types.length; i++) { // Types count
+        // Total Media
+        vars[0] = $listContext.length; 
+        // Total Episodes
+        vars[1] = $listContext.reduce((a: any, b: any) => a + b.current_episode, 0);
+        // Average Rating
+        let total = 0, entries_with_ratings = 0;
+        for(let key in $listContext) {
+            if($listContext[key].rating) {
+                total += $listContext[key].rating;
+                entries_with_ratings += 1;
+            }
+        }
+        vars[2] = Math.round((total / entries_with_ratings) * 10) / 10;
+        // Types count
+        for(let i = 0; i < types.length; i++) {
             vars[i+3] = $listContext.reduce((a: any, b: any) => a + (b.type == types[i] ? 1 : 0), 0);
         }
+        stats[stats.length-1] = "Uncategorized";
     } else {
         vars = new Array();
     }
