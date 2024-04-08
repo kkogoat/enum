@@ -73,7 +73,7 @@ export const validator = async (api: string, request: any) => {
         if(multipart[api]) {
             let form;
             try { form = await request.formData(); }
-            catch(error) {return {details: [{message: "Unprocessable Data"}]}}
+            catch(error) {return {details: [{message: "Unprocessable Data"}], status: 422}}
 
             let param_build:any = {};
             for (const pair of form.entries()) {
@@ -85,7 +85,7 @@ export const validator = async (api: string, request: any) => {
             params = param_build;
         } else {
             try { params = await request.json(); }
-            catch(error) {return {details: [{message: "Unprocessable Data"}]}}
+            catch(error) {return {details: [{message: "Unprocessable Data"}], status: 422}}
         }
         const { _, error } = schemaTable[api].validate(params)
         if(!error) log('joi', `Validated ${api} request`);

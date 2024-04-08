@@ -54,6 +54,9 @@ export async function handle({ event, resolve }) {
     // JOI Validation
     const validatorResult = await validator(event.url.pathname, event.request.clone());
     if(validatorResult) {
+        if(validatorResult.status) {
+            return new Response(JSON.stringify(validatorResult), {status: 302, headers: { Location: '/' }});
+        }
         return new Response(JSON.stringify(validatorResult), {status: 400});
     }
 
