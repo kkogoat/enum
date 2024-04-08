@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_ALLOW_NEW_ACC } from "$env/static/public";
+	import { PUBLIC_DEMO } from "$env/static/public";
 	import { onMount } from "svelte";
     import VisOff from "$lib/assets/visOff.svelte";
     import VisOn from "$lib/assets/visOn.svelte";
@@ -148,7 +148,7 @@
             on:invalid={() => passwordRef.setCustomValidity(`Alpha: a-z, A-Z\nDigit: 0-9\nSpecial: !@#$%^&*`)}
             disabled={disable}
         >
-        {#if PUBLIC_ALLOW_NEW_ACC == "true"}<div class="signup-link">ユーザーではない？<a href="/signup">登録</a></div>{/if}
+        {#if PUBLIC_DEMO !== "true"}<div class="signup-link">ユーザーではない？<a href="/signup">登録</a></div>{/if}
 
         <!-- SUBMIT -->
         <button 

@@ -1,4 +1,4 @@
-import { APP_DEFAULT_MAX_ENTRIES, APP_DEFAULT_MAX_ENTRY_LIMIT } from '$env/static/private';
+import { PUBLIC_DEMO, PUBLIC_DEMO_MAX_ENTRIES } from '$env/static/public';
 import Media from '$lib/server/db/models/media.js';
 import { log } from '$lib/server/util/loggerUtil.js';
 import { writeFileSync } from 'fs';
@@ -16,8 +16,8 @@ export const POST = async ({ request, locals }) => {
     body["username"] = locals.username;
 
     // MAX ENTRIES
-    if(APP_DEFAULT_MAX_ENTRY_LIMIT == "true") {
-        let maxEntries = parseInt(APP_DEFAULT_MAX_ENTRIES);
+    if(PUBLIC_DEMO === "true") {
+        let maxEntries = parseInt(PUBLIC_DEMO_MAX_ENTRIES);
         const num = (await Media.findAll({where: {username: body.username}, raw: true})).length;
         if(num >= maxEntries) return new Response(JSON.stringify("Max Entries Reached"), {status: 405});
     }

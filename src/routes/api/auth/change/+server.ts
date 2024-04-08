@@ -1,4 +1,4 @@
-import { APP_DEFAULT_ACC, APP_DEFAULT_ALLOW_PWD_CHANGE } from "$env/static/private";
+import { PUBLIC_DEMO } from "$env/static/public";
 import User from "$lib/server/db/models/user.js";
 import { log } from "$lib/server/util/loggerUtil.js";
 import bcrypt from "bcrypt";
@@ -9,8 +9,8 @@ export const PUT = async({ request, locals }) => {
     let username = locals.username;
     let newPass = await bcrypt.hash(body.newPass, 10);
 
-    if(username == APP_DEFAULT_ACC && APP_DEFAULT_ALLOW_PWD_CHANGE == "false") {
-        return new Response(JSON.stringify({message: "Cannot change this account password"}), {status: 405});
+    if(PUBLIC_DEMO === "true") {
+        return new Response(JSON.stringify({message: "Cannot use this feature during demo"}), {status: 405});
     }
     
     // CHECK IF PASSWORDS CONFIRMED
@@ -28,7 +28,7 @@ export const PUT = async({ request, locals }) => {
 
     // CHECK IF PASSWORD MATCHES
     if(!await bcrypt.compare(body.current, instance.password)) {
-        return new Response(JSON.stringify("Wrong current password"), {status: 403});
+        return new Response(JSON.stringify({message: "Wrong current password"}), {status: 403});
     }
 
     // CHANGE PASSWORD

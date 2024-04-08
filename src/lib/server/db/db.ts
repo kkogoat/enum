@@ -1,4 +1,5 @@
-import { DB_NAME, DB_USER, DB_PWD, DB_HOST, DB_PORT, APP_DEFAULT_ACC, APP_DEFAULT_PWD, APP_DEFAULT_ACC_CREATE } from '$env/static/private';
+import { DB_NAME, DB_USER, DB_PWD, DB_HOST, DB_PORT } from '$env/static/private';
+import { PUBLIC_DEMO, PUBLIC_DEMO_ACC, PUBLIC_DEMO_PWD } from '$env/static/public';
 import { Sequelize } from "sequelize-typescript";
 import User from './models/user.js';
 import Media from "./models/media.js";
@@ -37,12 +38,12 @@ try {
     log("db", 'data models unable to sync');
 }
 
-// DEFAULT ACCOUNT
-if(APP_DEFAULT_ACC_CREATE == "true") {
-    const instance = await User.findOne({where: {username: APP_DEFAULT_ACC}});
+// DEMO ACCOUNT
+if(PUBLIC_DEMO === "true") {
+    const instance = await User.findOne({where: {username: PUBLIC_DEMO_ACC}});
     if(!instance) {
-        log("db", `created default account ${APP_DEFAULT_ACC}`)
-        const body = {username: APP_DEFAULT_ACC.toLowerCase(), password: await bcrypt.hash(APP_DEFAULT_PWD, 10)};
+        log("db", `created demo account ${PUBLIC_DEMO_ACC}`)
+        const body = {username: PUBLIC_DEMO_ACC.toLowerCase(), password: await bcrypt.hash(PUBLIC_DEMO_PWD, 10)};
         await User.create(body)
     }
 }

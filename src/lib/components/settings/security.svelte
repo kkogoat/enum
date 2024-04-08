@@ -27,18 +27,12 @@
             }, 100);
         } else {
             const res = await authContext.change({current, newPass, confirm});
-            setTimeout(() => {
-                if(res.status == 403) {
-                    errorMessage = "Wrong current password";
-                    errorRef.showModal();
-                } else if(res.status == 500) {
-                    errorMessage = "Server error... Please try again later";
-                    errorRef.showModal();
-                } else if(res.status == 200) {
+            setTimeout(async () => {
+                if(res.ok) {
                     errorMessage = "Password Successfully Changed";
                     errorRef.showModal("ok");
-                } else if(res.status == 405) {
-                    errorMessage = "Cannot change this account's password";
+                } else {
+                    errorMessage = res.status == 500 ? "Server error... Please try again later" : (await res.json()).message;
                     errorRef.showModal();
                 }
                 formRef.reset();
