@@ -12,7 +12,14 @@ export const filteredListContext = derived([listContext, filterContext], ([$list
 
     // ALPHABETICAL FILTER
     if($filterContext.alpha && Object.keys($filterContext.alpha).length) {
-        result = result.filter((item: any) => $filterContext.alpha[item.title[0].toUpperCase()]);
+        result = result.filter((item: any) => {
+            const first = item.title[0].toUpperCase()
+            if(first >= '0' && first <= '9') {
+                return $filterContext.alpha['#'];
+            } else {
+                return $filterContext.alpha[first];
+            }
+        });
     }
 
     // TYPE FILTER

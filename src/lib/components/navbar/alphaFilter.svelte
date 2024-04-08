@@ -1,5 +1,6 @@
 <script lang="ts">
     let charMap: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    charMap += "#";
     let alphaBitMap: any = {};
 
     // ALPHA FILTER
@@ -56,7 +57,7 @@
 </style>
 
 <div class="alpha-filter-container">
-    {#each {length: 26} as _, i}
+    {#each {length: charMap.length} as _, i}
         <div>
             <input on:change={() => toggleBitMap(charMap[i])} id={charMap[i]} name={charMap[i]} type="checkbox" />
             <label for={charMap[i]}>{charMap[i]}</label>
