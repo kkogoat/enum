@@ -4,7 +4,7 @@ export const addMedia = async (data: object) => {
     // FORM CREATION
     let form = new FormData();
     for (const [key, value] of Object.entries(data)) {
-        if(value != undefined) {
+        if(value !== undefined) {
             form.append(key, value);
         }
     }
@@ -46,7 +46,7 @@ export const editMedia = (data: object) => {
     // FORM CREATION
     let form = new FormData();
     for (const [key, value] of Object.entries(data)) {
-        if(value != undefined) {
+        if(value !== undefined) {
             form.append(key, value);
         }
     }

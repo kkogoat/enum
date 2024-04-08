@@ -9,7 +9,7 @@ export const PUT = async ({ request, locals }) => {
     const form = await request.formData();
     let body: any = {};
     for (const pair of form.entries()) {
-        body[pair[0]] = pair[1];
+        body[pair[0]] = pair[1] !== 'null' ? pair[1] : null;
     }
     let id = body.id;
     let username = locals.username;
