@@ -1,6 +1,7 @@
 <script lang="ts">
-    let charMap: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    charMap += "#";
+	import { PUBLIC_ALPHA_FILTER } from "$env/static/public";
+
+    let charMap: string = PUBLIC_ALPHA_FILTER;
     let alphaBitMap: any = {};
 
     // ALPHA FILTER
