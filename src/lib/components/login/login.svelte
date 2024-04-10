@@ -74,6 +74,12 @@
         filter: var(--accent-color-filtered);
     }
 
+    @media only screen and (hover:none) and (pointer:coarse) {
+        .login-checkbox {
+            left: 268px;
+        }
+    }
+
     .login-checkbox:enabled:hover {
         cursor: pointer;
         background: none;
