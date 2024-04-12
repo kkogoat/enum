@@ -30,11 +30,6 @@
             width: 95%;
         }
     }
-    @media (min-width: 1025px) {
-        .list-labels-container {
-            width: unset;
-        }
-    }
     .list-labels-container {
         height: 27px;
         position: fixed;

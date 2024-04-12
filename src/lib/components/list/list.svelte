@@ -10,11 +10,6 @@
             width: 95%;
         }
     }
-    @media (min-width: 1025px) {
-        .list-container {
-            width: unset;
-        }
-    }
     .list-container {
         background-color: var(--background-color);
         transition: background-color var(--color-animation-timing) ease;

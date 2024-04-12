@@ -36,12 +36,6 @@
             justify-content: center;
         }
     }
-    @media (min-width:1025px) {
-        #app-container {
-            display: block;
-            justify-content: unset;
-        }
-    }
 
     #app-container-login {
         width: 100vw;
