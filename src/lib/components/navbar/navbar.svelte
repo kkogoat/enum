@@ -64,6 +64,12 @@
             flex-direction: column;
         }
     }
+    @media (min-width: 801px) and (pointer: coarse) {
+        .filter-container {
+            width: initial;
+            max-width: 95%;
+        }
+    }
     dialog {
         width: 0px;
         height: 0px;

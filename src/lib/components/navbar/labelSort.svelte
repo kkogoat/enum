@@ -30,6 +30,11 @@
             width: 95%;
         }
     }
+    @media (min-width: 801px) and (pointer: coarse) {
+        .list-labels-container {
+            width: initial;
+        }
+    }
     .list-labels-container {
         height: 27px;
         position: fixed;
