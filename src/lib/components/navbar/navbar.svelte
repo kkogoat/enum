@@ -54,6 +54,15 @@
 
     .filter-container {
         margin-bottom: 0px;
+        max-width: 60%;
+    }
+    @media (min-width: 600px) and (pointer: coarse) {
+        .filter-container {
+            width: 95%;
+            max-width: 95%;
+            display: flex;
+            flex-direction: column;
+        }
     }
     dialog {
         width: 0px;

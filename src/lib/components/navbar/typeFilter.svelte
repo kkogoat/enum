@@ -29,13 +29,21 @@
     .type-filter-container {
         display: flex;
         gap: 5px;
+        flex-wrap: wrap;
     }
     button {
         border-radius: unset;
     }
     label {
         padding: 5px;
+        display: block;
         user-select: none;
+    }
+    @media (min-width: 600px) and (pointer: coarse) {
+        label {
+            padding: 4px;
+            font-size: 13px;
+        }
     }
     input[type="checkbox"] {
         display: none;

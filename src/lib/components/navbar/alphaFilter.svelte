@@ -29,14 +29,25 @@
     .alpha-filter-container {
         display: flex;
         gap: 5px;
-        margin-bottom: 17px;
+        margin-bottom: 6px;
+        flex-wrap: wrap;
     }
     button {
         border-radius: unset;
     }
     label {
         padding: 5px;
+        display: block;
         user-select: none;
+    }
+    @media (min-width: 600px) and (pointer: coarse) {
+        .alpha-filter-container {
+            margin-bottom: 5px;
+        }
+        label {
+            padding: 4px;
+            font-size: 13px;
+        }
     }
     input[type="checkbox"] {
         display: none;
