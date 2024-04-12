@@ -96,6 +96,22 @@
         overflow-x: hidden;
         white-space: nowrap;
     }
+    @media (min-width: 600px) and (pointer: coarse) {
+        .media-item-progress {
+            margin-left: -25px;
+        }
+        .media-item-progress-stat {
+            margin-left: 25px;
+        }
+    }
+    @media (min-width: 1025px) {
+        .media-item-progress {
+            margin-left: 0px;
+        }
+        .media-item-progress-stat {
+            margin-left: 0px;
+        }
+    }
     .media-item-progress-button {
         margin-top: -4px;
         font-size: 18px;
