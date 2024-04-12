@@ -36,6 +36,7 @@
 <style>
     .analytics-container {
         padding-top: 3px;
+        width: 300px;
     }
 
     .float-right {

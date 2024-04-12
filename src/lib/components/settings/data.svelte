@@ -54,7 +54,8 @@
     .data-container {
         margin-top: 45px;
         padding-top: 3px;
-        margin-left: 20%;
+        margin-left: 17%;
+        width: 300px;
     }
 
     .prompt {

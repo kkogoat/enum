@@ -10,7 +10,7 @@
 
     // SETTINGS OPEN
     function handleOpen() {
-        settingsDialogRef.style.display = "grid";
+        settingsDialogRef.style.display = "flex";
         settingsDialogRef.showModal();
     }
     
@@ -25,7 +25,6 @@
 <style>
     .settings-dialog {
         display: none;
-        grid-template-columns: 100px 300px;
         color: var(--text-color);
     }
 

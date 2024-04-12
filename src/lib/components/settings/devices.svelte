@@ -45,6 +45,7 @@
     .list-container {
         padding-top: 3px;
         min-height: 200px;
+        width: 300px;
     }
 
     .layer-1 {

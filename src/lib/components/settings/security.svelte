@@ -44,6 +44,10 @@
 </script>
 
 <style>
+    .container {
+        width: 300px;
+    }
+
     .change-form-title {
         padding-top: 3px;
     }
@@ -67,7 +71,7 @@
 
 </style>
 
-<div>
+<div class="container">
     <ErrorModal bind:this={errorRef} errorMessage={errorMessage} />
     <div class="change-form-title">Change Password:</div>
     <form class="change-form" on:submit|preventDefault={handleChangePassword} autocomplete="off" bind:this={formRef}>
