@@ -5,7 +5,7 @@
 </script>
 
 <style>
-    @media (min-width: 600px) and (pointer: coarse) {
+    @media (min-width: 320px) and (pointer: coarse) {
         .list-container {
             width: 95%;
         }

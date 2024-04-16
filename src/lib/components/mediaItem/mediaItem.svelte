@@ -64,6 +64,22 @@
         grid-template-rows: 30px;
         border-bottom: 1px solid var(--foreground-color);
     }
+    @media (min-width:320px) and (pointer: coarse) {
+        .media-item-container {
+            grid-template-columns: minmax(200px, 500px) 50px 120px;
+        }
+        .rating, .type {
+            display: none;
+        }
+    }
+    @media (min-width:600px) and (pointer: coarse) {
+        .media-item-container {
+            grid-template-columns: minmax(200px, 500px) 50px 85px 100px 120px;
+        }
+        .rating, .type {
+            display: block;
+        }
+    }
 
     .pos-1 {
         background-color: var(--background-color);
@@ -96,7 +112,7 @@
         overflow-x: hidden;
         white-space: nowrap;
     }
-    @media (min-width: 600px) and (pointer: coarse) {
+    @media (min-width: 320px) and (pointer: coarse) {
         .media-item-progress {
             margin-left: -25px;
         }
@@ -151,10 +167,10 @@
             <div class="media-link"><a href={link} target="_black" rel="noopener noreferrer"><Open fill="var(--link-base)" size="15px"/></a></div>
         {/if}
     </div>
-    <div class="media-item media-item-border">
+    <div class="media-item media-item-border rating">
         {rating !== null ? rating : "-"}
     </div>
-    <div class="media-item media-item-border">
+    <div class="media-item media-item-border type">
         {type ? type : "-"}
     </div>
     <div class="media-item media-item-progress">

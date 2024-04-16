@@ -56,7 +56,18 @@
         margin-bottom: 0px;
         max-width: 60%;
     }
+    @media (min-width: 320px) and (pointer: coarse) {
+        .search-container {
+            margin-left: 5px;
+        }
+        .filter-container {
+            display: none;
+        }
+    }
     @media (min-width: 600px) and (pointer: coarse) {
+        .search-container {
+            margin-left: 35px;
+        }
         .filter-container {
             width: 95%;
             max-width: 95%;
@@ -64,7 +75,10 @@
             flex-direction: column;
         }
     }
-    @media (min-width: 801px) and (pointer: coarse) {
+    @media (min-width: 960px) and (pointer: coarse) {
+        .search-container {
+            margin-left: 35px;
+        }
         .filter-container {
             width: initial;
             max-width: 95%;

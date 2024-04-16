@@ -25,16 +25,6 @@
 </script>
 
 <style>
-    @media (min-width: 600px) and (pointer: coarse) {
-        .list-labels-container {
-            width: 95%;
-        }
-    }
-    @media (min-width: 801px) and (pointer: coarse) {
-        .list-labels-container {
-            width: initial;
-        }
-    }
     .list-labels-container {
         height: 27px;
         position: fixed;
@@ -42,6 +32,33 @@
         display: grid;
         grid-template-columns: minmax(200px, 500px) 50px 85px 100px 120px;
         transition: background-color var(--color-animation-timing) ease, color var(--color-animation-timing) ease;
+    }
+    @media (min-width:320px) and (pointer: coarse) {
+        .list-labels-container {
+            grid-template-columns: minmax(200px, 500px) 50px 120px;
+            width: 95%;
+        }
+        .rating, .type {
+            display: none;
+        }
+    }
+    @media (min-width: 600px) and (pointer: coarse) {
+        .list-labels-container {
+            grid-template-columns: minmax(200px, 500px) 50px 85px 100px 120px;
+            width: 95%;
+        }
+        .rating, .type {
+            display: block;
+        }
+    }
+    @media (min-width: 960px) and (pointer: coarse) {
+        .list-labels-container {
+            grid-template-columns: minmax(200px, 500px) 50px 85px 100px 120px;
+            width: initial;
+        }
+        .rating, .type {
+            display: block;
+        }
     }
 
     .list-labels-item {
@@ -78,13 +95,13 @@
     <div class="list-labels-item list-labels-item-border">
         Link
     </div>
-    <div class="list-labels-item list-labels-item-border can-sort {stage1 == "r" ? "active" : "" }" on:click={() => handleSort("r")} aria-hidden="true">
+    <div class="rating list-labels-item list-labels-item-border can-sort {stage1 == "r" ? "active" : "" }" on:click={() => handleSort("r")} aria-hidden="true">
         Rating
         {#if stage1 == "r" && stage2 == ""} <ArrowUp />
         {:else if stage2 == "r"} <ArrowDown />
         {/if}
     </div>
-    <div class="list-labels-item list-labels-item-border">
+    <div class="type list-labels-item list-labels-item-border">
         Type
     </div>
     <div class="list-labels-item can-sort {stage1 == "p" ? "active" : "" }" on:click={() => handleSort("p")} aria-hidden="true">

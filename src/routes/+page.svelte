@@ -30,7 +30,7 @@
         width: 100vw;
         max-height: 100vh;
     }
-    @media (min-width:600px) and (pointer: coarse) {
+    @media (min-width:320px) and (pointer: coarse) {
         #app-container {
             display: flex;
             justify-content: center;

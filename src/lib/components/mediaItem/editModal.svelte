@@ -223,6 +223,49 @@
     .edit-dialog:has(:is(.drag-zone-enabled, .drag-zone-active)) {
         outline: 1px dashed var(--accent-color-disabled);
     }
+    
+    @media (min-width: 320px) and (pointer: coarse) {
+        .edit-dialog {
+            height: 505px;
+            padding: 30px 10px 12px 10px;
+        }
+        .layer1 {
+            height: 300px;
+        }
+        .layer1-left {
+            margin-top: 25px;
+            width: 35%;
+        }
+        .layer1-right {
+            width: 63%;
+        }
+        .media-delete-button {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+    }
+    @media (min-width: 600px) and (pointer: coarse) {
+        .edit-dialog {
+            height: 435px;
+            padding: 30px 30px 12px 30px;
+        }
+        .layer1 {
+            height: 225px;
+        }
+        .layer1-left {
+            margin-top: 0px;
+            width: 27%;
+        }
+        .layer1-right {
+            width: 69%;
+        }
+        .media-delete-button {
+            position: absolute;
+            right: 30px;
+            bottom: 14px;
+        }
+    }
 </style>
 
 <dialog class="edit-dialog" bind:this={dialogRef} on:cancel={close} on:dragenter={() => handleDrag(0)} on:dragleave={() => handleDrag(0)} on:drop|preventDefault={(e) => handleDrop(e, 0)} on:dragover|preventDefault>

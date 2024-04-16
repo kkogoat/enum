@@ -144,11 +144,6 @@
         border-radius: 50px;
         text-align: left
     }
-    @media (min-width: 600px) and (pointer: coarse) {
-        .add-button {
-            padding-left: 11px;
-        }
-    }
     .cancel-button {
         background-color: #b41010;
     }
@@ -203,6 +198,45 @@
     }
     .add-dialog:has(:is(.drag-zone-enabled, .drag-zone-active)) {
         outline: 1px dashed var(--accent-color-disabled);
+    }
+
+    @media (min-width: 320px) and (pointer: coarse) {
+        .add-dialog {
+            height: 505px;
+            padding: 30px 10px 12px 10px;
+        }
+        .layer1 {
+            height: 300px;
+        }
+        .layer1-left {
+            margin-top: 25px;
+            width: 35%;
+        }
+        .layer1-right {
+            width: 63%;
+        }
+        .add-button {
+            padding-left: 11px;
+        }
+    }
+    @media (min-width: 600px) and (pointer: coarse) {
+        .add-dialog {
+            height: 435px;
+            padding: 30px 30px 12px 30px;
+        }
+        .layer1 {
+            height: 225px;
+        }
+        .layer1-left {
+            margin-top: 0px;
+            width: 27%;
+        }
+        .layer1-right {
+            width: 69%;
+        }
+        .add-button {
+            padding-left: 11px;
+        }
     }
 </style>
 
