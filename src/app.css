@@ -86,7 +86,6 @@ html {
 body {
     margin: 0px;
     color: var(--text-color);
-    overflow-y: scroll;
     overflow-x: hidden;
 }
 

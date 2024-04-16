@@ -41,6 +41,11 @@
         }
     }
 
+    // HANDLE DIALOG OPEN
+    function handleDialogOpen() {
+        dialogRef.showModal();
+    }
+
     // HANDLE DIALOG CLOSE
     function handleDialogClose() {
         dialogRef.close();
@@ -138,6 +143,11 @@
         padding-top: 7px;
         border-radius: 50px;
         text-align: left
+    }
+    @media (min-width: 600px) and (pointer: coarse) {
+        .add-button {
+            padding-left: 11px;
+        }
     }
     .cancel-button {
         background-color: #b41010;
@@ -282,6 +292,6 @@
     </form>
 </dialog>
 
-<button class="add-button" on:click={() => dialogRef.showModal()}>
+<button class="add-button" on:click={handleDialogOpen}>
     +
 </button>
