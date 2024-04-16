@@ -181,6 +181,13 @@ dialog[open] {
     animation: dropdown .2s ease-in forwards;
 }
 
+@media (pointer: coarse) {
+    dialog[open] {
+        margin-top: 10vh;
+        animation: none;
+    }
+}
+
 dialog::backdrop {
     background-color: var(--background-color-disabled);
     opacity: .65;
