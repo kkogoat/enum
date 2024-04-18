@@ -318,9 +318,10 @@
                         状態:
                         <select name="status" bind:value={status} disabled={disable}>
                             <option></option>
-                            <option selected>Completed</option>
+                            <option>Completed</option>
                             <option>In Progress</option>
                             <option>Planned</option>
+                            <option>Dropped</option>
                         </select>
                     </label>
     

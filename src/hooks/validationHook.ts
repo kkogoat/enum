@@ -20,7 +20,7 @@ const mediaAddSchema = joi.object({
     total_episodes: [joi.number().min(0).max(2147483647), joi.allow(null)],
     rating: [joi.number().min(0).max(10), joi.allow(null)],
     description: joi.string().min(0).max(200).allow(null),
-    status: joi.string().valid('','Completed','In Progress','Planned'),
+    status: joi.string().valid('','Completed','In Progress','Planned','Dropped'),
     type: joi.string().valid('', ...PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER)),
     image: joi.object({
         type: joi.string().valid("image/png", "image/jpeg"),
@@ -47,7 +47,7 @@ const importSchema = joi.array().items(joi.object({
     total_episodes: joi.number().min(0).max(2147483647).allow(null),
     rating: joi.number().min(0).max(10).allow(null),
     description: joi.string().min(0).max(200).allow(null),
-    status: joi.string().valid('','Completed','In Progress','Planned'),
+    status: joi.string().valid('','Completed','In Progress','Planned','Dropped'),
     type: joi.string().valid('', ...PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER)),
     image: joi.any()
 }));
