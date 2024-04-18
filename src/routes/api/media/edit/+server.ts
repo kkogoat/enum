@@ -1,3 +1,4 @@
+import { PUBLIC_DEMO } from "$env/static/public";
 import Media from "$lib/server/db/models/media";
 import { log } from "$lib/server/util/loggerUtil";
 import { writeFileSync, unlink } from "fs";
@@ -42,13 +43,15 @@ export const PUT = async ({ request, locals }) => {
     }
 
     // EDIT SELECTED MEDIA
-    const image = form.get("image") as File;
-    let image_name = undefined;
-    if(image) {
-        image_name = `${crypto.randomUUID()}${extname(image.name)}`;
-        writeFileSync(`covers/${image_name}`, Buffer.from(await image.arrayBuffer()));
-        body["image"] = image_name;
+    let image_name = null;
+    if(PUBLIC_DEMO !== "true") {
+        const image = form.get("image") as File;
+        if(image) {
+            image_name = `${crypto.randomUUID()}${extname(image.name)}`;
+            writeFileSync(`covers/${image_name}`, Buffer.from(await image.arrayBuffer()));
+        }
     }
+    body["image"] = image_name;
     delete(body["id"]);
     let old_image = check.image;
     Media.update(

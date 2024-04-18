@@ -36,13 +36,15 @@ export const POST = async ({ request, locals }) => {
     }
 
     // UPLOAD IMAGE, THEN ADD NEW MEDIA TO MODEL
-    const image = form.get("image") as File;
-    let image_name = undefined;
-    if(image) {
-        image_name = `${crypto.randomUUID()}${extname(image.name)}`;
-        writeFileSync(`covers/${image_name}`, Buffer.from(await image.arrayBuffer()));
-        body["image"] = image_name;
+    let image_name = null;
+    if(PUBLIC_DEMO !== "true") {
+        const image = form.get("image") as File;
+        if(image) {
+            image_name = `${crypto.randomUUID()}${extname(image.name)}`;
+            writeFileSync(`covers/${image_name}`, Buffer.from(await image.arrayBuffer()));
+        }
     }
+    body["image"] = image_name;
     const instance = await Media.create(body);
     log("media", `successfully added ${body.title} to ${body.username}`);
 
