@@ -27,6 +27,11 @@ export const filteredListContext = derived([listContext, filterContext], ([$list
         result = result.filter((item: any) => $filterContext.type[item.type]);
     }
 
+    // STATUS FILTER
+    if($filterContext.status && Object.keys($filterContext.status).length) {
+        result = result.filter((item: any) => $filterContext.status[item.status]);
+    }
+
     // COLUMN SORTS
     if($filterContext.sort && Object.keys($filterContext.sort).length) {
         let key = Object.keys($filterContext.sort)[0];

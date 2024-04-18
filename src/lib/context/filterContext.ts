@@ -26,6 +26,14 @@ function createFilterContext(filters: any) {
             return filters;
         });
     }
+
+    // STATUS FITLER
+    function status(input: any) {
+        update((filters) => {
+            filters.status = input;
+            return filters;
+        });
+    }
     
     // SORTING OPTIONS
     function sort(input: any) {
@@ -35,7 +43,7 @@ function createFilterContext(filters: any) {
         });
     }
 
-    return { subscribe, search, alpha, type, sort }
+    return { subscribe, search, alpha, type, status, sort }
 }
 
 export const filterContext = createFilterContext({});

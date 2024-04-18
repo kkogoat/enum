@@ -1,36 +1,38 @@
 <script lang="ts">
-	import { PUBLIC_ALLOWED_TYPES, PUBLIC_ALLOWED_TYPES_DELIMITER } from "$env/static/public";
-    let types: Array<string> = PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER);
-    types.push('');
-    let typeBitMap: any = {};
+    let statuses: Array<string> = ["In Progress", "Completed", "Planned", "Dropped"]
 
-    // TYPES FILTER
-	import { filterContext } from "$lib/context/filterContext";
-    function toggleBitMap(type: string) {
-        if(typeBitMap[type]) {
-            delete(typeBitMap[type]);
+    // STATUSES FILTER
+    let statusBitMap: any = {};
+    import { filterContext } from "$lib/context/filterContext";
+    function toggleBitMap(status: string) {
+        if(statusBitMap[status]) {
+            delete statusBitMap[status];
         } else {
-            typeBitMap[type] = 1;
+            let current = Object.keys(statusBitMap);
+            if(current.length) {
+                (document.getElementById(current[0]) as HTMLInputElement).checked = false;
+            }
+            statusBitMap = {};
+            statusBitMap[status] = 1;
         }
-        filterContext.type(typeBitMap);
+        filterContext.status(statusBitMap);
     }
 
     // RESET
     function handleReset() {
-        typeBitMap = {}
-        filterContext.type(typeBitMap);
-        for (let step = 0; step < types.length; step++) {
-            (document.getElementById(types[step] ? types[step] : 'Unclassified') as HTMLInputElement).checked = false;
+        statusBitMap = {}
+        filterContext.status(statusBitMap);
+        for (let step = 0; step < statuses.length; step++) {
+            (document.getElementById(statuses[step]) as HTMLInputElement).checked = false;
         }
     }
 </script>
 
 <style>
-    .type-filter-container {
+    .status-filter-container {
         display: flex;
         gap: 5px;
         flex-wrap: wrap;
-        margin-bottom: 6px;
     }
     button {
         border-radius: unset;
@@ -65,11 +67,11 @@
     }
 </style>
 
-<div class="type-filter-container">
-    {#each types as item, index}
+<div class="status-filter-container">
+    {#each statuses as item, index}
         <div>
-            <input id={item ? item : 'Unclassified'} name={item ? item : 'Unclassified'} type="checkbox" on:change={() => toggleBitMap(item)}/>
-            <label for={item ? item : 'Unclassified'}>{item ? item : 'Unclassified'}</label>
+            <input id={item} name={item} type="checkbox" on:change={() => toggleBitMap(item)}/>
+            <label for={item}>{item}</label>
         </div>
     {/each}
     <button on:click={handleReset}>reset</button>

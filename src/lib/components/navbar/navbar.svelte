@@ -4,6 +4,7 @@
 	import Search from "./search.svelte";
 	import AlphaFilter from "./alphaFilter.svelte";
 	import TypeFilter from "./typeFilter.svelte";
+	import StatusFilter from "./statusFilter.svelte";
 
     let dialogRef: HTMLDialogElement;
     function handleLogout() {
@@ -104,5 +105,6 @@
     <div class="filter-container">
         <AlphaFilter />
         <TypeFilter />
+        <StatusFilter />
     </div>
 </nav>
