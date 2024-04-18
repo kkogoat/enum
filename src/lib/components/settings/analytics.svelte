@@ -5,7 +5,8 @@
     // TYPES & STATS INITIALIZATION
     let types = PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER);
     types.push(""); // Uncategorized Entries
-    let stats = ["Total Media", "Total Episodes", "Average Rating", ...types];
+    let statuses = ["In Progress", "Completed", "Planned", "Dropped"];
+    let stats = ["Total Media", "Total Episodes", "Average Rating", ...statuses, ...types];
     let vars: any = new Array();
 
     // Analytics Calculation
@@ -23,9 +24,13 @@
             }
         }
         vars[2] = Math.round((total / entries_with_ratings) * 10) / 10;
+        // Status Count
+        for(let i = 0; i < statuses.length; i++) {
+            vars[i+3] = $listContext.reduce((a: any, b: any) => a + (b.status == statuses[i] ? 1 : 0), 0);
+        }
         // Types count
         for(let i = 0; i < types.length; i++) {
-            vars[i+3] = $listContext.reduce((a: any, b: any) => a + (b.type == types[i] ? 1 : 0), 0);
+            vars[i+7] = $listContext.reduce((a: any, b: any) => a + (b.type == types[i] ? 1 : 0), 0);
         }
         stats[stats.length-1] = "Unclassified";
     } else {
