@@ -1,6 +1,6 @@
 import sequelize from "$lib/server/db/db";
 import { log } from "$lib/server/util/loggerUtil";
-import { authenticateToken } from "./hooks/authHook";
+import { authorize } from "./hooks/authHook";
 import { validator } from "./hooks/validationHook";
 
 /** @type {import('@sveltejs/kit').HandleServerError} */
@@ -11,43 +11,23 @@ export async function handleError({ error, event, status, message }) {
     }
 }
 
-const protectedPath: {[key: string]: any} = {
-    // AUTH
-    '/api/auth/refresh': 0,
-    '/api/auth/login': 0,
-    '/api/auth/logout': 1,
-    '/api/auth/signup': 0,
-    '/api/auth/change': 1,
-    '/api/auth/get-devices': 1,
-    '/api/auth/logout-device': 1,
-    
-    // MEDIA
-    '/api/media/add': 1,
-    '/api/media/delete': 1,
-    '/api/media/edit': 1,
-    '/api/media/get-list': 1,
-    '/api/media/import': 1,
-}
-
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
 
-    // Protected Path
-    if(protectedPath[event.url.pathname]) {
-        // CHECK IF ACCESS TOKEN EXISTS
-        const bearer = event.request.headers.get("authorization");
-        if(!bearer) return new Response(JSON.stringify("No Access Token Provided"), {status: 302, headers: { Location: '/' }});
-
-        // IF ACCESS TOKEN EXISTS -> HANDLE
-        const access_result = await authenticateToken(bearer) as any as Response;
-        if(access_result.ok) {
-            log('auth', `Authorized ${event.url.pathname} request`);
-            event.locals.username = (await access_result.json()).username;
-        } else if(access_result.status == 401) {
-            log(`auth`, `Rejected ${event.url.pathname} request`);
-            return new Response(JSON.stringify("Expired Token"),  {status: 401});
-        } else {
-            return new Response(JSON.stringify("Unprocessable Token"), {status: 422});
+    // AUTH TOKEN VALIDATION
+    const auth_token_response: Response | null = authorize(event.url.pathname, event.request.clone());
+    if(auth_token_response) {
+        switch(auth_token_response.status) {
+            case 302: // No Token Redirect
+            case 401: // Unauthorized Request
+            case 422: // Unprocessable Token
+            case 500: // Internal Server Error
+                return auth_token_response;
+            case 200: // Authorized Request
+                event.locals.username = await auth_token_response.text();
+                break;
+            default:
+                break;
         }
     }
 
