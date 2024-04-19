@@ -17,7 +17,7 @@ export const POST = async ({ request, locals }) => {
 
     // MAX ENTRIES
     if(envPublic.PUBLIC_DEMO === "true") {
-        let maxEntries = parseInt(envPublic.PUBLIC_DEMO_MAX_ENTRIES);
+        let maxEntries = parseInt(envPublic.PUBLIC_DEMO_MAX_ENTRIES as string);
         const num = (await Media.findAll({where: {username: body.username}, raw: true})).length;
         if(num >= maxEntries) return new Response(JSON.stringify("Max Entries Reached"), {status: 405});
     }

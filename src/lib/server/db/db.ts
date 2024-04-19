@@ -43,7 +43,7 @@ if(envPublic.PUBLIC_DEMO === "true") {
     const instance = await User.findOne({where: {username: envPublic.PUBLIC_DEMO_ACC}});
     if(!instance) {
         log("db", `created demo account ${envPublic.PUBLIC_DEMO_ACC}`)
-        const body = {username: envPublic.PUBLIC_DEMO_ACC.toLowerCase(), password: await bcrypt.hash(envPublic.PUBLIC_DEMO_PWD, 10)};
+        const body = {username: (envPublic.PUBLIC_DEMO_ACC as string).toLowerCase(), password: await bcrypt.hash(envPublic.PUBLIC_DEMO_PWD as string, 10)};
         await User.create(body)
     }
 }
