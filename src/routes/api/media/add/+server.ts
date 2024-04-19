@@ -1,4 +1,4 @@
-import { PUBLIC_DEMO, PUBLIC_DEMO_MAX_ENTRIES } from '$env/static/public';
+import { env as envPublic } from "$env/dynamic/public"; 
 import Media from '$lib/server/db/models/media.js';
 import { log } from '$lib/server/util/loggerUtil.js';
 import { writeFileSync } from 'fs';
@@ -16,8 +16,8 @@ export const POST = async ({ request, locals }) => {
     body["username"] = locals.username;
 
     // MAX ENTRIES
-    if(PUBLIC_DEMO === "true") {
-        let maxEntries = parseInt(PUBLIC_DEMO_MAX_ENTRIES);
+    if(envPublic.PUBLIC_DEMO === "true") {
+        let maxEntries = parseInt(envPublic.PUBLIC_DEMO_MAX_ENTRIES);
         const num = (await Media.findAll({where: {username: body.username}, raw: true})).length;
         if(num >= maxEntries) return new Response(JSON.stringify("Max Entries Reached"), {status: 405});
     }
@@ -37,7 +37,7 @@ export const POST = async ({ request, locals }) => {
 
     // UPLOAD IMAGE, THEN ADD NEW MEDIA TO MODEL
     let image_name = null;
-    if(PUBLIC_DEMO !== "true") {
+    if(envPublic.PUBLIC_DEMO !== "true") {
         const image = form.get("image") as File;
         if(image) {
             image_name = `${crypto.randomUUID()}${extname(image.name)}`;

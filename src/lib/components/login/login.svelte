@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_DEMO } from "$env/static/public";
+	import { env as envPublic } from "$env/dynamic/public"; 
 	import { onMount } from "svelte";
     import VisOff from "$lib/assets/visOff.svelte";
     import VisOn from "$lib/assets/visOn.svelte";
@@ -154,7 +154,7 @@
             on:invalid={() => passwordRef.setCustomValidity(`Alpha: a-z, A-Z\nDigit: 0-9\nSpecial: !@#$%^&*`)}
             disabled={disable}
         >
-        {#if PUBLIC_DEMO !== "true"}<div class="signup-link">ユーザーではない？<a href="/signup">登録</a></div>{/if}
+        {#if envPublic.PUBLIC_DEMO !== "true"}<div class="signup-link">ユーザーではない？<a href="/signup">登録</a></div>{/if}
 
         <!-- SUBMIT -->
         <button 

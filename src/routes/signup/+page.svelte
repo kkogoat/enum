@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { PUBLIC_DEMO } from "$env/static/public";
+    import { env as envPublic } from "$env/dynamic/public"; 
 	import Signup from "$lib/components/signup/signup.svelte";
 	import ThemeToggle from "$lib/components/theme/themeToggle.svelte";
 	import { authContext } from "$lib/context/authContext";
@@ -9,7 +9,7 @@
     let loading = true;
     onMount(async () => {
         await authContext.autoLogin();
-        if(PUBLIC_DEMO === "true" || $authContext) {
+        if(envPublic.PUBLIC_DEMO === "true" || $authContext) {
             window.location.replace("/");
         } else {
             loading = false;
@@ -17,7 +17,7 @@
     })
 </script>
 
-{#if PUBLIC_DEMO != "true" && !loading}
+{#if envPublic.PUBLIC_DEMO != "true" && !loading}
     <ThemeToggle />
     <Signup />
 {/if}

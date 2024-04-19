@@ -1,5 +1,5 @@
 import { generateTokens, jwtErrorHandling } from "$lib/server/util/authUtil.js";
-import { REFRESH_TOKEN_SECRET } from "$env/static/private";
+import { env } from "$env/dynamic/private"; 
 import { log } from "$lib/server/util/loggerUtil.js";
 import Device from "$lib/server/db/models/device.js";
 import jwt from "jsonwebtoken";
@@ -13,11 +13,11 @@ export const GET = async ({ cookies }) => {
     if(!refresh) return new Response(JSON.stringify("No Required Cookie"), {status: 400});
 
     // IF REFRESH EXISTS, VERIFY
-    const refresh_result = await jwt.verify(refresh, REFRESH_TOKEN_SECRET, async (err, user) => {
+    const refresh_result = await jwt.verify(refresh, env.REFRESH_TOKEN_SECRET, async (err, user) => {
         // ERRORS?
         if(err) {
             if(err.name == "TokenExpiredError") {
-                const payload = await jwt.verify(refresh, REFRESH_TOKEN_SECRET, {ignoreExpiration: true});
+                const payload = await jwt.verify(refresh, env.REFRESH_TOKEN_SECRET, {ignoreExpiration: true});
                 await Device.destroy({where: {id: (payload as JwtPayload).device_id}});
                 cookies.delete("session", {path: '/', httpOnly: true, sameSite: 'strict', secure: true});
             }

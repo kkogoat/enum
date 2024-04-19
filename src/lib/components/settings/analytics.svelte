@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { PUBLIC_ALLOWED_TYPES, PUBLIC_ALLOWED_TYPES_DELIMITER } from "$env/static/public";
+    import { env as envPublic } from "$env/dynamic/public"; 
     import { listContext } from "$lib/context/listContext";
 
     // TYPES & STATS INITIALIZATION
-    let types = PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER);
+    let types = envPublic.PUBLIC_ALLOWED_TYPES.split(envPublic.PUBLIC_ALLOWED_TYPES_DELIMITER);
     types.push(""); // Uncategorized Entries
     let statuses = ["In Progress", "Completed", "Planned", "Dropped"];
     let stats = ["Total Media", "Total Episodes", "Average Rating", ...statuses, ...types];

@@ -1,4 +1,4 @@
-import { PUBLIC_DEMO } from "$env/static/public";
+import { env as envPublic } from "$env/dynamic/public"; 
 import Media from "$lib/server/db/models/media";
 import { log } from "$lib/server/util/loggerUtil";
 import { writeFileSync, unlink } from "fs";
@@ -44,7 +44,7 @@ export const PUT = async ({ request, locals }) => {
 
     // EDIT SELECTED MEDIA
     let image_name = null;
-    if(PUBLIC_DEMO !== "true") {
+    if(envPublic.PUBLIC_DEMO !== "true") {
         const image = form.get("image") as File;
         if(image) {
             image_name = `${crypto.randomUUID()}${extname(image.name)}`;

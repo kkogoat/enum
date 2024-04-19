@@ -1,4 +1,4 @@
-import { PUBLIC_DEMO } from "$env/static/public";
+import { env as envPublic } from "$env/dynamic/public"; 
 import User from "$lib/server/db/models/user.js";
 import { log } from "$lib/server/util/loggerUtil.js";
 import bcrypt from "bcrypt";
@@ -9,7 +9,7 @@ export const PUT = async({ request, locals }) => {
     let username = locals.username;
     let newPass = await bcrypt.hash(body.newPass, 10);
 
-    if(PUBLIC_DEMO === "true") {
+    if(envPublic.PUBLIC_DEMO === "true") {
         return new Response(JSON.stringify({message: "Cannot use this feature during demo"}), {status: 405});
     }
     

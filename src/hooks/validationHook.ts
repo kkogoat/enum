@@ -1,4 +1,4 @@
-import { PUBLIC_ALLOWED_TYPES, PUBLIC_ALLOWED_TYPES_DELIMITER } from "$env/static/public";
+import { env as envPublic } from "$env/dynamic/public"; 
 import { log } from "$lib/server/util/loggerUtil";
 import joi from "joi";
 
@@ -21,7 +21,7 @@ const mediaAddSchema = joi.object({
     rating: [joi.number().min(0).max(10), joi.allow(null)],
     description: joi.string().min(0).max(200).allow(null),
     status: joi.string().valid('','Completed','In Progress','Planned','Dropped'),
-    type: joi.string().valid('', ...PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER)),
+    type: joi.string().valid('', ...envPublic.PUBLIC_ALLOWED_TYPES.split(envPublic.PUBLIC_ALLOWED_TYPES_DELIMITER)),
     image: joi.object({
         type: joi.string().valid("image/png", "image/jpeg"),
         size: joi.number().min(1).max(5242880).messages({
@@ -48,7 +48,7 @@ const importSchema = joi.array().items(joi.object({
     rating: joi.number().min(0).max(10).allow(null),
     description: joi.string().min(0).max(200).allow(null),
     status: joi.string().valid('','Completed','In Progress','Planned','Dropped'),
-    type: joi.string().valid('', ...PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER)),
+    type: joi.string().valid('', ...envPublic.PUBLIC_ALLOWED_TYPES.split(envPublic.PUBLIC_ALLOWED_TYPES_DELIMITER)),
     image: joi.any()
 }));
 

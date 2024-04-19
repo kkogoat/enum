@@ -1,4 +1,4 @@
-import { REFRESH_TOKEN_SECRET } from '$env/static/private';
+import { env } from "$env/dynamic/private"; 
 import Device from '$lib/server/db/models/device.js';
 import { log } from '$lib/server/util/loggerUtil.js';
 import bcrypt from "bcrypt";
@@ -13,7 +13,7 @@ export const POST = async ({ locals, cookies }) => {
     if(!refresh) return new Response(JSON.stringify("Already Logged Out"), {status: 400});
 
     // VERIFY REFRESH
-    const result = await jwt.verify(refresh, REFRESH_TOKEN_SECRET, async (err, user) => {
+    const result = await jwt.verify(refresh, env.REFRESH_TOKEN_SECRET, async (err, user) => {
         const name: string = (user as JwtPayload).username == username ? username : "";
         const device_id: string = (user as JwtPayload).device_id;
 

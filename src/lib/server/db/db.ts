@@ -1,5 +1,5 @@
-import { DB_NAME, DB_USER, DB_PWD, DB_HOST, DB_PORT } from '$env/static/private';
-import { PUBLIC_DEMO, PUBLIC_DEMO_ACC, PUBLIC_DEMO_PWD } from '$env/static/public';
+import { env } from "$env/dynamic/private";
+import { env as envPublic } from "$env/dynamic/public";
 import { Sequelize } from "sequelize-typescript";
 import User from './models/user.js';
 import Media from "./models/media.js";
@@ -9,12 +9,12 @@ import bcrypt from "bcrypt";
 
 // DB CONFIG
 const sequelize = new Sequelize ({
-    database: DB_NAME,
+    database: env.DB_NAME,
     dialect: 'mysql',
-    username: DB_USER,
-    password: DB_PWD,
-    host: DB_HOST,
-    port: Number(DB_PORT),
+    username: env.DB_USER,
+    password: env.DB_PWD,
+    host: env.DB_HOST,
+    port: Number(env.DB_PORT),
     logging: false,
     // logging: (msg) => {
     //     log("db", msg)
@@ -39,11 +39,11 @@ try {
 }
 
 // DEMO ACCOUNT
-if(PUBLIC_DEMO === "true") {
-    const instance = await User.findOne({where: {username: PUBLIC_DEMO_ACC}});
+if(envPublic.PUBLIC_DEMO === "true") {
+    const instance = await User.findOne({where: {username: envPublic.PUBLIC_DEMO_ACC}});
     if(!instance) {
-        log("db", `created demo account ${PUBLIC_DEMO_ACC}`)
-        const body = {username: PUBLIC_DEMO_ACC.toLowerCase(), password: await bcrypt.hash(PUBLIC_DEMO_PWD, 10)};
+        log("db", `created demo account ${envPublic.PUBLIC_DEMO_ACC}`)
+        const body = {username: envPublic.PUBLIC_DEMO_ACC.toLowerCase(), password: await bcrypt.hash(envPublic.PUBLIC_DEMO_PWD, 10)};
         await User.create(body)
     }
 }

@@ -1,5 +1,5 @@
-import { ACC_MAX_LIMIT, ACC_MAX_NUMBER } from '$env/static/private';
-import { PUBLIC_DEMO } from '$env/static/public';
+import { env } from "$env/dynamic/private";
+import { env as envPublic } from "$env/dynamic/public";
 import User from '$lib/server/db/models/user.js';
 import { log } from '$lib/server/util/loggerUtil.js';
 import bcrypt from "bcrypt";
@@ -7,14 +7,14 @@ import bcrypt from "bcrypt";
 /** @type {import('./$types').RequestHandler} */
 export const POST = async ({ request }) => {
     // ALLOW NEW ACCOUNTS ENV
-    if(PUBLIC_DEMO === "true") {
+    if(envPublic.PUBLIC_DEMO === "true") {
         return new Response(JSON.stringify({message: "Invalid Method"}), {status: 405});
     }
 
     // MAX # OF ACCOUNTS ENV
-    if(ACC_MAX_LIMIT == "true") {
+    if(env.ACC_MAX_LIMIT === "true") {
         let numAccs = (await User.findAll({raw: true})).length;
-        if(numAccs >= parseInt(ACC_MAX_NUMBER)) {
+        if(numAccs >= parseInt(env.ACC_MAX_NUMBER)) {
             return new Response(JSON.stringify({message: "Invalid Method: Max # of accounts reached"}), {status: 405});
         }
     }

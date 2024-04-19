@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN_SECRET } from "$env/static/private";
+import { env } from "$env/dynamic/private"; 
 import { jwtErrorHandling } from "$lib/server/util/authUtil";
 import jwt from "jsonwebtoken";
 
@@ -7,7 +7,7 @@ export const authenticateToken = async (header: string) => {
     const access = header.split(' ')[1];
     
     // VERIFY TOKEN
-    return await jwt.verify(access, ACCESS_TOKEN_SECRET, async (err, user) => {
+    return await jwt.verify(access, env.ACCESS_TOKEN_SECRET, async (err, user) => {
         // ERRORS?
         if(err) return await jwtErrorHandling(err);
 

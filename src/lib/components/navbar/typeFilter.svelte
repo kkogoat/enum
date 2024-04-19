@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { PUBLIC_ALLOWED_TYPES, PUBLIC_ALLOWED_TYPES_DELIMITER } from "$env/static/public";
-    let types: Array<string> = PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER);
+    import { env as envPublic } from "$env/dynamic/public"; 
+    let types: Array<string> = envPublic.PUBLIC_ALLOWED_TYPES.split(envPublic.PUBLIC_ALLOWED_TYPES_DELIMITER);
     types.push('');
     let typeBitMap: any = {};
 

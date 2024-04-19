@@ -1,4 +1,4 @@
-import { REFRESH_TOKEN_SECRET } from '$env/static/private';
+import { env } from "$env/dynamic/private"; 
 import Device from '$lib/server/db/models/device.js';
 import { jwtErrorHandling } from '$lib/server/util/authUtil.js';
 import { log } from '$lib/server/util/loggerUtil.js';
@@ -13,7 +13,7 @@ export const POST = async({ request, locals, cookies }) => {
     // CHECK IF LOGGING OUT YOUR CURRENT DEVICE
     const refresh = cookies.get("session");
     if(!refresh) return new Response(JSON.stringify("No Required Cookie"), {status: 400});
-    const result = await jwt.verify(refresh, REFRESH_TOKEN_SECRET, async (err, payload) => {
+    const result = await jwt.verify(refresh, env.REFRESH_TOKEN_SECRET, async (err, payload) => {
         // ERRORS?
         if(err) return jwtErrorHandling(err);
 

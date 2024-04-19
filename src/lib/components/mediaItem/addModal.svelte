@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_ALLOWED_TYPES, PUBLIC_ALLOWED_TYPES_DELIMITER } from '$env/static/public';
+	import { env as envPublic } from "$env/dynamic/public"; 
     import ErrorModal from '$lib/components/error/errorModal.svelte';
    
     let dialogRef: HTMLDialogElement;
@@ -299,7 +299,7 @@
                         媒体:
                         <select name="type" bind:value={type} disabled={disable}>
                             <option></option>
-                            {#each PUBLIC_ALLOWED_TYPES.split(PUBLIC_ALLOWED_TYPES_DELIMITER) as item}
+                            {#each envPublic.PUBLIC_ALLOWED_TYPES.split(envPublic.PUBLIC_ALLOWED_TYPES_DELIMITER) as item}
                                 <option>{item}</option>
                             {/each}
                         </select>

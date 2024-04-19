@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { PUBLIC_ALPHA_FILTER } from "$env/static/public";
+    import { env as envPublic } from "$env/dynamic/public"; 
 
-    let charMap: string = PUBLIC_ALPHA_FILTER;
+    let charMap: string = envPublic.PUBLIC_ALPHA_FILTER;
     let alphaBitMap: any = {};
 
     // ALPHA FILTER
