@@ -31,13 +31,18 @@ export async function handle({ event, resolve }) {
         }
     }
 
-    // JOI Validation
-    const validatorResult = await validator(event.url.pathname, event.request.clone());
-    if(validatorResult) {
-        if(validatorResult.status) {
-            return new Response(JSON.stringify(validatorResult), {status: 302, headers: { Location: '/' }});
+    // JOI BODY VALIDATION
+    const joi_validation_response: Response | null = await validator(event.url.pathname, event.request.clone());
+    if(joi_validation_response) {
+        switch(joi_validation_response.status) {
+            case 400: // Bad Validation
+                return new Response(JSON.stringify({details: [{message: await joi_validation_response.text()}]}), {status: 400});
+            case 422: // Unprocessable Data
+                return new Response(JSON.stringify({details: [{message: await joi_validation_response.text()}]}), {status: 302, headers: { Location: '/' }});
+            case 200:
+            default:
+                break;
         }
-        return new Response(JSON.stringify(validatorResult), {status: 400});
     }
 
     // SITE THEME
