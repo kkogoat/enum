@@ -22,9 +22,11 @@ export async function handle({ event, resolve }) {
             case 401: // Unauthorized Request
             case 422: // Unprocessable Token
             case 500: // Internal Server Error
+                log('auth', `Rejected ${event.url.pathname} request`);
                 return auth_token_response;
             case 200: // Authorized Request
                 event.locals.username = await auth_token_response.text();
+                log('auth', `Authorized ${event.url.pathname} request`);
                 break;
             default:
                 break;
@@ -36,10 +38,13 @@ export async function handle({ event, resolve }) {
     if(joi_validation_response) {
         switch(joi_validation_response.status) {
             case 400: // Bad Validation
+                log('joi', `Rejected ${event.url.pathname} request`);
                 return new Response(JSON.stringify({details: [{message: await joi_validation_response.text()}]}), {status: 400});
             case 422: // Unprocessable Data
                 return new Response(JSON.stringify({details: [{message: await joi_validation_response.text()}]}), {status: 302, headers: { Location: '/' }});
-            case 200:
+            case 200: // Validated Request
+                log('joi', `Validated ${event.url.pathname} request`);
+                break;
             default:
                 break;
         }

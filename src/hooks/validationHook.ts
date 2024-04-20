@@ -1,5 +1,4 @@
 import { env as envPublic } from "$env/dynamic/public"; 
-import { log } from "$lib/server/util/loggerUtil";
 import joi from "joi";
 
 const login_schema = joi.object({
@@ -96,12 +95,10 @@ export const validator = async (api_path: string, request: Request): Promise<Res
         // VALIDATE OBJECT & CHECK FOR ERRORS
         const { error } = api_path_to_schema_map[api_path].validate(object_to_validate);
         if(!error) {
-            log('joi', `Validated ${api_path} request`);
             return new Response(`Validated ${api_path} request`, {status: 200});
         }
 
         // ERROR OCCURRED
-        log('joi', `Rejected ${api_path} request ${error}`);
         return new Response(`${error.message}`, {status: 400});
     }
 
