@@ -50,10 +50,8 @@ export async function handle({ event, resolve }) {
         }
     }
 
-    // SITE THEME
+    // REQUEST PROCESSING
     const theme = event.cookies.get("theme");
-
-    // Request Processing
     const response = await resolve(event, {
         transformPageChunk: ({html}) => html.replace('data-theme=""', `data-theme="${theme}"`)
     });
