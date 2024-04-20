@@ -43,7 +43,7 @@
 
     .title {
         font-size: 40px;
-        margin-bottom: 50px;
+        margin-bottom: 20px;
         transition: color var(--color-animation-timing) ease;
     }
 
