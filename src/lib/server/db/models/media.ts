@@ -36,6 +36,7 @@ class Media extends Model<MediaAttributes> {
 
     @Column({
         type: DataType.STRING(100),
+        defaultValue: ""
     })
     declare link: string;
 
@@ -67,12 +68,14 @@ class Media extends Model<MediaAttributes> {
 
     @PrimaryKey
     @Column({
-        type: DataType.STRING(15)
+        type: DataType.STRING(15),
+        defaultValue: ""
     })
     declare type: string;
 
     @Column({
-        type: DataType.STRING(15)
+        type: DataType.STRING(15),
+        defaultValue: ""
     })
     declare status: string;
 
