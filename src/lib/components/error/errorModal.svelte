@@ -33,6 +33,6 @@
 <dialog class="{ok ? "ok-dialog" : "error-dialog"}" bind:this={errorRef}>
     <div class="modal-alignment">
         <div>{errorMessage}</div>
-        <button class="error-dialog-button"on:click={() => errorRef.close()}>はい</button>
+        <button class="error-dialog-button"on:click={() => errorRef.close()}>Okay</button>
     </div>
 </dialog>

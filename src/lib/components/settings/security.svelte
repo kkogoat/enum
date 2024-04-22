@@ -79,7 +79,7 @@
         <input class="change-input" type="password" name="current"
             minlength="8" maxlength="30"
             pattern="^[a-zA-Z0-9!@#$%^&*]+$"
-            placeholder="現在のパスワード"
+            placeholder="Current Password"
             required
             bind:this={currentRef}
             bind:value={current}
@@ -91,7 +91,7 @@
         <input class="change-input" type="password" name="current"
             minlength="8" maxlength="30"
             pattern="^[a-zA-Z0-9!@#$%^&*]+$"
-            placeholder="新しいパスワード"
+            placeholder="New Password"
             required
             bind:this={newRef}
             bind:value={newPass}
@@ -103,7 +103,7 @@
         <input class="change-input" type="password" name="current"
             minlength="8" maxlength="30"
             pattern="^[a-zA-Z0-9!@#$%^&*]+$"
-            placeholder="パスワードの確認"
+            placeholder="Confirm New Password"
             required
             bind:this={confirmRef}
             bind:value={confirm}
@@ -119,7 +119,7 @@
         > {#if disable}
             ...
         {:else}
-            登録する
+            Submit
         {/if}
         </button>
     </form>

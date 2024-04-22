@@ -25,7 +25,7 @@
         showError = false;
         if(password != confirm) {
             showError = true;
-            errorMessage = "パスワードが一致しない";
+            errorMessage = "Passwords do not match";
             setTimeout(() => {
                 password = "";
                 confirm = "";
@@ -39,7 +39,7 @@
                 }
                 if(res.status == 409) {
                     showError = true;
-                    errorMessage = "ユーザー名はすでに存在する";
+                    errorMessage = "Username already exists";
                 }
                 formRef.reset();
                 disable = false;
@@ -110,7 +110,7 @@
     }
 
     .login-link {
-        margin: -12px 0px 0px 8px;
+        margin: -10px 0px 0px 10px;
         transition: color var(--color-animation-timing) ease;
     }
 </style>
@@ -126,7 +126,7 @@
             minlength="4"
             maxlength="15"
             pattern="^[a-zA-Z0-9]+$"
-            placeholder="ユーザー名"
+            placeholder="Username"
             required
             bind:this={usernameRef}
             bind:value={username}
@@ -142,7 +142,7 @@
             minlength="8"
             maxlength="30"
             pattern="^[a-zA-Z0-9!@#$%^&*]+$"
-            placeholder="パスワード"
+            placeholder="Password"
             required
             bind:this={passwordRef}
             bind:value={password}
@@ -158,14 +158,14 @@
             minlength="8"
             maxlength="30"
             pattern="^[a-zA-Z0-9!@#$%^&*]+$"
-            placeholder="パスワードの確認"
+            placeholder="Confirm Password"
             required
             bind:this={confirmRef}
             bind:value={confirm}
             on:invalid={() => confirmRef.setCustomValidity(`Alpha: a-z, A-Z\nDigit: 0-9\nSpecial: !@#$%^&*`)}
             disabled={disable}
         >
-        <div class="login-link">すでに登録済みですか？<a href="/">ログイン</a></div>
+        <div class="login-link">Already a user？<a href="/">login</a></div>
 
         <!-- SUBMIT -->
         <button 
@@ -175,7 +175,7 @@
         > {#if disable}
             ...
         {:else}
-            登録する
+            Signup
         {/if}
         </button>
     </form>

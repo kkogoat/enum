@@ -261,31 +261,31 @@
             <!-- RIGHT COLUMN -->
             <div class="layer1-right">
                 <label for="title">
-                    タイトル:
+                    Title:
                     <input name="title" type="text" minlength="1" maxlength="100" bind:value={title} disabled={disable} required/>
                 </label>
                 <label for="link">
-                    リンク:
+                    Link:
                     <input name="link" type="text" minlength="1" maxlength="100" bind:value={link} disabled={disable}/>
                 </label>
                 <div style="display: flex; justify-content: space-between; flex-wrap: wrap; row-gap: 10px">
                     <label class="label-shorter" for="current-episode">
-                        現在 #:
+                        Current #:
                         <input type="number" name="current-episode" min="0" max="2147483647" bind:value={current_episode} disabled={disable}/>
                     </label>
     
                     <label class="label-shorter" for="total-episode">
-                        全 #:
+                        Total #:
                         <input type="number" name="total-episode" min="0" max="2147483647" bind:value={total_episodes} disabled={disable}/>
                     </label>
     
                     <label class="label-shorter" for="rating">
-                        評価 #:
+                        Rating #:
                         <input type="number" name="rating" min="0" max="10" step="0.1" bind:value={rating} disabled={disable}/>
                     </label>
 
                     <label class="label-shorter" for="status">
-                        状態:
+                        Status:
                         <select name="status" bind:value={status} disabled={disable}>
                             <option></option>
                             <option>Completed</option>
@@ -296,7 +296,7 @@
                     </label>
     
                     <label class="label-shorter" for="type">
-                        媒体:
+                        Type:
                         <select name="type" bind:value={type} disabled={disable}>
                             <option></option>
                             {#each envPublic.PUBLIC_ALLOWED_TYPES.split(envPublic.PUBLIC_ALLOWED_TYPES_DELIMITER) as item}
@@ -311,17 +311,17 @@
 
         <!-- LAYER 2 -->
         <label>
-            筋書き:
+            Description:
             <textarea minlength="1" maxlength="200" bind:value={description} disabled={disable}></textarea>
         </label>
         
         <!-- LAYER 3 -->
         <div style="display:flex;align-items:center;justify-content:center;gap:20px;margin-top:13px;">
             <button disabled={disable || !Boolean(title)}>
-                セーブ
+                Save
             </button>
             <button disabled={disable} class="cancel-button" type="button" on:click={handleDialogClose}>
-                キャンセル
+                Cancel
             </button>
         </div>
     </form>

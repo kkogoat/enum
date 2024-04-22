@@ -67,16 +67,16 @@
 <dialog bind:this={deleteModalRef} class="delete-dialog-prompt">
     <!-- LAYER 1 -->
     <div>
-        本当に滅ぼすつもりですか？
+        Do you really want to delete this？
     </div>
 
     <!-- LAYER 2 -->
     <div class="layer2">
         <button disabled={disable} class="delete-dialog-accept" on:click={handleDeleteMedia}>
-            はい
+            Yes
         </button>
         <button disabled={disable} on:click={() => deleteModalRef.close()}>
-            いいえ
+            No
         </button>
     </div>
 </dialog>

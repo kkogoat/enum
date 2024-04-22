@@ -92,7 +92,7 @@
     .login-error {
         position: absolute;
         transform: translate(0px, 150px);
-        width: 200px;
+        width: 230px;
         margin-top: 10px;
         padding-top: 5px;
         height: 45px;
@@ -115,7 +115,7 @@
     }
 
     .signup-link {
-        margin: -12px 0px 0px 8px;
+        margin: -12px 0px 0px 10px;
         transition: color var(--color-animation-timing) ease;
     }
 </style>
@@ -131,7 +131,7 @@
             minlength="4"
             maxlength="15"
             pattern="^[a-zA-Z0-9]+$"
-            placeholder="ユーザー名"
+            placeholder="Username"
             required
             bind:this={usernameRef}
             bind:value={username}
@@ -147,14 +147,14 @@
             minlength="8"
             maxlength="30"
             pattern="^[a-zA-Z0-9!@#$%^&*]+$"
-            placeholder="パスワード"
+            placeholder="Password"
             required
             bind:this={passwordRef}
             bind:value={password}
             on:invalid={() => passwordRef.setCustomValidity(`Alpha: a-z, A-Z\nDigit: 0-9\nSpecial: !@#$%^&*`)}
             disabled={disable}
         >
-        {#if envPublic.PUBLIC_DEMO !== "true"}<div class="signup-link">ユーザーではない？<a href="/signup">登録</a></div>{/if}
+        {#if envPublic.PUBLIC_DEMO !== "true"}<div class="signup-link">Not a user？<a href="/signup">signup</a></div>{/if}
 
         <!-- SUBMIT -->
         <button 
@@ -164,7 +164,7 @@
         > {#if disable}
             ...
         {:else}
-            ログイン
+            Login
         {/if}
         </button>
     </form>
@@ -181,7 +181,7 @@
 
 {#if showError}
     <div class="login-error">
-        <div>ログインに失敗しました</div>
-        <div>ユーザーが見つかりません</div>
+        <div>Login failed</div>
+        <div>Username/Password are incorrect</div>
     </div>
 {/if}

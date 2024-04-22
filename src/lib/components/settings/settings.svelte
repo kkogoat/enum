@@ -30,7 +30,7 @@
 
     .open-button {
         position: fixed;
-        padding: 5px 20px 5px 20px;
+        padding: 7px 20px 7px 20px;
         border-radius: 50px;
         right: 15px;
         top: 95px;
@@ -43,5 +43,5 @@
 </dialog>
 
 <button class="open-button" on:click={handleOpen}>
-    設定
+    Settings
 </button>

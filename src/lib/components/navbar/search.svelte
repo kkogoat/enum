@@ -30,4 +30,4 @@
     }
 </style>
 
-<input class="search-input" placeholder="サーチ" type="text" bind:value={toSearch} />
+<input class="search-input" placeholder="Search" type="text" bind:value={toSearch} />

@@ -94,7 +94,7 @@
 </style>
 
 <dialog bind:this={dialogRef}></dialog>
-<button class="logout-button" on:click={handleLogout}>ログアウト</button>
+<button class="logout-button" on:click={handleLogout}>Logout</button>
 
 <nav>
     <div class="title"> enum.usagi </div>
