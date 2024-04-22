@@ -35,6 +35,16 @@ docker build -t <name>:<version> .
 
 
 ## Docker Container
+
+Typical Directory Structure for deploying container
+```
+service-folder
+├── enum                    # cloned repository
+├── covers                  # covers folder (created for docker-compose)
+├── logs                    # logs folder   (created for docker-compose)
+└── docker-compose.yaml     # created for running container
+```
+
 ### To build a docker image of enum:
 ```bash
 git clone https://github.com/kkogoat/enum.git
@@ -55,8 +65,3 @@ mkdir ./covers ./logs
 docker-compose up -d
 ```
 4. Connect to your docker instance in your web browser of choice
-
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
