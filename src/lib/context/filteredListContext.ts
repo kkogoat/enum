@@ -14,11 +14,7 @@ export const filteredListContext = derived([listContext, filterContext], ([$list
     if($filterContext.alpha && Object.keys($filterContext.alpha).length) {
         result = result.filter((item: any) => {
             const first = item.title[0].toUpperCase()
-            if(first >= '0' && first <= '9') {
-                return $filterContext.alpha['#'];
-            } else {
-                return $filterContext.alpha[first];
-            }
+            return (first >= '0' && first <= '9') ? $filterContext.alpha['#'] : $filterContext.alpha[first];
         });
     }
 
@@ -36,12 +32,12 @@ export const filteredListContext = derived([listContext, filterContext], ([$list
     if($filterContext.sort && Object.keys($filterContext.sort).length) {
         let key = Object.keys($filterContext.sort)[0];
         let value = $filterContext.sort[key];
-        let t = 1, f = -1;
-        if(value) { t = -1, f = 1};
-        if(key == "title") {
-            f = [t, t = f][0];
+        let t = 1, f = -1; // t = true value, f = false value
+        if(value) { t = -1, f = 1}; // inverse of t & f
+        if(key === "title") {
+            f = [t, t = f][0]; // swapping t & f values
             result.sort((a: any, b: any) => { return a["title"] > b["title"] ? t : f; });
-        } else if(key == "current_episode") {
+        } else if(key === "current_episode") {
             result.sort((a: any, b: any) => {
                 if(a[key] === 0 || a[key] === null) return 1;
                 if(b[key] === 0 || b[key] === null) return -1;
