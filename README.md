@@ -46,11 +46,16 @@ NOTE: Possible features that I may or may not develop
 
 ## Feature Developing
 ### Running dev server
-NOTE: Please take a look at "Node.js Server" section, as this is an extension
-1. Perform same directions as the mentioned section
-2. Instead of running the node command "npm run start", execute "npm run dev"
+NOTE: Please take a look at .env.example file
+
+NOTE: Under the assumption that you have MySQL installed and configured correctly
+1. Clone or download repository
+2. Change into directory of project
+3. Create ".env" configuration file in project directory
+4. Run node commands
 ```bash
-npm run dev             # Runs dev server on localhost:5173
+npm install
+npm run dev
 ```
 
 ## Node.js Server
