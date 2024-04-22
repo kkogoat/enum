@@ -1,4 +1,4 @@
-import { generateTokens, jwtErrorHandling } from "$lib/server/util/authUtil.js";
+import { generateTokens, jwt_error_handling } from "$lib/server/util/authUtil.js";
 import { env } from "$env/dynamic/private"; 
 import { log } from "$lib/server/util/loggerUtil.js";
 import Device from "$lib/server/db/models/device.js";
@@ -21,7 +21,7 @@ export const GET = async ({ cookies }) => {
                 await Device.destroy({where: {id: (payload as JwtPayload).device_id}});
                 cookies.delete("session", {path: '/', httpOnly: true, sameSite: 'strict', secure: true});
             }
-            return jwtErrorHandling(err);
+            return jwt_error_handling(err);
         }
 
         // IF NO ERRORS, CHECK IF SESSION EXISTS

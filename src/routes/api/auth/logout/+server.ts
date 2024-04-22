@@ -1,5 +1,6 @@
 import { env } from "$env/dynamic/private"; 
 import Device from '$lib/server/db/models/device.js';
+import { jwt_error_handling } from "$lib/server/util/authUtil.js";
 import { log } from '$lib/server/util/loggerUtil.js';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -14,6 +15,9 @@ export const POST = async ({ locals, cookies }) => {
 
     // VERIFY REFRESH
     const result = await jwt.verify(refresh, env.REFRESH_TOKEN_SECRET, async (err, user) => {
+        // ERRORS?
+        if(err) return jwt_error_handling(err);
+
         const name: string = (user as JwtPayload).username == username ? username : "";
         const device_id: string = (user as JwtPayload).device_id;
 

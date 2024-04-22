@@ -1,6 +1,6 @@
 import { env } from "$env/dynamic/private"; 
 import Device from '$lib/server/db/models/device.js';
-import { jwtErrorHandling } from '$lib/server/util/authUtil.js';
+import { jwt_error_handling } from '$lib/server/util/authUtil.js';
 import { log } from '$lib/server/util/loggerUtil.js';
 import  jwt from "jsonwebtoken";
 
@@ -15,7 +15,7 @@ export const POST = async({ request, locals, cookies }) => {
     if(!refresh) return new Response(JSON.stringify("No Required Cookie"), {status: 400});
     const result = await jwt.verify(refresh, env.REFRESH_TOKEN_SECRET, async (err, payload) => {
         // ERRORS?
-        if(err) return jwtErrorHandling(err);
+        if(err) return jwt_error_handling(err);
 
         // TEST SAME DEVICE?
         if(device_id == (payload as JwtPayload).device_id) {

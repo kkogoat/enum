@@ -9,12 +9,14 @@ export const generateTokens = (details: {username: string, device_id: string}) =
     return { access_token: access_token, refresh_token: refresh_token };
 }
 
-export const jwtErrorHandling = (err: any) => {
+export const jwt_error_handling = (err: any): Response => {
     switch(err.name) {
         case "NotBeforeError":
         case "TokenExpiredError": // Expired Token
-            return new Response(JSON.stringify(err.message), {status: 401});
-        case "JsonWebTokenError": // Unprocessable Refresh
-            return new Response(JSON.stringify("Bad Refresh Token"), {status: 422});
+            return new Response(err.message, {status: 401});
+        case "JsonWebTokenError": // Unprocessable Token
+            return new Response("Bad Refresh Token", {status: 422});
+        default:
+            return new Response("Server Error", {status: 500});
     }
 }
