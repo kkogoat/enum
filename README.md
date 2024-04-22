@@ -1,3 +1,49 @@
+# Enum - Media Cataloguing
+![Stars](https://img.shields.io/github/stars/kkogoat/enum?logo=github&label=github%20stars&style=for-the-badge)
+![Forks](https://img.shields.io/github/forks/kkogoat/enum?logo=github&label=github%20forks&style=for-the-badge)
+[![DockerPulls](https://img.shields.io/docker/pulls/kkogoat/enum?logo=docker&style=for-the-badge)](https://registry.hub.docker.com/r/kkogoat/enum)
+[![DockerStars](https://img.shields.io/docker/stars/kkogoat/enum?logo=docker&style=for-the-badge)](https://registry.hub.docker.com/r/kkogoat/enum)
+
+[View on Github](https://github.com/kkogoat/enum) | [View on Dockerhub](https://registry.hub.docker.com/r/kkogoat/enum)
+### Table of Contents
+1. [Description](#description)
+1. [Features](#features)
+1. [Roadmap](#roadmap)
+1. [Feature Developing](#feature-developing)
+1. [Node.js Server](#nodejs-server)
+1. [Docker Container](#docker-container)
+
+## Description
+A local web application for cataloguing consumed media. Features Image uploading, multiple users, list export/import, multi-device login, and more. The application also stores all data locally, including uploaded images.
+
+## Features
+### 
+<details> 
+<summary> Features </summary>
+<ul>
+<li> Login/Signup/Change Password of User accounts
+<li> Dark/Light Theme Toggle
+<li> Create/Read/Update/Delete media entries
+<li> Cover Image Uploads & Viewing (images saved locally)
+<li> Search
+<li> List Entry Hyperlinks
+<li> Alphabetical/Types/Status Filters
+<li> Title, Rating, Progress Sorting
+<li> Quick analytics for catalogued media
+<li> Export/Import Catalogue data
+<li> Multi-Device Login & Logout
+</ul>
+</details>
+
+## Roadmap
+NOTE: Possible features that I may or may not develop
+<details> 
+<summary> Roadmap </summary>
+<ul>
+<li>
+</ul>
+</details>
+
 ## Feature Developing
 ### Running dev server
 NOTE: Please take a look at "Node.js Server" section, as this is an extension
@@ -15,7 +61,7 @@ NOTE: Under the assumption that you have MySQL installed and configured correctl
 1. Clone or download repository
 2. Change into directory of project
 3. Create ".env" configuration file in project directory
-3. Run node commands
+4. Run node commands
 ```bash
 npm ci                  # Clean installs node dependencies
 npm run build           # Builds svelte-kit project with node adapter
@@ -55,4 +101,4 @@ mkdir ./covers ./logs
 ```bash
 docker-compose up -d
 ```
-4. Connect to your docker instance in your web browser of choice
+4. Connect to your docker instance
