@@ -1,0 +1,60 @@
+FROM node:21-alpine3.18
+
+WORKDIR /app
+
+# PACKAGES INSTALLATION
+COPY package*.json ./
+RUN npm ci
+RUN npm audit fix
+
+# SRC CODE
+COPY ./src ./src
+COPY ./static ./static
+COPY svelte.config.js ./
+COPY vite.config.ts ./
+COPY tsconfig.json ./
+
+# MAKE COVERS
+RUN mkdir ./covers
+VOLUME ./covers
+
+# MAKE LOGS
+RUN mkdir ./logs
+VOLUME ./logs
+
+# ENVIRONMENT VARIABLES
+# NODE ADAPTER
+ENV ORIGIN="none"
+ENV BODY_SIZE_LIMIT="6242880"
+# DEFAULT DB
+ENV DB_NAME=enum
+ENV DB_USER=root
+ENV DB_PWD=password
+ENV DB_HOST=localhost
+ENV DB_PORT=3306
+# SYSTEM
+ENV LOGGING_ENABLED=false
+ENV ACCESS_TOKEN_SECRET="changeme"
+ENV REFRESH_TOKEN_SECRET="changemerefresh"
+ENV ACCESS_TOKEN_EXPIRY="30m"
+ENV REFRESH_TOKEN_EXPIRY="48hr"
+ENV ACC_MAX_LIMIT=false
+ENV ACC_MAX_NUMBER="100"
+ENV PUBLIC_ALPHA_FILTER="ABCDEFGHIJKLMNOPQRSTUVWXYZ#"
+ENV PUBLIC_ALLOWED_TYPES="Anime;Cartoon;C-Drama;J-Drama;K-Drama;Manga;Manhwa;Manhua"
+ENV PUBLIC_ALLOWED_TYPES_DELIMITER=";"
+# DEMO
+ENV PUBLIC_DEMO="false"
+ENV PUBLIC_DEMO_ACC="demoaccount"
+ENV PUBLIC_DEMO_PWD="demo12345"
+ENV PUBLIC_DEMO_MAX_ENTRIES="10"
+
+# BUILD APP
+RUN npm run prepare
+RUN npm run build
+
+# PORT
+EXPOSE 3000
+
+# START IT UP
+CMD ["sh", "-c", "ENV=${ORIGIN} node build"]

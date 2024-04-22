@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  enum:
+    depends_on:
+      mysql:
+        condition: service_healthy
+    image: kkogoat/enum:1.0
+    environment:
+      ORIGIN: https://sub.yourdomain.com
+      DB_NAME: enum
+      DB_USER: root
+      DB_PWD: password
+      DB_HOST: mysql
+      DB_PORT: 3306
+      LOGGING_ENABLED: "true"
+    volumes:
+      - ./covers:/app/covers
+      - ./logs:/app/logs
+    restart: unless-stopped
+  
+  mysql:
+    image: mysql:latest
+    volumes:
+     - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: enum
+      MYSQL_ROOT_PASSWORD: password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
