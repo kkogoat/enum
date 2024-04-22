@@ -26,12 +26,36 @@ npm run dev -- --open
 ```
 
 ## Building
-
-To create a production version of your app:
-
+To build a docker image of enum:
 ```bash
-npm run build
+git clone https://github.com/kkogoat/enum.git
+cd enum
+docker build -t <name>:<version> .
 ```
+
+
+## Docker Container
+### To build a docker image of enum:
+```bash
+git clone https://github.com/kkogoat/enum.git
+cd enum
+docker build -t <name>:<version> .
+```
+
+### To run the docker container:
+NOTE: Please take a look at docker-compose.example.yaml
+
+1. Create a docker-compose.yaml in your desired directory
+2. Make the covers and logs folder
+```bash
+mkdir ./covers ./logs
+```
+3. Run docker-compose command
+```bash
+docker-compose up -d
+```
+4. Connect to your docker instance in your web browser of choice
+
 
 You can preview the production build with `npm run preview`.
 
