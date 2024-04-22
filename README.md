@@ -1,6 +1,7 @@
 ## Node.js Server
 ### To build a Node.js server of enum:
 NOTE: Please take a look at .env.example file
+
 NOTE: Under the assumption that you have MySQL installed and configured correctly
 1. Clone or download repository
 2. Change into directory of project
