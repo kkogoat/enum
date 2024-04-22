@@ -1,5 +1,14 @@
+## Feature Developing
+### Running dev server
+NOTE: Please take a look at "Node.js Server" section, as this is an extension
+1. Perform same directions as the mentioned section
+2. Instead of running the node command "npm run start", execute "npm run dev"
+```bash
+npm run dev             # Runs dev server on localhost:5173
+```
+
 ## Node.js Server
-### To build a Node.js server of enum:
+### To build and run a Node.js server of enum:
 NOTE: Please take a look at .env.example file
 
 NOTE: Under the assumption that you have MySQL installed and configured correctly
@@ -10,7 +19,7 @@ NOTE: Under the assumption that you have MySQL installed and configured correctl
 ```bash
 npm ci                  # Clean installs node dependencies
 npm run build           # Builds svelte-kit project with node adapter
-npm run start           # Starde node.js server with .env configuration
+npm run start           # Stards node.js server with .env configuration
 ```
 
 ## Docker Container
