@@ -33,6 +33,10 @@
         } else {
             setTimeout(() => {
                 listContext.addToList(decoded.entry);
+                if(url) {
+                    URL.revokeObjectURL(url)
+                    url = null
+                }
                 formRef.reset();
                 dialogRef.close();
                 title="";
@@ -51,8 +55,10 @@
         dialogRef.close();
         formRef.reset();
         title="";
-        URL.revokeObjectURL(url);
-        url = null;
+        if(url) {
+            URL.revokeObjectURL(url)
+            url = null
+        }
     }
 
     // HANDLE IMAGE UPLOAD
