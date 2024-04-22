@@ -1,11 +1,11 @@
 <script lang="ts">
 	import ThemeToggle from "$lib/components/theme/themeToggle.svelte";
-    import Login from "$lib/components/login/login.svelte";
     import Settings from "$lib/components/settings/settings.svelte";
 	import Navbar from "$lib/components/navbar/navbar.svelte";
+    import Login from "$lib/components/login/login.svelte";
 	import List from "$lib/components/list/list.svelte";
 
-    // ON MOUNT
+    // ON MOUNT, TRY LOGIN
     import { authContext } from "$lib/context/authContext";
 	import { onMount } from "svelte";
     let loading: boolean = true;
@@ -15,14 +15,13 @@
     })
 
     // LOAD LIST IF LOGGED IN
-    import { listContext } from "$lib/context/listContext";
     import { getMediaList } from "$lib/util/mediaFetchUtil";
+    import { listContext } from "$lib/context/listContext";
 	import { browser } from "$app/environment";
-    $: if(browser && $authContext) getList();
-    async function getList() {
-        const response = await getMediaList();
-        listContext.initializeList(response);
-    }
+    $: if(browser && $authContext) (async () => {
+        const media_list = await getMediaList();
+        listContext.initializeList(media_list);
+    })();
 </script>
 
 <style>
@@ -43,13 +42,15 @@
     }
 
     .flex {
+        width: inherit;
+        height: inherit;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 </style>
 
-<div id={$authContext ? "app-container" : "app-container-login"} class={$authContext ? "" : "flex"}>
+<div id={$authContext ? "app-container" : "app-container-login"}>
     <ThemeToggle />
     {#if !loading}
         {#if $authContext}
@@ -57,7 +58,9 @@
             <Settings />
             <List />
         {:else}
-            <Login />
+            <div class="flex">
+                <Login />
+            </div>
         {/if}
     {/if}
 </div>
