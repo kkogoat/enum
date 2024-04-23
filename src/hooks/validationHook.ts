@@ -18,7 +18,7 @@ const media_add_schema = joi.object({
     current_episode: joi.number().min(0).max(2147483647),
     total_episodes: [joi.number().min(0).max(2147483647), joi.allow(null)],
     rating: [joi.number().min(0).max(10), joi.allow(null)],
-    description: joi.string().min(0).max(200).allow(null),
+    description: joi.string().min(0).max(5000).allow(null),
     status: joi.string().valid('','Completed','In Progress','Planned','Dropped'),
     type: joi.string().valid('', ...envPublic.PUBLIC_ALLOWED_TYPES.split(envPublic.PUBLIC_ALLOWED_TYPES_DELIMITER)),
     image: joi.object({

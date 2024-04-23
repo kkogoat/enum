@@ -62,7 +62,7 @@ class Media extends Model<MediaAttributes> {
     declare rating: number;
 
     @Column({
-        type: DataType.STRING(200)
+        type: DataType.STRING(5000)
     })
     declare description: string;
 

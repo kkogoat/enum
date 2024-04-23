@@ -318,7 +318,7 @@
         <!-- LAYER 2 -->
         <label>
             Description:
-            <textarea minlength="1" maxlength="200" bind:value={description} disabled={disable}></textarea>
+            <textarea minlength="1" maxlength="5000" bind:value={description} disabled={disable}></textarea>
         </label>
         
         <!-- LAYER 3 -->
