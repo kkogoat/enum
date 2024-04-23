@@ -44,14 +44,20 @@ export const PUT = async ({ request, locals }) => {
 
     // EDIT SELECTED MEDIA
     let image_name = null;
+    const image = form.get("image") as File;
     if(envPublic.PUBLIC_DEMO !== "true") {
-        const image = form.get("image") as File;
-        if(image) {
+        if(image && image.type !== undefined) {
             image_name = `${crypto.randomUUID()}${extname(image.name)}`;
             writeFileSync(`covers/${image_name}`, Buffer.from(await image.arrayBuffer()));
+            body["image"] = image_name;
+        } else {
+            delete(body["image"]);
+        }
+    } else {
+        if(image) {
+            delete(body["image"]);
         }
     }
-    body["image"] = image_name;
     delete(body["id"]);
     let old_image = check.image;
     Media.update(
