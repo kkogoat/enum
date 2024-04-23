@@ -292,11 +292,11 @@
             <div class="layer1-right">
                 <label for="title">
                     Title:
-                    <input name="title" type="text" minlength="1" maxlength="100" bind:value={title} disabled={disable} required/>
+                    <input name="title" type="text" minlength="1" maxlength="200" bind:value={title} disabled={disable} required/>
                 </label>
                 <label for="link">
                     Link:
-                    <input name="link" type="text" minlength="1" maxlength="100" bind:value={link} disabled={disable}/>
+                    <input name="link" type="text" minlength="1" maxlength="200" bind:value={link} disabled={disable}/>
                 </label>
                 <div style="display: flex; justify-content: space-between; flex-wrap: wrap; row-gap: 10px">
                     <label class="label-shorter" for="current-episode">

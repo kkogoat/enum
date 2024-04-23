@@ -13,8 +13,8 @@ const change_schema = joi.object({
 })
 
 const media_add_schema = joi.object({
-    title: joi.string().min(1).max(100).required(),
-    link: joi.string().min(1).max(100).uri().allow(''),
+    title: joi.string().min(1).max(200).required(),
+    link: joi.string().min(1).max(200).uri().allow(''),
     current_episode: joi.number().min(0).max(2147483647),
     total_episodes: [joi.number().min(0).max(2147483647), joi.allow(null)],
     rating: [joi.number().min(0).max(10), joi.allow(null)],

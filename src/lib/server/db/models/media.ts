@@ -29,13 +29,13 @@ class Media extends Model<MediaAttributes> {
     // DATA
     @PrimaryKey
     @Column({
-        type: DataType.STRING(100),
+        type: DataType.STRING(200),
         allowNull: false
     })
     declare title: string;
 
     @Column({
-        type: DataType.STRING(100),
+        type: DataType.STRING(200),
         defaultValue: ""
     })
     declare link: string;
@@ -68,13 +68,13 @@ class Media extends Model<MediaAttributes> {
 
     @PrimaryKey
     @Column({
-        type: DataType.STRING(15),
+        type: DataType.STRING(30),
         defaultValue: ""
     })
     declare type: string;
 
     @Column({
-        type: DataType.STRING(15),
+        type: DataType.STRING(30),
         defaultValue: ""
     })
     declare status: string;
