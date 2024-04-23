@@ -7,6 +7,7 @@
 [View on Github](https://github.com/kkogoat/enum) | [View on Dockerhub](https://registry.hub.docker.com/r/kkogoat/enum)
 ### Table of Contents
 1. [Description](#description)
+1. [Demo](#demo)
 1. [Features](#features)
 1. [Roadmap](#roadmap)
 1. [Feature Developing](#feature-developing)
@@ -16,8 +17,17 @@
 ## Description
 A local web application for cataloguing consumed media. Features Image uploading, multiple users, list export/import, multi-device login, and more. The application also stores all data locally, including uploaded images.
 
+## Demo
+Website: [https://enum.usagi.cc](https://enum.usagi.cc)
+
+NOTE: For demo purposes: Image uploading, password changing, signup, device list & logout, are disabled. There is also a maximum number of 10 entries.
+
+WARNING: Be careful of hyperlinks, since the demoaccount can be accessed by anyone.
+
+USERNAME: demoaccount <br> PASSWORD: demo12345
+
 ## Features
-### 
+Tested on: Desktop Browser, iPad mini 6, iPhone 14 Pro Max
 <details> 
 <summary> Features </summary>
 <ul>
@@ -32,15 +42,6 @@ A local web application for cataloguing consumed media. Features Image uploading
 <li> Quick analytics for catalogued media
 <li> Export/Import Catalogue data
 <li> Multi-Device Login & Logout
-</ul>
-</details>
-
-## Roadmap
-NOTE: Possible features that I may or may not develop
-<details> 
-<summary> Roadmap </summary>
-<ul>
-<li>
 </ul>
 </details>
 
