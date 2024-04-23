@@ -16,11 +16,9 @@ COPY tsconfig.json ./
 
 # MAKE COVERS
 RUN mkdir ./covers
-VOLUME ./covers
 
 # MAKE LOGS
 RUN mkdir ./logs
-VOLUME ./logs
 
 # ENVIRONMENT VARIABLES
 # NODE ADAPTER
