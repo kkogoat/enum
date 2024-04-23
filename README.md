@@ -18,11 +18,9 @@
 A local web application for cataloguing consumed media. Features Image uploading, multiple users, list export/import, multi-device login, and more. The application also stores all data locally, including uploaded images.
 
 ## Demo
-Website: [https://enum.usagi.cc](https://enum.usagi.cc)
-
+Website: [https://enum.usagi.cc](https://enum.usagi.cc)  
+**Be careful of hyperlinks, since the demoaccount can be accessed by anyone.**  
 NOTE: For demo purposes: Image uploading, password changing, signup, device list & logout, are disabled. There is also a maximum number of 10 entries.
-
-WARNING: Be careful of hyperlinks, since the demoaccount can be accessed by anyone.
 
 USERNAME: demoaccount <br> PASSWORD: demo12345
 
@@ -45,11 +43,11 @@ Tested on: Desktop Browser, iPad mini 6, iPhone 14 Pro Max
 </ul>
 </details>
 
-## Feature Developing
+## Development
 ### Running dev server
-NOTE: Please take a look at .env.example file
+**Please take a look at .env.example file**<br>
+NOTE: Under the assumption that you have MySQL installed and configured correctly on the hosting device
 
-NOTE: Under the assumption that you have MySQL installed and configured correctly
 1. Clone or download repository
 2. Change into directory of project
 3. Create ".env" configuration file in project directory
@@ -61,9 +59,8 @@ npm run dev
 
 ## Node.js Server
 ### To build and run a Node.js server of enum:
-NOTE: Please take a look at .env.example file
-
-NOTE: Under the assumption that you have MySQL installed and configured correctly
+**Please take a look at .env.example file**<br>
+NOTE: Under the assumption that you have MySQL installed and configured correctly on the hosting device
 1. Clone or download repository
 2. Change into directory of project
 3. Create ".env" configuration file in project directory
@@ -96,7 +93,7 @@ docker build -t <name>:<version> .
 ```
 
 ### To run the docker container:
-NOTE: Please take a look at docker-compose.example.yaml
+**Please take a look at docker-compose.example.yaml**
 
 1. Create a "docker-compose.yaml" in your desired directory
 2. Make the covers and logs folder
