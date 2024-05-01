@@ -26,7 +26,8 @@ export const POST = async ({ request, cookies }) => {
     await device.save();
 
     // CREATE REFRESH_TOKEN COOKIE & LOGIN USER
-    cookies.set("session", tokens.refresh_token, {path: '/', httpOnly: true, sameSite: 'strict', secure: true});
+
+    cookies.set("session", tokens.refresh_token, {path: '/', httpOnly: true, sameSite: 'strict', secure: true, maxAge: 31536000});
     log(`auth`, `logging in user: ${instance.username}`);
 
     // RESSPONSE

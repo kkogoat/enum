@@ -42,7 +42,7 @@ export const GET = async ({ cookies }) => {
         device.update({token: await bcrypt.hash(tokens.refresh_token, 10)});
 
         // UPDATE EXISTING COOKIE & RESPONSE
-        cookies.set("session", tokens.refresh_token, {path: '/', httpOnly: true, sameSite: 'strict', secure: true});
+        cookies.set("session", tokens.refresh_token, {path: '/', httpOnly: true, sameSite: 'strict', secure: true, maxAge: 31536000});
         log(`auth`, `accepted refresh for user: ${username}`);
         return new Response(JSON.stringify({username: username, access_token: tokens.access_token}), {status: 200});
     })
