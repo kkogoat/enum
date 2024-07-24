@@ -40,12 +40,12 @@ const media_delete_schema = joi.object({
 
 const import_schema = joi.array().items(joi.object({
     id: joi.any(),
-    title: joi.string().min(1).max(100).required(),
-    link: joi.string().min(1).max(100).uri().allow('', null),
+    title: joi.string().min(1).max(200).required(),
+    link: joi.string().min(1).max(200).uri().allow('', null),
     current_episode: joi.number().min(0).max(2147483647),
     total_episodes: joi.number().min(0).max(2147483647).allow(null),
     rating: joi.number().min(0).max(10).allow(null),
-    description: joi.string().min(0).max(200).allow(null),
+    description: joi.string().min(0).max(5000).allow(null),
     status: joi.string().valid('','Completed','In Progress','Planned','Dropped'),
     type: joi.string().valid('', ...envPublic.PUBLIC_ALLOWED_TYPES.split(envPublic.PUBLIC_ALLOWED_TYPES_DELIMITER)),
     image: joi.any()
